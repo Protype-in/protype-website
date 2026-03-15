@@ -28,29 +28,20 @@ export default function Navbar() {
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-[#020209]/90 backdrop-blur-xl border-b border-[#00f5ff]/10"
+                ? "bg-[#030305]/80 backdrop-blur-xl border-b border-white/5"
                 : "bg-transparent"
                 }`}
         >
-            {/* Top accent line */}
-            <div className="h-px bg-gradient-to-r from-transparent via-[#00f5ff]/60 to-transparent" />
-
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <a href="#" className="flex items-center gap-3 group">
-                    <div className="relative">
-                        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#00f5ff] to-[#7c3aed] flex items-center justify-center font-bold text-black text-sm">
-                            <Cpu className="w-5 h-5" />
-                        </div>
-                        <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#00f5ff] to-[#7c3aed] blur-md opacity-40 group-hover:opacity-70 transition-opacity" />
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center text-white shadow-lg group-hover:from-blue-600 group-hover:to-blue-800 transition-all duration-300">
+                        <Cpu className="w-5 h-5" />
                     </div>
                     <div>
-                        <span className="text-xl font-bold font-[family-name:var(--font-heading)] text-white tracking-tight">
+                        <span className="text-xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
                             Elevate
                         </span>
-                        <div className="text-[9px] font-mono text-[#00f5ff] tracking-widest -mt-0.5 opacity-60">
-                            AI SYSTEMS
-                        </div>
                     </div>
                 </a>
 
@@ -60,15 +51,15 @@ export default function Navbar() {
                         <a
                             key={link.href}
                             href={link.href}
-                            className="text-sm text-[#64748b] hover:text-[#00f5ff] transition-colors duration-200 font-mono tracking-wide relative group"
+                            className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 font-medium tracking-wide relative group"
                         >
                             {link.label}
-                            <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#00f5ff] group-hover:w-full transition-all duration-300 ease-out shadow-[0_0_8px_#00f5ff]" />
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
                         </a>
                     ))}
                     <a
                         href="#cta"
-                        className="btn-glow !py-2 !px-5 !text-xs"
+                        className="bg-white text-black hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300"
                     >
                         Book Demo
                     </a>
@@ -77,20 +68,20 @@ export default function Navbar() {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setMobileOpen(!mobileOpen)}
-                    className="md:hidden flex flex-col gap-1.5 p-2 border border-[#00f5ff]/20 rounded"
+                    className="md:hidden flex flex-col gap-1.5 p-2"
                     aria-label="Toggle menu"
                 >
                     <motion.span
                         animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-[#00f5ff]"
+                        className="block w-5 h-0.5 bg-white"
                     />
                     <motion.span
                         animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="block w-5 h-0.5 bg-[#00f5ff]"
+                        className="block w-5 h-0.5 bg-white"
                     />
                     <motion.span
                         animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-[#00f5ff]"
+                        className="block w-5 h-0.5 bg-white"
                     />
                 </button>
             </div>
@@ -102,7 +93,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="md:hidden overflow-hidden bg-[#020209]/98 backdrop-blur-xl border-b border-[#00f5ff]/10"
+                        className="md:hidden overflow-hidden bg-[#030305] border-b border-white/5"
                     >
                         <div className="px-6 py-4 flex flex-col gap-4">
                             {navLinks.map((link) => (
@@ -110,16 +101,15 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setMobileOpen(false)}
-                                    className="text-[#64748b] hover:text-[#00f5ff] transition-colors font-mono text-sm tracking-wide"
+                                    className="text-zinc-400 hover:text-white transition-colors font-medium text-sm tracking-wide"
                                 >
-                                    <span className="text-[#00ff88] mr-2">›</span>
                                     {link.label}
                                 </a>
                             ))}
                             <a
                                 href="#cta"
                                 onClick={() => setMobileOpen(false)}
-                                className="btn-glow text-center !py-2"
+                                className="bg-white text-black text-center px-4 py-2 rounded-lg text-sm font-semibold mt-2"
                             >
                                 Book Demo
                             </a>

@@ -1,155 +1,93 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FileText, Package, MessageSquare, Target, Clock, Zap, AlertTriangle } from "lucide-react";
+import { FileText, Package, MessageSquare, Target, Clock, AlertTriangle } from "lucide-react";
+import SpotlightCard from "../react-bits/SpotlightCard";
 
 const problems = [
     {
-        icon: <FileText className="w-7 h-7" />,
+        icon: <FileText className="w-6 h-6" />,
         title: "Manual Documentation",
-        desc: "Hours wasted on repetitive paperwork and data entry across spreadsheets.",
-        color: "#ff2b2b",
-        code: "ERR_001",
+        desc: "Hours wasted on repetitive paperwork and data entry across spreadhseets.",
     },
     {
-        icon: <Package className="w-7 h-7" />,
+        icon: <Package className="w-6 h-6" />,
         title: "Shipment Tracking Chaos",
         desc: "No centralized system to track shipments, deliveries, and logistics.",
-        color: "#ff6b35",
-        code: "ERR_002",
     },
     {
-        icon: <MessageSquare className="w-7 h-7" />,
+        icon: <MessageSquare className="w-6 h-6" />,
         title: "Unorganized Communication",
         desc: "Client conversations scattered across email, WhatsApp, and calls.",
-        color: "#f59e0b",
-        code: "ERR_003",
     },
     {
-        icon: <Target className="w-7 h-7" />,
+        icon: <Target className="w-6 h-6" />,
         title: "Missed Leads",
         desc: "Potential clients fall through the cracks without proper follow-up.",
-        color: "#ff2b2b",
-        code: "ERR_004",
     },
     {
-        icon: <Clock className="w-7 h-7" />,
-        title: "Slow Product Development",
+        icon: <Clock className="w-6 h-6" />,
+        title: "Slow Development",
         desc: "Months spent building products that could be launched in weeks.",
-        color: "#ff6b35",
-        code: "ERR_005",
     },
 ];
 
 export default function ProblemSection() {
     return (
-        <section className="relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-red-500/4 blur-[180px]" />
-            <div className="animated-grid-bg" />
-
-            <div className="section-container relative z-10">
+        <section className="relative overflow-hidden py-16 bg-[#030305]">
+            <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="mb-12"
                 >
-                    <div className="tech-badge mb-6" style={{ borderColor: "rgba(255, 43, 43, 0.3)", color: "#ff2b2b" }}>
-                        <AlertTriangle className="w-3 h-3" />
-                        <span className="ml-1">CRITICAL_BOTTLENECKS_DETECTED</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-500/20 bg-red-500/10 text-red-400 text-sm font-medium mb-6">
+                        <AlertTriangle className="w-4 h-4" />
+                        <span>The Bottlenecks</span>
                     </div>
-                    <h2 className="section-title">
-                        Businesses Waste{" "}
-                        <span
-                            className="glitch"
-                            data-text="Thousands of Hours"
-                            style={{
-                                color: "#ff2b2b",
-                                textShadow: "0 0 20px rgba(255,43,43,0.5), 0 0 40px rgba(255,43,43,0.2)",
-                            }}
-                        >
-                            Thousands of Hours
-                        </span>
+                    
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                        Businesses Waste <span className="text-red-400">Thousands of Hours</span>
                         <br />
                         on Manual Work
                     </h2>
-                    <p className="section-subtitle">
-                        Import-export companies and startups struggle with outdated processes
-                        that drain productivity and revenue.
+                    
+                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                        Legacy systems and fragmented tools drain your team's productivity. It's time to let automation do the heavy lifting so you can focus on growth.
                     </p>
                 </motion.div>
 
-                {/* Error cards grid */}
-                <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                {/* Spotlight Cards Grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
                     {problems.map((p, i) => (
-                        <motion.div
+                        <SpotlightCard
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className={`cyber-card p-6 group ${i === 3 ? "md:col-span-2" : ""}`}
-                            style={{
-                                borderColor: `${p.color}15`,
-                            }}
+                            spotlightColor="rgba(239, 68, 68, 0.15)"
+                            className="bg-[#0a0a0f] border-white/5 rounded-2xl group"
                         >
-                            {/* Card inner */}
-                            <div className="relative z-10">
-                                {/* Error code top bar */}
-                                <div className="flex items-center justify-between mb-5">
-                                    <div
-                                        className="flex items-center gap-2 px-2 py-1 rounded text-[10px] font-mono"
-                                        style={{ background: `${p.color}12`, color: p.color, border: `1px solid ${p.color}25` }}
-                                    >
-                                        ⚠ {p.code}
-                                    </div>
-                                    <div className="flex gap-1">
-                                        <div className="w-2 h-2 rounded-full bg-[#ff2b2b]/60" />
-                                        <div className="w-2 h-2 rounded-full bg-[#f59e0b]/60" />
-                                    </div>
-                                </div>
-
-                                <div
-                                    className="mb-4 p-3 rounded-xl inline-flex"
-                                    style={{
-                                        background: `${p.color}0d`,
-                                        border: `1px solid ${p.color}20`,
-                                        color: p.color,
-                                        boxShadow: `0 0 15px ${p.color}15`,
-                                    }}
-                                >
+                            <div className="relative z-10 flex flex-col h-full">
+                                <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                                     {p.icon}
                                 </div>
-                                <h3 className="text-base font-semibold mb-2">{p.title}</h3>
-                                <p className="text-sm text-[#64748b] leading-relaxed">{p.desc}</p>
+                                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{p.title}</h3>
+                                <p className="text-zinc-400 leading-relaxed text-sm">{p.desc}</p>
                             </div>
-
-                            {/* Hover glow border */}
-                            <div
-                                className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                style={{ background: `linear-gradient(90deg, transparent, ${p.color}, transparent)` }}
-                            />
-                        </motion.div>
+                        </SpotlightCard>
                     ))}
+                    
+                    {/* Final spanning card */}
+                    <SpotlightCard
+                        spotlightColor="rgba(59, 130, 246, 0.15)"
+                        className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20 rounded-2xl md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center text-center p-8"
+                    >
+                        <h3 className="text-2xl font-bold text-white mb-2">Sound Familiar?</h3>
+                        <p className="text-blue-200/80 mb-6">Let's fix it with intelligent systems.</p>
+                        <a href="#services" className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-colors">
+                            See Solutions
+                        </a>
+                    </SpotlightCard>
                 </div>
-
-                {/* Solution bridge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-16"
-                >
-                    <div className="inline-flex items-center gap-3 px-6 py-3 rounded-sm border border-[#00ff88]/30 bg-[#00ff88]/5 font-mono text-sm shadow-[0_0_20px_rgba(0,255,136,0.1)]">
-                        <Zap className="w-4 h-4 text-[#00ff88] animate-pulse" />
-                        <span className="text-[#64748b]">
-                            <span className="text-[#00ff88]">$ SOLUTION_FOUND:</span>{" "}
-                            <span className="text-white font-semibold">AI systems</span>
-                            {" + "}
-                            <span className="text-white font-semibold">rapid product development</span>
-                        </span>
-                    </div>
-                </motion.div>
             </div>
         </section>
     );

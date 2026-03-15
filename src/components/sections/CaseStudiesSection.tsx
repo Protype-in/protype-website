@@ -1,180 +1,103 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BarChart3, Mail, FileText, AlertTriangle, Lightbulb, CheckCircle2, PieChart } from "lucide-react";
+import { ArrowUpRight, BarChart, Clock, Users } from "lucide-react";
+import SpotlightCard from "../react-bits/SpotlightCard";
 
-const caseStudies = [
-    {
-        icon: <BarChart3 className="w-8 h-8" />,
-        product: "Import Export CRM",
-        industry: "Global Trade",
-        problem: "Manual client and supplier management using spreadsheets, causing missed deals and communication chaos.",
-        solution: "Built an AI-powered CRM with automated follow-ups, shipment tracking, and document management.",
-        result: "60% faster deal closure, zero missed follow-ups, and full visibility across the pipeline.",
-        metrics: [
-            { val: "60%", label: "Faster Deals" },
-            { val: "0", label: "Missed Leads" },
-            { val: "3x", label: "Team Efficiency" },
-        ],
-        gradient: "from-[#00f5ff] to-[#3b82f6]",
-        neonColor: "#00f5ff",
-        caseId: "CASE_001",
-    },
-    {
-        icon: <Mail className="w-8 h-8" />,
-        product: "AI Email Automation Agent",
-        industry: "SaaS Startup",
-        problem: "Sales team spending 4+ hours daily on manual email follow-ups with inconsistent messaging.",
-        solution: "Deployed an AI email agent that reads, drafts, and sends personalized follow-up emails automatically.",
-        result: "Saved 10+ hours per week, response rates improved by 45% with consistent messaging.",
-        metrics: [
-            { val: "10h+", label: "Saved Weekly" },
-            { val: "45%", label: "Better Response" },
-            { val: "100%", label: "Follow-up Rate" },
-        ],
-        gradient: "from-[#7c3aed] to-[#ec4899]",
-        neonColor: "#7c3aed",
-        caseId: "CASE_002",
-    },
-    {
-        icon: <FileText className="w-8 h-8" />,
-        product: "Trade Document Processor",
-        industry: "Logistics",
-        problem: "Data entry from invoices and shipping documents taking up to 2 hours per batch.",
-        solution: "AI document processor that extracts, validates, and syncs data from any document format.",
-        result: "Processing time reduced from 2 hours to under 5 minutes with 99% accuracy.",
-        metrics: [
-            { val: "24x", label: "Faster Processing" },
-            { val: "99%", label: "Accuracy" },
-            { val: "85%", label: "Cost Saved" },
-        ],
-        gradient: "from-[#f59e0b] to-[#ef4444]",
-        neonColor: "#f59e0b",
-        caseId: "CASE_003",
-    },
+const metrics = [
+    { label: "Hours Saved", value: "1,200+", icon: <Clock className="w-4 h-4" /> },
+    { label: "Revenue Increase", value: "35%", icon: <BarChart className="w-4 h-4" /> },
+    { label: "Active Users", value: "10k+", icon: <Users className="w-4 h-4" /> },
 ];
 
 export default function CaseStudiesSection() {
     return (
-        <section className="relative overflow-hidden">
-            <div className="absolute top-1/2 left-0 w-[600px] h-[600px] rounded-full bg-[#00f5ff]/3 blur-[180px]" />
-            <div className="animated-grid-bg" />
-
-            <div className="section-container relative z-10">
+        <section id="case-studies" className="relative overflow-hidden py-16 bg-[#0a0a0f]">
+            <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="mb-12"
                 >
-                    <div className="tech-badge mb-6">
-                        <PieChart className="w-3 h-3 inline-block mr-1" />
-                        CASE_STUDIES // VERIFIED_RESULTS
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-sm font-medium mb-6">
+                        <BarChart className="w-4 h-4" />
+                        <span>Proven Impact</span>
                     </div>
-                    <h2 className="section-title">
-                        Real Results for <span className="gradient-text">Real Businesses</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                        Real Results for <span className="text-blue-400">Real Companies</span>
                     </h2>
-                    <p className="section-subtitle">
-                        See how our AI solutions and products have transformed business operations across industries.
+                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                        See how our intelligent automation and MVPs have transformed operations
+                        for businesses worldwide.
                     </p>
                 </motion.div>
 
-                <div className="space-y-5 max-w-5xl mx-auto">
-                    {caseStudies.map((cs, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.15 }}
-                            className="cyber-card p-8 group"
-                            style={{ borderColor: `${cs.neonColor}10` }}
+                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 text-left">
+                    {/* Featured Case Study */}
+                    <SpotlightCard
+                        spotlightColor="rgba(59, 130, 246, 0.15)"
+                        className="bg-[#030305] border-white/5 rounded-3xl lg:w-2/3"
+                    >
+                        <div className="relative z-10 flex flex-col justify-between h-full">
+                            <div>
+                                <span className="text-sm font-medium text-blue-400 mb-4 block">Logistics Automation</span>
+                                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Global Freight Forwarder</h3>
+                                <p className="text-zinc-400 leading-relaxed font-light mb-8 max-w-lg">
+                                    We deployed a custom AI agent fleet to read incoming custom declarations,
+                                    extract data, and push it directly into their global ERP. This eliminated manual
+                                    data entry errors and reduced processing times from days to seconds.
+                                </p>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-white/5">
+                                {metrics.map((m, i) => (
+                                    <div key={i}>
+                                        <div className="text-zinc-500 font-light text-xs uppercase tracking-widest flex items-center gap-2 mb-1">
+                                            {m.icon}
+                                            {m.label}
+                                        </div>
+                                        <div className="text-2xl font-bold text-white">{m.value}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </SpotlightCard>
+
+                    {/* Secondary Studies Column */}
+                    <div className="flex flex-col gap-8 lg:w-1/3">
+                        <SpotlightCard
+                            spotlightColor="rgba(255, 255, 255, 0.05)"
+                            className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
                         >
-                            {/* Top gradient accent */}
-                            <div className={`h-px w-full bg-gradient-to-r ${cs.gradient} mb-6 opacity-60`} />
-
-                            {/* Case ID header */}
-                            <div className="flex items-center justify-between mb-6">
-                                <span
-                                    className="font-mono text-[10px] tracking-widest px-2 py-1 rounded"
-                                    style={{ color: cs.neonColor, background: `${cs.neonColor}0d`, border: `1px solid ${cs.neonColor}25` }}
-                                >
-                                    {cs.caseId} // {cs.industry.toUpperCase()}
-                                </span>
-                                <div className="flex gap-1.5 opacity-40">
-                                    <div className="w-2 h-2 rounded-full" style={{ background: cs.neonColor }} />
-                                </div>
+                            <div className="relative z-10">
+                                <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
+                                <h3 className="text-xl font-bold text-white mb-2 tracking-tight">Smart Lending App</h3>
+                                <p className="text-zinc-400 text-sm font-light mb-6">
+                                    Validated and launched a complex lending platform in 4 weeks with built-in KYC AI.
+                                </p>
+                                <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
+                                    Read Story <ArrowUpRight className="w-4 h-4" />
+                                </a>
                             </div>
+                        </SpotlightCard>
 
-                            <div className="grid md:grid-cols-3 gap-8">
-                                {/* Left - details */}
-                                <div>
-                                    <div className="flex items-center gap-3 mb-5">
-                                        <div
-                                            className="p-2.5 rounded-xl inline-flex"
-                                            style={{ background: `${cs.neonColor}10`, border: `1px solid ${cs.neonColor}20`, color: cs.neonColor }}
-                                        >
-                                            {cs.icon}
-                                        </div>
-                                        <div>
-                                            <h3 className="font-bold text-base">{cs.product}</h3>
-                                            <span className="text-xs font-mono" style={{ color: cs.neonColor }}>{cs.industry}</span>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-4 text-sm">
-                                        <div>
-                                            <div className="text-[#ff2b2b] font-mono text-xs mb-1.5 flex items-center gap-1.5">
-                                                <AlertTriangle className="w-3 h-3" /> PROBLEM
-                                            </div>
-                                            <p className="text-[#64748b] leading-relaxed">{cs.problem}</p>
-                                        </div>
-                                        <div>
-                                            <div className="text-[#00f5ff] font-mono text-xs mb-1.5 flex items-center gap-1.5">
-                                                <Lightbulb className="w-3 h-3" /> SOLUTION
-                                            </div>
-                                            <p className="text-[#64748b] leading-relaxed">{cs.solution}</p>
-                                        </div>
-                                        <div>
-                                            <div className="text-[#00ff88] font-mono text-xs mb-1.5 flex items-center gap-1.5">
-                                                <CheckCircle2 className="w-3 h-3" /> RESULT
-                                            </div>
-                                            <p className="text-[#64748b] leading-relaxed">{cs.result}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Right - Metrics */}
-                                <div className="md:col-span-2 flex items-center">
-                                    <div className="grid grid-cols-3 gap-3 w-full">
-                                        {cs.metrics.map((m, mi) => (
-                                            <div
-                                                key={mi}
-                                                className="cyber-card p-4 text-center"
-                                                style={{ borderColor: `${cs.neonColor}15` }}
-                                            >
-                                                <div
-                                                    className="text-3xl font-extrabold font-mono mb-1"
-                                                    style={{
-                                                        color: cs.neonColor,
-                                                        textShadow: `0 0 20px ${cs.neonColor}50`,
-                                                    }}
-                                                >
-                                                    {m.val}
-                                                </div>
-                                                <div className="text-xs text-[#64748b] font-mono">{m.label}</div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                        <SpotlightCard
+                            spotlightColor="rgba(255, 255, 255, 0.05)"
+                            className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
+                        >
+                            <div className="relative z-10">
+                                <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
+                                <h3 className="text-xl font-bold text-white mb-2 tracking-tight">AI Recruitment Bot</h3>
+                                <p className="text-zinc-400 text-sm font-light mb-6">
+                                    Automated initial candidate screening and scheduling, saving 40+ hours per week.
+                                </p>
+                                <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
+                                    Read Story <ArrowUpRight className="w-4 h-4" />
+                                </a>
                             </div>
-
-                            {/* Hover top border */}
-                            <div
-                                className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                style={{ background: `linear-gradient(90deg, transparent, ${cs.neonColor}80, transparent)` }}
-                            />
-                        </motion.div>
-                    ))}
+                        </SpotlightCard>
+                    </div>
                 </div>
             </div>
         </section>

@@ -2,192 +2,121 @@
 
 import { motion } from "framer-motion";
 import { Target, Mail, FileText, Briefcase, Smartphone, Bot, Rocket } from "lucide-react";
+import SpotlightCard from "../react-bits/SpotlightCard";
 
 const aiServices = [
     {
-        icon: <Target className="w-7 h-7" />,
-        title: "Lead Generation Agent",
-        desc: "Automatically find and qualify leads from multiple sources. Score, prioritize, and route leads to your sales team.",
-        color: "#00f5ff",
-        id: "AGT_001",
+        icon: <Target className="w-6 h-6" />,
+        title: "Lead Generation",
+        desc: "Automatically find and qualify leads from multiple sources. Score and route them seamlessly.",
     },
     {
-        icon: <Mail className="w-7 h-7" />,
-        title: "Email Automation Agent",
-        desc: "Reads emails, drafts intelligent replies, tracks conversations, and sends automated follow-ups.",
-        color: "#7c3aed",
-        id: "AGT_002",
+        icon: <Mail className="w-6 h-6" />,
+        title: "Email Automation",
+        desc: "Read emails, draft intelligent replies, and send automated follow-ups.",
     },
     {
-        icon: <FileText className="w-7 h-7" />,
-        title: "Document Processing Agent",
-        desc: "Extract data from invoices, PDFs, and trade documents with AI-powered OCR and NLP.",
-        color: "#00ff88",
-        id: "AGT_003",
+        icon: <FileText className="w-6 h-6" />,
+        title: "Document Processing",
+        desc: "Extract data from invoices and PDFs automatically with precise OCR.",
     },
     {
-        icon: <Briefcase className="w-7 h-7" />,
-        title: "CRM Automation Agent",
-        desc: "Manage leads, deals, and follow-ups automatically. Keep your pipeline organized effortlessly.",
-        color: "#f59e0b",
-        id: "AGT_004",
+        icon: <Briefcase className="w-6 h-6" />,
+        title: "CRM Management",
+        desc: "Keep your pipeline organized and update deal statuses effortlessly.",
     },
     {
-        icon: <Smartphone className="w-7 h-7" />,
-        title: "Social Media AI Agent",
-        desc: "Content planning, scheduling, analytics, and engagement automation across platforms.",
-        color: "#ec4899",
-        id: "AGT_005",
+        icon: <Smartphone className="w-6 h-6" />,
+        title: "Social Media AI",
+        desc: "Schedule posts, analyze trends, and engage audiences autonomously.",
     },
 ];
 
 const timeline = [
-    { week: "INIT_01", title: "Planning & UI Design", desc: "Requirements gathering, wireframing, and UI/UX design." },
-    { week: "BUILD_02", title: "Core Development", desc: "Backend APIs, database design, and frontend development." },
-    { week: "INTG_03", title: "AI Integration & Testing", desc: "Integrate AI features, run tests, and iterate on feedback." },
-    { week: "SHIP_04", title: "Launch & Deploy", desc: "Final QA, deployment, and go-live support." },
+    { step: "01", title: "Strategy & UX", desc: "Requirements mapping, user flows, and interface design." },
+    { step: "02", title: "Core Build", desc: "Backend APIs, database modeling, and frontend integration." },
+    { step: "03", title: "AI Integration", desc: "Embed intelligent agents and test automation pathways." },
+    { step: "04", title: "Go-Live", desc: "Final QA, infrastructure scaling, and launch." },
 ];
 
 export default function ServicesSection() {
     return (
-        <section id="services" className="relative overflow-hidden">
-            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-[#00f5ff]/3 blur-[150px]" />
-            <div className="animated-grid-bg" />
-            <div className="scanline-overlay" />
-
-            <div className="section-container relative z-10">
-                {/* AI Agents */}
+        <section id="services" className="relative overflow-hidden py-16 bg-[#030305]">
+            <div className="section-container relative z-10 text-center">
+                
+                {/* AI Agents Setup */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="mb-12"
                 >
-                    <div className="tech-badge mb-6">
-                        <Bot className="w-3 h-3 inline-block mr-1" />
-                        AI_AUTOMATION_SUITE // ACTIVE
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
+                        <Bot className="w-4 h-4" />
+                        <span>The Automation Suite</span>
                     </div>
-                    <h2 className="section-title">
-                        Custom AI Agents for{" "}
-                        <span className="gradient-text">Business Automation</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                        Custom AI Agents for <br />
+                        <span className="text-zinc-400">Business Workflows</span>
                     </h2>
-                    <p className="section-subtitle">
-                        Intelligent agents that work around the clock, handling your
-                        business processes with precision and speed.
-                    </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-4 mb-32 max-w-5xl mx-auto">
+                {/* Agents Grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 max-w-6xl mx-auto text-left">
                     {aiServices.map((s, i) => (
-                        <motion.div
+                        <SpotlightCard
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="cyber-card p-6 group"
-                            style={{ borderColor: `${s.color}10` }}
+                            spotlightColor="rgba(255, 255, 255, 0.05)"
+                            className="bg-[#0a0a0f] border-white/5 rounded-2xl group"
                         >
-                            {/* Agent ID */}
-                            <div className="flex items-center justify-between mb-5">
-                                <span
-                                    className="font-mono text-[9px] tracking-widest px-2 py-0.5 rounded"
-                                    style={{ color: s.color, background: `${s.color}0d`, border: `1px solid ${s.color}20` }}
-                                >
-                                    {s.id} // ONLINE
-                                </span>
-                                <div
-                                    className="w-2 h-2 rounded-full animate-pulse"
-                                    style={{ background: s.color, boxShadow: `0 0 6px ${s.color}` }}
-                                />
+                            <div className="relative z-10">
+                                <div className="mb-6 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-blue-500/10 group-hover:text-blue-400 group-hover:border-blue-500/20 transition-colors">
+                                    {s.icon}
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-2 tracking-tight">{s.title}</h3>
+                                <p className="text-zinc-400 text-sm leading-relaxed font-light">{s.desc}</p>
                             </div>
-
-                            {/* Icon */}
-                            <div
-                                className="mb-5 p-3 rounded-xl inline-flex transition-all duration-300"
-                                style={{
-                                    background: `${s.color}0d`,
-                                    border: `1px solid ${s.color}20`,
-                                    color: s.color,
-                                }}
-                            >
-                                {s.icon}
-                            </div>
-
-                            <h3 className="text-base font-semibold mb-2">{s.title}</h3>
-                            <p className="text-sm text-[#64748b] leading-relaxed">{s.desc}</p>
-
-                            {/* Hover top line */}
-                            <div
-                                className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                style={{ background: `linear-gradient(90deg, transparent, ${s.color}60, transparent)` }}
-                            />
-                        </motion.div>
+                        </SpotlightCard>
                     ))}
+                    
+                    {/* Filler Card */}
+                    <SpotlightCard
+                        spotlightColor="rgba(59, 130, 246, 0.1)"
+                        className="bg-blue-500/5 border-blue-500/10 rounded-2xl flex flex-col items-center justify-center text-center p-6"
+                    >
+                        <h3 className="text-lg font-bold text-white mb-2">Need Custom Logic?</h3>
+                        <p className="text-blue-200/60 text-sm">We can build agents for any niche process.</p>
+                    </SpotlightCard>
                 </div>
 
-                {/* MVP Development */}
+                {/* MVP Setup */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="mb-12"
                 >
-                    <div className="tech-badge mb-6" style={{ borderColor: "rgba(124, 58, 237, 0.3)", color: "#a78bfa" }}>
-                        <Rocket className="w-3 h-3 inline-block mr-1" />
-                        MVP_DEVELOPMENT // PIPELINE_ACTIVE
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-400 text-sm font-medium mb-6">
+                        <Rocket className="w-4 h-4" />
+                        <span>Fast-Track Development</span>
                     </div>
-                    <h2 className="section-title">
-                        Build Your Startup MVP{" "}
-                        <span className="gradient-text">in Weeks</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                        Build Your Startup MVP <br />
+                        <span className="text-zinc-400">in Just 4 Weeks</span>
                     </h2>
-                    <p className="section-subtitle">
-                        We help founders validate ideas, build MVPs, and launch
-                        products with AI integrations — in just 4 weeks.
-                    </p>
                 </motion.div>
 
-                {/* Tech timeline */}
-                <div className="max-w-2xl mx-auto relative">
-                    {/* Animated pipeline line */}
-                    <div
-                        className="absolute left-5 top-0 bottom-0 w-0.5"
-                        style={{
-                            background: "linear-gradient(to bottom, #00f5ff, #7c3aed, #00ff88, transparent)",
-                            boxShadow: "0 0 10px rgba(0, 245, 255, 0.3)",
-                        }}
-                    />
-
+                {/* Modern Timeline Setup */}
+                <div className="max-w-4xl mx-auto text-left grid md:grid-cols-2 gap-8 relative">
                     {timeline.map((t, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.15 }}
-                            className="flex gap-6 mb-6 last:mb-0"
+                            className="relative flex flex-col p-8 rounded-3xl border border-white/5 bg-[#0a0a0f] hover:bg-white/[0.02] transition-colors"
                         >
-                            {/* Node dot */}
-                            <div className="relative flex-shrink-0">
-                                <motion.div
-                                    animate={{ scale: [1, 1.2, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                                    className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold font-mono text-black"
-                                    style={{ background: `linear-gradient(135deg, #00f5ff, #7c3aed)` }}
-                                >
-                                    {String(i + 1).padStart(2, "0")}
-                                </motion.div>
-                            </div>
-
-                            {/* Card */}
-                            <div className="cyber-card p-5 flex-1 group">
-                                <div className="font-mono text-[10px] tracking-widest text-[#00f5ff] mb-1 font-semibold">
-                                    {t.week}
-                                </div>
-                                <h3 className="text-base font-semibold mb-1">{t.title}</h3>
-                                <p className="text-sm text-[#64748b]">{t.desc}</p>
-                            </div>
-                        </motion.div>
+                            <div className="text-4xl font-black text-white/5 mb-4">{t.step}</div>
+                            <h3 className="text-xl font-bold text-white mb-2">{t.title}</h3>
+                            <p className="text-zinc-400 text-sm font-light leading-relaxed">{t.desc}</p>
+                        </div>
                     ))}
                 </div>
             </div>

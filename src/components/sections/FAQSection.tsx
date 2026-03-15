@@ -1,108 +1,82 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { MessageCircleQuestion } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HelpCircle, Plus, X } from "lucide-react";
 
 const faqs = [
     {
-        q: "How long does MVP development take?",
-        a: "Our standard MVP development cycle is 4 weeks: Week 1 for planning & design, Week 2 for core development, Week 3 for AI integration & testing, and Week 4 for launch. Larger projects may take 6–8 weeks depending on complexity.",
+        q: "How long does it take to build an MVP?",
+        a: "Our standard timeframe for a full-featured Minimum Viable Product is 4 weeks. This includes planning, UI/UX design, full-stack development, and deployment.",
     },
     {
-        q: "Can AI agents integrate with our existing systems?",
-        a: "Absolutely. Our AI agents are built to integrate with CRMs, ERPs, email platforms, Slack, WhatsApp, spreadsheets, and custom APIs. We handle all the integration work for you.",
+        q: "What kind of AI agents do you build?",
+        a: "We build custom AI agents for anything from intelligent lead routing and completely autonomous email management to document OCR and internal knowledge retrieval.",
     },
     {
-        q: "Do you support international businesses?",
-        a: "Yes — we work with import-export companies, global trading firms, and startups across Asia, Middle East, Europe, and North America. We support multi-language and multi-currency workflows.",
+        q: "Do I own the source code?",
+        a: "Yes. Once the project is completed and handed over, you own 100% of the Intellectual Property and raw source code.",
     },
     {
-        q: "What happens after the project is delivered?",
-        a: "We provide full documentation, source code ownership, and ongoing support. Growth and MVP plans include 3–6 months of maintenance. We also offer retainer plans for continuous improvement.",
+        q: "What is your ongoing support model?",
+        a: "Every project comes with 30 days of post-launch support. Afterward, we offer flexible retainer models for scaling the app or maintaining the AI agents.",
     },
     {
-        q: "How much does a custom AI agent cost?",
-        a: "Our Growth plan starts at $1,200 for a custom AI agent. Pricing depends on complexity, integrations, and scale. Book a free discovery call and we'll provide a detailed quote within 24 hours.",
-    },
-    {
-        q: "Can you build for our specific industry?",
-        a: "Yes. While we specialize in import-export and logistics, we've built for SaaS, real estate, legal, healthcare, and e-commerce. Every solution is customized to your business workflow.",
+        q: "What tech stack do you use?",
+        a: "We primarily use Next.js, React, Node, Python, and PostgreSQL. For AI, we utilize state-of-the-art models from OpenAI, Anthropic, or open-source solutions like Llama depending on your data privacy needs.",
     },
 ];
 
 export default function FAQSection() {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section className="relative overflow-hidden">
-            <div className="animated-grid-bg" />
-            <div className="section-container">
+        <section id="faq" className="relative overflow-hidden py-16 bg-[#030305] border-t border-white/5">
+            <div className="section-container relative z-10 max-w-3xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-12"
                 >
-                    <div className="tech-badge mb-6">
-                        <MessageCircleQuestion className="w-3 h-3 inline-block mr-1" />
-                        FAQ_DATABASE // QUERYING
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-sm font-medium mb-6">
+                        <HelpCircle className="w-4 h-4" />
+                        <span>FAQ</span>
                     </div>
-                    <h2 className="section-title">
-                        Frequently Asked <span className="gradient-text">Questions</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                        Common <span className="text-blue-400">Questions</span>
                     </h2>
-                    <p className="section-subtitle">
-                        Everything you need to know before starting your AI journey with us.
-                    </p>
                 </motion.div>
 
-                <div className="max-w-3xl mx-auto space-y-2">
+                <div className="space-y-4">
                     {faqs.map((faq, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.07 }}
-                            className="cyber-card overflow-hidden"
+                            transition={{ delay: i * 0.1 }}
+                            className="border border-white/10 bg-[#0a0a0f] rounded-2xl overflow-hidden"
                         >
                             <button
                                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                                className="w-full flex items-center justify-between p-5 text-left group"
+                                className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none bg-white/[0.01] hover:bg-white/[0.03] transition-colors"
                             >
-                                <div className="flex items-center gap-3 flex-1">
-                                    <span
-                                        className="font-mono text-[10px] flex-shrink-0 px-1.5 py-0.5 rounded"
-                                        style={{ color: "#00f5ff", background: "rgba(0,245,255,0.05)", border: "1px solid rgba(0,245,255,0.15)" }}
-                                    >
-                                        Q_{String(i + 1).padStart(2, "0")}
-                                    </span>
-                                    <span className="font-semibold text-sm text-[#e2e8f0] group-hover:text-white transition-colors pr-4">
-                                        {faq.q}
-                                    </span>
+                                <span className="font-semibold text-white pr-8">{faq.q}</span>
+                                <div className="text-zinc-500 font-light flex-shrink-0">
+                                    {openIndex === i ? <X className="w-5 h-5 text-blue-400" /> : <Plus className="w-5 h-5" />}
                                 </div>
-                                <motion.div
-                                    animate={{ rotate: openIndex === i ? 45 : 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="flex-shrink-0 w-6 h-6 rounded border border-[#00f5ff]/20 flex items-center justify-center text-[#00f5ff]"
-                                >
-                                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                                    </svg>
-                                </motion.div>
                             </button>
-
+                            
                             <AnimatePresence>
                                 {openIndex === i && (
                                     <motion.div
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
                                         className="overflow-hidden"
                                     >
-                                        <div className="px-5 pb-5 text-sm text-[#64748b] leading-relaxed border-t border-[#00f5ff]/08 pt-4 font-mono">
-                                            <span className="text-[#00ff88] mr-2">›</span>
+                                        <div className="px-6 pb-6 pt-2 text-zinc-400 font-light leading-relaxed border-t border-white/5">
                                             {faq.a}
                                         </div>
                                     </motion.div>

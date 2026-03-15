@@ -1,178 +1,121 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CreditCard, Check, Zap } from "lucide-react";
+import { CheckCircle2, Crown } from "lucide-react";
+import SpotlightCard from "../react-bits/SpotlightCard";
 
 const plans = [
     {
-        name: "Starter",
-        planId: "PLAN_STARTER",
-        price: "$299",
-        period: "one-time",
-        desc: "Perfect for businesses exploring AI automation.",
+        name: "MVP Starter",
+        desc: "Perfect for founders looking to validate their idea fast.",
+        price: "$15k",
         features: [
-            "AI consultation session",
-            "Business process audit",
-            "Basic automation setup",
-            "1 AI agent configuration",
-            "Email support",
-            "7-day onboarding",
+            "4-Week Delivery Timeline",
+            "Core Product Features",
+            "Basic AI Integration",
+            "Responsive Web App",
+            "1 Month Post-Launch Support",
         ],
-        cta: "Get Started",
         popular: false,
-        neonColor: "#64748b",
     },
     {
-        name: "Growth",
-        planId: "PLAN_GROWTH",
-        price: "$1,200+",
-        period: "project",
-        desc: "Full custom AI agents for serious businesses.",
+        name: "AI Automation Sandbox",
+        desc: "Ideal for businesses ready to automate key workflows.",
+        price: "$5k/mo",
         features: [
-            "Everything in Starter",
-            "Custom AI agent development",
-            "Multi-system integrations",
-            "CRM & workflow automation",
-            "Dashboard & analytics",
-            "Priority support",
-            "3 months maintenance",
+            "2 Custom AI Agents",
+            "CRM & Email Integrations",
+            "Dedicated Slack Channel",
+            "Weekly Strategy Calls",
+            "Continuous Agent Training",
         ],
-        cta: "Most Popular",
         popular: true,
-        neonColor: "#00f5ff",
     },
     {
-        name: "MVP Dev",
-        planId: "PLAN_MVP",
-        price: "$3,000+",
-        period: "project",
-        desc: "Launch your startup product in 4 weeks.",
+        name: "Enterprise Scaling",
+        desc: "Full-scale custom systems for complex organizations.",
+        price: "Custom",
         features: [
-            "Full-stack MVP development",
-            "UI/UX design included",
-            "Backend APIs & database",
-            "AI feature integration",
-            "Cloud deployment",
-            "6 months support",
-            "Source code ownership",
+            "Unlimited AI Agents",
+            "Custom MVP Portals",
+            "On-Premise Deployment Options",
+            "Dedicated Engineering Team",
+            "SLA Guarantees",
         ],
-        cta: "Start Building",
         popular: false,
-        neonColor: "#7c3aed",
     },
 ];
 
 export default function PricingSection() {
     return (
-        <section id="pricing" className="relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00f5ff]/2 to-transparent" />
-            <div className="animated-grid-bg" />
-
-            <div className="section-container relative z-10">
+        <section id="pricing" className="relative overflow-hidden py-16 bg-[#030305]">
+            <div className="section-container relative z-10 w-full max-w-7xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-12"
                 >
-                    <div className="tech-badge mb-6">
-                        <CreditCard className="w-3 h-3 inline-block mr-1" />
-                        PRICING_TIERS // NO_HIDDEN_FEES
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
+                        <Crown className="w-4 h-4" />
+                        <span>Investment Levels</span>
                     </div>
-                    <h2 className="section-title">
-                        Simple, <span className="gradient-text">Transparent Pricing</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                        Transparent <span className="text-blue-400">Pricing</span>
                     </h2>
-                    <p className="section-subtitle">
-                        No hidden fees. Choose the tier that fits your stage and scale as you grow.
+                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                        No hidden fees. Just clear milestones and predictable costs for
+                        delivering high-impact automation and software.
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {plans.map((plan, i) => (
-                        <motion.div
+                        <SpotlightCard
                             key={i}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.15 }}
-                            className={`cyber-card p-8 flex flex-col relative group ${plan.popular ? "scale-105 z-10" : ""}`}
-                            style={{ borderColor: `${plan.neonColor}15` }}
+                            spotlightColor={plan.popular ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0.05)"}
+                            className={`bg-[#0a0a0f] border rounded-3xl relative ${
+                                plan.popular ? "border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]" : "border-white/5"
+                            }`}
                         >
-                            {/* Popular badge */}
-                            {plan.popular && (
-                                <div
-                                    className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-black text-[10px] font-bold font-mono px-4 py-1 rounded"
-                                    style={{ background: "linear-gradient(90deg, #00f5ff, #7c3aed)" }}
-                                >
-                                    ★ MOST_POPULAR
-                                </div>
-                            )}
-
-                            {/* Plan ID */}
-                            <div className="flex items-center justify-between mb-5">
-                                <span
-                                    className="font-mono text-[10px] tracking-widest px-2 py-0.5 rounded"
-                                    style={{ color: plan.neonColor, background: `${plan.neonColor}0d`, border: `1px solid ${plan.neonColor}25` }}
-                                >
-                                    {plan.planId}
-                                </span>
+                            <div className="relative z-10 flex flex-col h-full">
                                 {plan.popular && (
-                                    <Zap className="w-4 h-4" style={{ color: plan.neonColor }} />
+                                    <div className="absolute -top-12 -right-8 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                                        Most Popular
+                                    </div>
                                 )}
-                            </div>
-
-                            <div className="mb-6">
-                                <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                                <p className="text-xs text-[#64748b] mb-4">{plan.desc}</p>
-                                <div className="flex items-baseline gap-2">
-                                    <span
-                                        className="text-4xl font-extrabold font-mono"
-                                        style={{
-                                            color: plan.popular ? plan.neonColor : "#e2e8f0",
-                                            textShadow: plan.popular ? `0 0 30px ${plan.neonColor}50` : "none",
-                                        }}
-                                    >
-                                        {plan.price}
-                                    </span>
-                                    <span className="text-[#334155] text-xs font-mono">/{plan.period}</span>
+                                
+                                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{plan.name}</h3>
+                                <p className="text-zinc-400 text-sm mb-6 font-light">{plan.desc}</p>
+                                
+                                <div className="mb-8">
+                                    <span className="text-4xl font-black text-white tracking-tighter">{plan.price}</span>
+                                    {plan.price !== "Custom" && <span className="text-zinc-500 text-sm ml-2">base</span>}
                                 </div>
+
+                                <ul className="space-y-4 mb-10 flex-1">
+                                    {plan.features.map((f, fi) => (
+                                        <li key={fi} className="flex items-start gap-3 text-zinc-300 text-sm font-light">
+                                            <CheckCircle2 className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.popular ? "text-blue-400" : "text-zinc-500"}`} />
+                                            {f}
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <a
+                                    href="#cta"
+                                    className={`w-full text-center py-4 rounded-xl font-bold text-sm transition-all duration-300 ${
+                                        plan.popular
+                                            ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25"
+                                            : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+                                    }`}
+                                >
+                                    Get Started
+                                </a>
                             </div>
-
-                            <ul className="space-y-2.5 mb-8 flex-1 font-mono text-xs">
-                                {plan.features.map((f, fi) => (
-                                    <li key={fi} className="flex items-center gap-2.5 text-[#64748b]">
-                                        <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: plan.neonColor }} />
-                                        {f}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <a
-                                href="#cta"
-                                className={`text-center py-3 px-6 font-mono font-semibold text-xs transition-all duration-300 rounded ${plan.popular ? "btn-glow" : "btn-outline"}`}
-                            >
-                                {plan.cta}
-                            </a>
-
-                            {/* Hover top glow */}
-                            <div
-                                className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                style={{ background: `linear-gradient(90deg, transparent, ${plan.neonColor}80, transparent)` }}
-                            />
-                        </motion.div>
+                        </SpotlightCard>
                     ))}
                 </div>
-
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-10 text-xs text-[#334155] font-mono"
-                >
-                    <span className="text-[#00ff88]">$</span> need_custom_solution?{" "}
-                    <a href="#cta" className="text-[#00f5ff] hover:text-white transition-colors">contact_us</a>{" "}
-                    for enterprise pricing.
-                </motion.p>
             </div>
         </section>
     );

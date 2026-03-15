@@ -12,7 +12,7 @@ import PricingSection from "@/components/sections/PricingSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FAQSection from "@/components/sections/FAQSection";
 import CTASection from "@/components/sections/CTASection";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
