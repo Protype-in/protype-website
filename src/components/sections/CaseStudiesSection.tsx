@@ -4,6 +4,7 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, BarChart, Clock, Users } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
 import SplitText from "../react-bits/SplitText";
+import DecayCard from "../react-bits/DecayCard";
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -101,45 +102,43 @@ export default function CaseStudiesSection() {
                     </motion.div>
 
                     {/* Secondary Studies Column */}
-                    <div className="flex flex-col gap-8 lg:w-1/3">
-                        <motion.div variants={itemVariants} className="h-full">
-                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
-                                <SpotlightCard
-                                    spotlightColor="rgba(255, 255, 255, 0.05)"
-                                    className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
-                                >
-                                    <div className="relative z-10">
-                                        <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
-                                        <h3 className="text-xl font-bold text-white mb-2 tracking-tight">Smart Lending App</h3>
-                                        <p className="text-zinc-400 text-sm font-light mb-6">
-                                            Validated and launched a complex lending platform in 4 weeks with built-in KYC AI.
-                                        </p>
-                                        <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
-                                            Read Story <ArrowUpRight className="w-4 h-4" />
-                                        </a>
-                                    </div>
-                                </SpotlightCard>
-                            </motion.div>
+                    <div className="flex flex-col gap-8 lg:w-1/3 mt-12 md:mt-0">
+                        <motion.div variants={itemVariants} className="h-full w-full flex justify-center overflow-hidden rounded-3xl group relative">
+                            <DecayCard 
+                                width={350} 
+                                height={350} 
+                                image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
+                            >
+                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                                    <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
+                                    <h3 className="text-xl font-bold text-white mb-2 tracking-tight">Smart Lending App</h3>
+                                    <p className="text-zinc-300 text-sm font-light mb-4">
+                                        Validated and launched a complex platform in 4 weeks.
+                                    </p>
+                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-emerald-300 transition-colors">
+                                        Read Story <ArrowUpRight className="w-4 h-4" />
+                                    </a>
+                                </div>
+                            </DecayCard>
                         </motion.div>
 
-                        <motion.div variants={itemVariants} className="h-full">
-                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
-                                <SpotlightCard
-                                    spotlightColor="rgba(255, 255, 255, 0.05)"
-                                    className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
-                                >
-                                    <div className="relative z-10">
-                                        <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
-                                        <h3 className="text-xl font-bold text-white mb-2 tracking-tight">AI Recruitment Bot</h3>
-                                        <p className="text-zinc-400 text-sm font-light mb-6">
-                                            Automated initial candidate screening and scheduling, saving 40+ hours per week.
-                                        </p>
-                                        <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
-                                            Read Story <ArrowUpRight className="w-4 h-4" />
-                                        </a>
-                                    </div>
-                                </SpotlightCard>
-                            </motion.div>
+                        <motion.div variants={itemVariants} className="h-full w-full flex justify-center overflow-hidden rounded-3xl group relative">
+                            <DecayCard 
+                                width={350} 
+                                height={350} 
+                                image="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2940&auto=format&fit=crop"
+                            >
+                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                                    <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
+                                    <h3 className="text-xl font-bold text-white mb-2 tracking-tight">AI Recruitment Bot</h3>
+                                    <p className="text-zinc-300 text-sm font-light mb-4">
+                                        Automated initial candidate screening scheduling.
+                                    </p>
+                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-purple-300 transition-colors">
+                                        Read Story <ArrowUpRight className="w-4 h-4" />
+                                    </a>
+                                </div>
+                            </DecayCard>
                         </motion.div>
                     </div>
                 </motion.div>

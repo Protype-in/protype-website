@@ -4,6 +4,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu } from "lucide-react";
 import Magnet from "./react-bits/Magnet";
+import FlowingMenu from "./react-bits/FlowingMenu";
+
+const demoItems = [
+    { link: '#home', text: 'Home', image: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=2532&auto=format&fit=crop' },
+    { link: '#process', text: 'Process', image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2670&auto=format&fit=crop' },
+    { link: '#services', text: 'Services', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop' },
+    { link: '#products', text: 'Products', image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2670&auto=format&fit=crop' },
+    { link: '#pricing', text: 'Pricing', image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2670&auto=format&fit=crop' }
+];
 
 const navLinks = [
     { label: "Services", href: "#services" },
@@ -95,28 +104,12 @@ export default function Navbar() {
                 {mobileOpen && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
+                        animate={{ height: "100vh", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="md:hidden overflow-hidden bg-[#030305] border-b border-white/5"
+                        className="fixed inset-0 top-16 md:hidden overflow-hidden bg-[#030305] border-t border-white/5 z-40"
                     >
-                        <div className="px-6 py-4 flex flex-col gap-4">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setMobileOpen(false)}
-                                    className="text-zinc-400 hover:text-white transition-colors font-medium text-sm tracking-wide"
-                                >
-                                    {link.label}
-                                </a>
-                            ))}
-                            <a
-                                href="#cta"
-                                onClick={() => setMobileOpen(false)}
-                                className="bg-white text-black text-center px-4 py-2 rounded-lg text-sm font-semibold mt-2"
-                            >
-                                Book Demo
-                            </a>
+                        <div className="h-full w-full pb-20">
+                            <FlowingMenu items={demoItems} />
                         </div>
                     </motion.div>
                 )}

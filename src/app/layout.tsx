@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SplashCursor from "../components/react-bits/SplashCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -41,7 +42,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <div className="pointer-events-none fixed inset-0 z-[9999]">
+          <SplashCursor />
+        </div>
+      </body>
     </html>
   );
 }

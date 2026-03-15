@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Search, Lightbulb, Zap, Rocket, Headset, Settings } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
+import Stepper, { Step } from "../react-bits/Stepper";
 
 const steps = [
     {
@@ -60,37 +61,34 @@ export default function HowWeWorkSection() {
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto text-left relative">
-                    {steps.map((s, i) => (
-                        <SpotlightCard
-                            key={i}
-                            spotlightColor="rgba(255, 255, 255, 0.05)"
-                            className="bg-[#030305] border-white/5 rounded-3xl"
-                        >
-                            <div className="relative z-10 flex flex-col h-full">
-                                <div className="flex justify-between items-start mb-6">
-                                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-zinc-300">
-                                        {s.icon}
-                                    </div>
-                                    <span className="text-4xl font-black text-white/5">{s.num}</span>
-                                </div>
-                                
-                                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{s.title}</h3>
-                                <p className="text-zinc-400 leading-relaxed font-light text-sm">{s.desc}</p>
-                            </div>
-                        </SpotlightCard>
-                    ))}
-                    
-                    <SpotlightCard
-                        spotlightColor="rgba(59, 130, 246, 0.1)"
-                        className="bg-gradient-to-br from-blue-900/10 to-transparent border-blue-500/10 rounded-3xl flex flex-col items-center justify-center text-center p-8"
+                <div className="max-w-6xl mx-auto text-left relative min-h-[400px]">
+                    <Stepper
+                        initialStep={1}
+                        onStepChange={(step) => console.log(step)}
+                        onFinalStepCompleted={() => window.location.hash = "#cta"}
+                        backButtonText="Previous"
+                        nextButtonText="Next"
+                        contentClassName="py-4"
+                        footerClassName="pt-2"
+                        stepCircleContainerClassName="bg-[#0a0a0f] border-white/10"
                     >
-                        <h3 className="text-2xl font-bold text-white mb-2">Ready to Start?</h3>
-                        <p className="text-zinc-400 font-light mb-6 text-sm">Let's discuss your project.</p>
-                        <a href="#cta" className="bg-white text-black hover:bg-zinc-200 transition-colors px-6 py-3 rounded-full font-semibold text-sm">
-                            Book a Call
-                        </a>
-                    </SpotlightCard>
+                        {steps.map((s, i) => (
+                            <Step key={i}>
+                                <SpotlightCard
+                                    spotlightColor="rgba(255, 255, 255, 0.05)"
+                                    className="bg-[#030305] border-white/5 rounded-3xl w-full h-full min-h-[250px]"
+                                >
+                                    <div className="relative z-10 flex flex-col h-full items-center justify-center text-center p-6">
+                                        <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-zinc-300 mb-6">
+                                            {s.icon}
+                                        </div>
+                                        <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">{s.title}</h3>
+                                        <p className="text-zinc-400 leading-relaxed font-light text-lg max-w-lg mx-auto">{s.desc}</p>
+                                    </div>
+                                </SpotlightCard>
+                            </Step>
+                        ))}
+                    </Stepper>
                 </div>
             </div>
         </section>
