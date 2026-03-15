@@ -1,8 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FileText, Package, MessageSquare, Target, Clock, AlertTriangle } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
+import SplitText from "../react-bits/SplitText";
+
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.3,
+        },
+    },
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: "easeOut" }
+    },
+};
 
 const problems = [
     {
@@ -48,7 +69,15 @@ export default function ProblemSection() {
                     </div>
                     
                     <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
-                        Businesses Waste <span className="text-red-400">Thousands of Hours</span>
+                        <SplitText
+                            text="Businesses Waste"
+                            className="inline-block"
+                            delay={30}
+                            duration={0.5}
+                            ease="easeOut"
+                        />
+                        <br />
+                        <span className="text-red-400">Thousands of Hours</span>
                         <br />
                         on Manual Work
                     </h2>
@@ -59,35 +88,44 @@ export default function ProblemSection() {
                 </motion.div>
 
                 {/* Spotlight Cards Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto text-left"
+                >
                     {problems.map((p, i) => (
-                        <SpotlightCard
-                            key={i}
-                            spotlightColor="rgba(239, 68, 68, 0.15)"
-                            className="bg-[#0a0a0f] border-white/5 rounded-2xl group"
-                        >
-                            <div className="relative z-10 flex flex-col h-full">
-                                <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                    {p.icon}
+                        <motion.div key={i} variants={itemVariants} className="h-full">
+                            <SpotlightCard
+                                spotlightColor="rgba(239, 68, 68, 0.15)"
+                                className="bg-[#0a0a0f] border-white/5 rounded-2xl group h-full"
+                            >
+                                <div className="relative z-10 flex flex-col h-full">
+                                    <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                        {p.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{p.title}</h3>
+                                    <p className="text-zinc-400 leading-relaxed text-sm">{p.desc}</p>
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{p.title}</h3>
-                                <p className="text-zinc-400 leading-relaxed text-sm">{p.desc}</p>
-                            </div>
-                        </SpotlightCard>
+                            </SpotlightCard>
+                        </motion.div>
                     ))}
                     
                     {/* Final spanning card */}
-                    <SpotlightCard
-                        spotlightColor="rgba(59, 130, 246, 0.15)"
-                        className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20 rounded-2xl md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center text-center p-8"
-                    >
-                        <h3 className="text-2xl font-bold text-white mb-2">Sound Familiar?</h3>
-                        <p className="text-blue-200/80 mb-6">Let's fix it with intelligent systems.</p>
-                        <a href="#services" className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-colors">
-                            See Solutions
-                        </a>
-                    </SpotlightCard>
-                </div>
+                    <motion.div variants={itemVariants} className="md:col-span-2 lg:col-span-1 h-full">
+                        <SpotlightCard
+                            spotlightColor="rgba(59, 130, 246, 0.15)"
+                            className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20 rounded-2xl h-full flex flex-col items-center justify-center text-center p-8"
+                        >
+                            <h3 className="text-2xl font-bold text-white mb-2">Sound Familiar?</h3>
+                            <p className="text-blue-200/80 mb-6">Let's fix it with intelligent systems.</p>
+                            <a href="#solutions" className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-colors">
+                                See Solutions
+                            </a>
+                        </SpotlightCard>
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     );

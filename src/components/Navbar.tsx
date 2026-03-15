@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu } from "lucide-react";
+import Magnet from "./react-bits/Magnet";
 
 const navLinks = [
     { label: "Services", href: "#services" },
@@ -48,21 +49,24 @@ export default function Navbar() {
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
-                        <a
-                            key={link.href}
-                            href={link.href}
-                            className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 font-medium tracking-wide relative group"
-                        >
-                            {link.label}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
-                        </a>
+                        <Magnet key={link.href} padding={10} disabled={false} magnetStrength={2}>
+                            <a
+                                href={link.href}
+                                className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 font-medium tracking-wide relative group block"
+                            >
+                                {link.label}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
+                            </a>
+                        </Magnet>
                     ))}
-                    <a
-                        href="#cta"
-                        className="bg-white text-black hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300"
-                    >
-                        Book Demo
-                    </a>
+                    <Magnet padding={15} disabled={false} magnetStrength={3}>
+                        <a
+                            href="#cta"
+                            className="bg-white text-black hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 inline-block"
+                        >
+                            Book Demo
+                        </a>
+                    </Magnet>
                 </div>
 
                 {/* Mobile Toggle */}

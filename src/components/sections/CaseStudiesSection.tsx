@@ -1,8 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, BarChart, Clock, Users } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
+import SplitText from "../react-bits/SplitText";
+
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.2 },
+    },
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" }
+    },
+};
 
 const metrics = [
     { label: "Hours Saved", value: "1,200+", icon: <Clock className="w-4 h-4" /> },
@@ -25,7 +43,15 @@ export default function CaseStudiesSection() {
                         <span>Proven Impact</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
-                        Real Results for <span className="text-blue-400">Real Companies</span>
+                        <SplitText
+                            text="Real Results for"
+                            className="inline-block"
+                            delay={40}
+                            duration={0.6}
+                            ease="easeOut"
+                        />
+                        {" "}
+                        <span className="text-blue-400">Real Companies</span>
                     </h2>
                     <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
                         See how our intelligent automation and MVPs have transformed operations
@@ -33,72 +59,90 @@ export default function CaseStudiesSection() {
                     </p>
                 </motion.div>
 
-                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 text-left">
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 text-left"
+                >
                     {/* Featured Case Study */}
-                    <SpotlightCard
-                        spotlightColor="rgba(59, 130, 246, 0.15)"
-                        className="bg-[#030305] border-white/5 rounded-3xl lg:w-2/3"
-                    >
-                        <div className="relative z-10 flex flex-col justify-between h-full">
-                            <div>
-                                <span className="text-sm font-medium text-blue-400 mb-4 block">Logistics Automation</span>
-                                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Global Freight Forwarder</h3>
-                                <p className="text-zinc-400 leading-relaxed font-light mb-8 max-w-lg">
-                                    We deployed a custom AI agent fleet to read incoming custom declarations,
-                                    extract data, and push it directly into their global ERP. This eliminated manual
-                                    data entry errors and reduced processing times from days to seconds.
-                                </p>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-white/5">
-                                {metrics.map((m, i) => (
-                                    <div key={i}>
-                                        <div className="text-zinc-500 font-light text-xs uppercase tracking-widest flex items-center gap-2 mb-1">
-                                            {m.icon}
-                                            {m.label}
-                                        </div>
-                                        <div className="text-2xl font-bold text-white">{m.value}</div>
+                    <motion.div variants={itemVariants} className="lg:w-2/3 h-full">
+                        <motion.div whileHover={{ y: -5, scale: 1.01 }} transition={{ duration: 0.3 }} className="h-full">
+                            <SpotlightCard
+                                spotlightColor="rgba(59, 130, 246, 0.15)"
+                                className="bg-[#030305] border-white/5 rounded-3xl h-full"
+                            >
+                                <div className="relative z-10 flex flex-col justify-between h-full">
+                                    <div>
+                                        <span className="text-sm font-medium text-blue-400 mb-4 block">Logistics Automation</span>
+                                        <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Global Freight Forwarder</h3>
+                                        <p className="text-zinc-400 leading-relaxed font-light mb-8 max-w-lg">
+                                            We deployed a custom AI agent fleet to read incoming custom declarations,
+                                            extract data, and push it directly into their global ERP. This eliminated manual
+                                            data entry errors and reduced processing times from days to seconds.
+                                        </p>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </SpotlightCard>
+                                    
+                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-white/5 mt-auto">
+                                        {metrics.map((m, i) => (
+                                            <div key={i}>
+                                                <div className="text-zinc-500 font-light text-xs uppercase tracking-widest flex items-center gap-2 mb-1">
+                                                    {m.icon}
+                                                    {m.label}
+                                                </div>
+                                                <div className="text-2xl font-bold text-white">{m.value}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </SpotlightCard>
+                        </motion.div>
+                    </motion.div>
 
                     {/* Secondary Studies Column */}
                     <div className="flex flex-col gap-8 lg:w-1/3">
-                        <SpotlightCard
-                            spotlightColor="rgba(255, 255, 255, 0.05)"
-                            className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
-                        >
-                            <div className="relative z-10">
-                                <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
-                                <h3 className="text-xl font-bold text-white mb-2 tracking-tight">Smart Lending App</h3>
-                                <p className="text-zinc-400 text-sm font-light mb-6">
-                                    Validated and launched a complex lending platform in 4 weeks with built-in KYC AI.
-                                </p>
-                                <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
-                                    Read Story <ArrowUpRight className="w-4 h-4" />
-                                </a>
-                            </div>
-                        </SpotlightCard>
+                        <motion.div variants={itemVariants} className="h-full">
+                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
+                                <SpotlightCard
+                                    spotlightColor="rgba(255, 255, 255, 0.05)"
+                                    className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
+                                >
+                                    <div className="relative z-10">
+                                        <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
+                                        <h3 className="text-xl font-bold text-white mb-2 tracking-tight">Smart Lending App</h3>
+                                        <p className="text-zinc-400 text-sm font-light mb-6">
+                                            Validated and launched a complex lending platform in 4 weeks with built-in KYC AI.
+                                        </p>
+                                        <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
+                                            Read Story <ArrowUpRight className="w-4 h-4" />
+                                        </a>
+                                    </div>
+                                </SpotlightCard>
+                            </motion.div>
+                        </motion.div>
 
-                        <SpotlightCard
-                            spotlightColor="rgba(255, 255, 255, 0.05)"
-                            className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
-                        >
-                            <div className="relative z-10">
-                                <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
-                                <h3 className="text-xl font-bold text-white mb-2 tracking-tight">AI Recruitment Bot</h3>
-                                <p className="text-zinc-400 text-sm font-light mb-6">
-                                    Automated initial candidate screening and scheduling, saving 40+ hours per week.
-                                </p>
-                                <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
-                                    Read Story <ArrowUpRight className="w-4 h-4" />
-                                </a>
-                            </div>
-                        </SpotlightCard>
+                        <motion.div variants={itemVariants} className="h-full">
+                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
+                                <SpotlightCard
+                                    spotlightColor="rgba(255, 255, 255, 0.05)"
+                                    className="bg-[#030305] h-full flex flex-col justify-between border-white/5 rounded-3xl"
+                                >
+                                    <div className="relative z-10">
+                                        <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
+                                        <h3 className="text-xl font-bold text-white mb-2 tracking-tight">AI Recruitment Bot</h3>
+                                        <p className="text-zinc-400 text-sm font-light mb-6">
+                                            Automated initial candidate screening and scheduling, saving 40+ hours per week.
+                                        </p>
+                                        <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-blue-400 transition-colors">
+                                            Read Story <ArrowUpRight className="w-4 h-4" />
+                                        </a>
+                                    </div>
+                                </SpotlightCard>
+                            </motion.div>
+                        </motion.div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

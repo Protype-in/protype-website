@@ -2,12 +2,19 @@
 
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
+import Aurora from "../react-bits/Aurora";
+import Magnet from "../react-bits/Magnet";
 
 export default function CTASection() {
     return (
         <section id="cta" className="relative overflow-hidden py-20 bg-[#030305]">
-            <div className="absolute inset-0 z-0">
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-blue-600/10 blur-[150px]" />
+            <div className="absolute inset-0 z-0 overflow-hidden opacity-30">
+                <Aurora
+                    colorStops={["#3b82f6", "#8b5cf6", "#0ea5e9"]}
+                    blend={0.5}
+                    amplitude={1.5}
+                    speed={0.7}
+                />
             </div>
 
             <div className="section-container relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
@@ -28,22 +35,26 @@ export default function CTASection() {
                         Stop burning hours on manual tasks or waiting months for a product launch. Let's build your intelligent system today.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a
-                            href="https://cal.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white text-black hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 w-full sm:w-auto justify-center"
-                        >
-                            <Play className="w-5 h-5 fill-black" />
-                            Schedule Demo Call
-                        </a>
-                        <a
-                            href="mailto:hello@elevate.com"
-                            className="bg-transparent border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center w-full sm:w-auto justify-center transition-all duration-300"
-                        >
-                            Email Us
-                        </a>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <Magnet padding={15} disabled={false} magnetStrength={3}>
+                            <a
+                                href="https://cal.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-white text-black hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 w-full sm:w-auto justify-center"
+                            >
+                                <Play className="w-5 h-5 fill-black" />
+                                Schedule Demo Call
+                            </a>
+                        </Magnet>
+                        <Magnet padding={20} disabled={false} magnetStrength={3}>
+                            <a
+                                href="mailto:hello@elevate.com"
+                                className="bg-transparent border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center w-full sm:w-auto justify-center transition-all duration-300"
+                            >
+                                Email Us
+                            </a>
+                        </Magnet>
                     </div>
                 </motion.div>
             </div>

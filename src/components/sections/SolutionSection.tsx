@@ -1,8 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Cpu, Rocket } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
+import SplitText from "../react-bits/SplitText";
+
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+    },
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" }
+    },
+};
 
 const solutions = [
     {
@@ -48,7 +66,14 @@ export default function SolutionSection() {
                         <span>Core Systems</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
-                        AI Systems That Work <br className="hidden md:block" />
+                        <SplitText
+                            text="AI Systems That Work"
+                            className="inline-block"
+                            delay={30}
+                            duration={0.5}
+                            ease="easeOut"
+                        />
+                        <br className="hidden md:block" />
                         <span className="text-blue-400">For Your Business</span>
                     </h2>
                     <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
@@ -57,45 +82,52 @@ export default function SolutionSection() {
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left"
+                >
                     {solutions.map((s, i) => (
-                        <SpotlightCard
-                            key={i}
-                            spotlightColor={s.glowColor}
-                            className="bg-[#0a0a0f] border-white/5 rounded-3xl"
-                        >
-                            <div className="relative z-10">
-                                {/* Icon */}
-                                <div
-                                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${s.iconBg}`}
-                                >
-                                    {s.icon}
+                        <motion.div key={i} variants={itemVariants} className="h-full">
+                            <SpotlightCard
+                                spotlightColor={s.glowColor}
+                                className="bg-[#0a0a0f] border-white/5 rounded-3xl h-full flex flex-col"
+                            >
+                                <div className="relative z-10 flex flex-col flex-grow">
+                                    {/* Icon */}
+                                    <div
+                                        className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${s.iconBg} transform transition-transform group-hover:scale-110`}
+                                    >
+                                        {s.icon}
+                                    </div>
+
+                                    <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{s.title}</h3>
+                                    <p className="text-zinc-400 mb-8 leading-relaxed font-light">{s.desc}</p>
+
+                                    {/* Feature list */}
+                                    <ul className="space-y-3 mb-8 flex-grow">
+                                        {s.features.map((f, fi) => (
+                                            <li key={fi} className="flex items-start gap-3 text-zinc-400 font-light">
+                                                <span className="text-blue-400 mt-1">•</span>
+                                                {f}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <a
+                                        href="#services"
+                                        className="inline-flex items-center font-medium text-white hover:text-blue-400 transition-colors group mt-auto"
+                                    >
+                                        Learn More
+                                        <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                                    </a>
                                 </div>
-
-                                <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{s.title}</h3>
-                                <p className="text-zinc-400 mb-8 leading-relaxed font-light">{s.desc}</p>
-
-                                {/* Feature list */}
-                                <ul className="space-y-3 mb-8">
-                                    {s.features.map((f, fi) => (
-                                        <li key={fi} className="flex items-start gap-3 text-zinc-400 font-light">
-                                            <span className="text-blue-400 mt-1">•</span>
-                                            {f}
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <a
-                                    href="#services"
-                                    className="inline-flex items-center font-medium text-white hover:text-blue-400 transition-colors group"
-                                >
-                                    Learn More
-                                    <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
-                        </SpotlightCard>
+                            </SpotlightCard>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
