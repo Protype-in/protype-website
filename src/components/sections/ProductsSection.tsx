@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Package, Globe, Shield, Zap } from "lucide-react";
+import { Package, Zap } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
 import SplitText from "../react-bits/SplitText";
 
@@ -22,32 +22,7 @@ const itemVariants: Variants = {
     },
 };
 
-const products = [
-    {
-        title: "TradeFlow AI",
-        desc: "The ultimate AI OS for import-export automation.",
-        icon: <Globe className="w-6 h-6" />,
-        features: ["Automated Document OCR", "Shipment Tracking API", "Auto-Replies", "Compliance Checker"],
-        tag: "BETA",
-        color: "blue",
-    },
-    {
-        title: "SecureGuard",
-        desc: "Enterprise data privacy and compliance monitor.",
-        icon: <Shield className="w-6 h-6" />,
-        features: ["Real-time Monitoring", "PII Redaction", "Audit Logs", "SOC2 Dashboards"],
-        tag: "LIVE",
-        color: "emerald",
-    },
-    {
-        title: "FastTrack CRM",
-        desc: "A lightning-fast CRM built specifically for agencies.",
-        icon: <Zap className="w-6 h-6" />,
-        features: ["Smart Pipelines", "Email Sync", "Client Portals", "Custom Webhooks"],
-        tag: "LIVE",
-        color: "purple",
-    },
-];
+
 
 export default function ProductsSection() {
     return (
@@ -65,7 +40,7 @@ export default function ProductsSection() {
                     </div>
                     <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
                         <SplitText
-                            text="SaaS Built By"
+                            text="Products Built By"
                             className="inline-block"
                             delay={40}
                             duration={0.6}
@@ -85,45 +60,48 @@ export default function ProductsSection() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left"
+                    className="flex justify-center max-w-4xl mx-auto px-4"
                 >
-                    {products.map((p, i) => (
-                        <motion.div key={i} variants={itemVariants} className="h-full">
-                            <motion.div whileHover={{ y: -8, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
-                                <SpotlightCard
-                                    spotlightColor="rgba(255, 255, 255, 0.05)"
-                                    className="bg-[#0a0a0f] border-white/5 rounded-3xl group h-full"
+                    <motion.div variants={itemVariants} className="w-full">
+                        <SpotlightCard
+                            spotlightColor="rgba(59, 130, 246, 0.15)"
+                            className="bg-[#0a0a0f] border-white/10 rounded-[3xl] p-12 md:p-24 text-center relative overflow-hidden group w-full"
+                        >
+                            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/20 blur-[100px] rounded-full pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+                            
+                            <div className="relative z-10 flex flex-col items-center justify-center">
+                                <motion.div 
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                    className="w-20 h-20 rounded-2xl bg-[#030305] border border-white/10 flex items-center justify-center text-white mb-8 shadow-2xl relative"
                                 >
-                                    <div className="relative z-10 flex flex-col h-full">
-                                        <div className="flex justify-between items-start mb-6">
-                                            <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-${p.color}-400 group-hover:bg-${p.color}-500/10 transition-colors`}>
-                                                {p.icon}
-                                            </div>
-                                            <span className={`text-[10px] font-bold tracking-widest px-2 py-1 rounded bg-${p.color}-500/10 text-${p.color}-400 uppercase`}>
-                                                {p.tag}
-                                            </span>
-                                        </div>
-                                        
-                                        <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{p.title}</h3>
-                                        <p className="text-zinc-400 text-sm font-light mb-6 leading-relaxed flex-grow">{p.desc}</p>
-                                        
-                                        <ul className="space-y-3 mb-8">
-                                            {p.features.map((f, fi) => (
-                                                <li key={fi} className="flex items-start gap-2 text-zinc-300 text-sm font-light">
-                                                    <span className="text-blue-400">•</span>
-                                                    {f}
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        <a href="#cta" className="text-white hover:text-blue-400 font-medium text-sm transition-colors flex items-center gap-1 group-hover/link mt-auto">
-                                            Request Access <span className="group-hover/link:translate-x-1 transition-transform">→</span>
-                                        </a>
-                                    </div>
-                                </SpotlightCard>
-                            </motion.div>
-                        </motion.div>
-                    ))}
+                                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-50" />
+                                    <Zap className="w-10 h-10 text-blue-400 relative z-10" />
+                                </motion.div>
+                                
+                                <h3 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-zinc-500 tracking-tight mb-6">
+                                    Something <span className="text-blue-400">Incredible</span> <br /> is Coming Soon
+                                </h3>
+                                
+                                <p className="text-lg text-zinc-400 font-light max-w-xl mx-auto leading-relaxed mb-10">
+                                    We are building next-generation products that will redefine the way you work. Our engineering team is currently heads down in the lab. Stay tuned.
+                                </p>
+                                
+                                <a 
+                                    href="#cta"
+                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 font-semibold cursor-pointer group/btn"
+                                >
+                                    <span className="relative flex h-3 w-3">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                    </span>
+                                    Join the Waitlist
+                                    <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                                </a>
+                            </div>
+                        </SpotlightCard>
+                    </motion.div>
                 </motion.div>
             </div>
         </section>

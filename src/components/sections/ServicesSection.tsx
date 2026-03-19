@@ -24,11 +24,6 @@ const itemVariants: Variants = {
 
 const aiServices = [
     {
-        icon: <Target className="w-6 h-6" />,
-        title: "Lead Generation",
-        desc: "Automatically find and qualify leads from multiple sources. Score and route them seamlessly.",
-    },
-    {
         icon: <Mail className="w-6 h-6" />,
         title: "Email Automation",
         desc: "Read emails, draft intelligent replies, and send automated follow-ups.",
@@ -42,11 +37,6 @@ const aiServices = [
         icon: <Briefcase className="w-6 h-6" />,
         title: "CRM Management",
         desc: "Keep your pipeline organized and update deal statuses effortlessly.",
-    },
-    {
-        icon: <Smartphone className="w-6 h-6" />,
-        title: "Social Media AI",
-        desc: "Schedule posts, analyze trends, and engage audiences autonomously.",
     },
 ];
 

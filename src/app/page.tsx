@@ -19,16 +19,16 @@ export default function Home() {
     <main>
       <Navbar />
       <HeroSection />
-      <TrustedBySection />
+      {/* <TrustedBySection /> */}
       <ProblemSection />
       <SolutionSection />
       <ServicesSection />
       <ProductsSection />
       <HowWeWorkSection />
       <TechStackSection />
-      <CaseStudiesSection />
-      <PricingSection />
-      <TestimonialsSection />
+      {/* <CaseStudiesSection /> */}
+      {/* <PricingSection /> */}
+      {/* <TestimonialsSection /> */}
       <FAQSection />
       <CTASection />
       <Footer />

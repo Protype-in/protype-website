@@ -67,10 +67,12 @@ export default function Navbar() {
                     ))}
                     <Magnet padding={15} disabled={false} magnetStrength={3}>
                         <a
-                            href="#cta"
+                            href="https://wa.me/8637584923"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-white text-black hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 inline-block"
                         >
-                            Book Demo
+                            Get in Touch
                         </a>
                     </Magnet>
                 </div>

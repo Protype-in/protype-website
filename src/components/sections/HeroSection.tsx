@@ -99,9 +99,9 @@ export default function HeroSection() {
                     className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-4xl border-t border-white/5 pt-12"
                 >
                     {[
-                        { val: 50, suffix: "+", label: "AI Agents Built" },
+                        { val: 50, suffix: "+", label: "MVP Built" },
                         { val: 98, suffix: "%", label: "Client Satisfaction" },
-                        { val: 10, suffix: "x", label: "Faster Workflows" },
+                        { val: 10, suffix: "x", label: "Faster AI Workflows" },
                     ].map((stat, i) => (
                         <div key={stat.label} className="flex flex-col items-center">
                             <div className="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-2 flex">

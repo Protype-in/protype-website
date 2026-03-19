@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import Aurora from "../react-bits/Aurora";
 import Magnet from "../react-bits/Magnet";
 
@@ -38,18 +38,18 @@ export default function CTASection() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                         <Magnet padding={15} disabled={false} magnetStrength={3}>
                             <a
-                                href="https://cal.com"
+                                href="https://wa.me/8637584923"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="bg-white text-black hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 w-full sm:w-auto justify-center"
                             >
-                                <Play className="w-5 h-5 fill-black" />
-                                Schedule Demo Call
+                                <MessageCircle className="w-5 h-5" />
+                                WhatsApp Chat
                             </a>
                         </Magnet>
                         <Magnet padding={20} disabled={false} magnetStrength={3}>
                             <a
-                                href="mailto:hello@protype.com"
+                                href="mailto:info@protype.in"
                                 className="bg-transparent border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center w-full sm:w-auto justify-center transition-all duration-300"
                             >
                                 Email Us
