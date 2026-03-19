@@ -6,7 +6,7 @@ import SpotlightCard from "../react-bits/SpotlightCard";
 
 const testimonials = [
     {
-        quote: "Elevate built an MVP that would have taken us 6 months in just 4 weeks. Their blend of AI and full-stack development is unmatched.",
+        quote: "protype built an MVP that would have taken us 6 months in just 4 weeks. Their blend of AI and full-stack development is unmatched.",
         author: "Sarah Jenkins",
         role: "Founder, Logistics OS",
         tag: "MVP Development",

@@ -43,12 +43,11 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div className="lg:col-span-2 pr-8">
                         <a href="#" className="flex items-center gap-3 group mb-8 inline-flex">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                                <Cpu className="w-5 h-5" />
-                            </div>
-                            <span className="text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                                Elevate
-                            </span>
+                            <img 
+                              src="/logo1.png" 
+                              alt="protype logo" 
+                              className="h-16 w-auto object-contain"
+                            />
                         </a>
                         <p className="text-zinc-400 font-light leading-relaxed mb-8 max-w-sm text-sm">
                             Building intelligent automation systems and scalable MVPs that transform how businesses operate in the AI era.
@@ -91,7 +90,7 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="text-zinc-500 text-sm font-light">
-                        © {new Date().getFullYear()} Elevate AI Systems. All rights reserved.
+                        © {new Date().getFullYear()} protype. All rights reserved.
                     </div>
                     <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] text-zinc-400 text-sm font-light">
                         <span className="relative flex h-2.5 w-2.5">

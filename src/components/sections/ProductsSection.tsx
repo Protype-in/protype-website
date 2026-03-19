@@ -72,7 +72,7 @@ export default function ProductsSection() {
                             ease="easeOut"
                         />
                         {" "}
-                        <span className="text-blue-400">Elevate</span>
+                        <span className="text-blue-400">protype</span>
                     </h2>
                     <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
                         We don't just build for clients. We continuously launch our own

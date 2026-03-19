@@ -42,17 +42,14 @@ export default function Navbar() {
                 : "bg-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
                 {/* Logo */}
                 <a href="#" className="flex items-center gap-3 group">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center text-white shadow-lg group-hover:from-blue-600 group-hover:to-blue-800 transition-all duration-300">
-                        <Cpu className="w-5 h-5" />
-                    </div>
-                    <div>
-                        <span className="text-xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                            Elevate
-                        </span>
-                    </div>
+                    <img 
+                      src="/logo1.png"
+                      alt="protype logo" 
+                      className="h-16 w-auto object-contain"
+                    />
                 </a>
 
                 {/* Desktop Links */}
@@ -106,7 +103,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "100vh", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="fixed inset-0 top-16 md:hidden overflow-hidden bg-[#030305] border-t border-white/5 z-40"
+                        className="fixed inset-0 top-24 md:hidden overflow-hidden bg-[#030305] border-t border-white/5 z-40"
                     >
                         <div className="h-full w-full pb-20">
                             <FlowingMenu items={demoItems} />

@@ -49,7 +49,7 @@ export default function CTASection() {
                         </Magnet>
                         <Magnet padding={20} disabled={false} magnetStrength={3}>
                             <a
-                                href="mailto:hello@elevate.com"
+                                href="mailto:hello@protype.com"
                                 className="bg-transparent border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center w-full sm:w-auto justify-center transition-all duration-300"
                             >
                                 Email Us

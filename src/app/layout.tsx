@@ -3,7 +3,7 @@ import SplashCursor from "../components/react-bits/SplashCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Elevate — AI Automation & MVP Development for Global Businesses",
+  title: "protype — AI Automation & MVP Development for Global Businesses",
   description:
     "We build AI agents, automation systems, and startup MVPs that help companies scale faster. Custom AI solutions for import-export, logistics, trading, and SaaS businesses.",
   keywords: [
@@ -15,8 +15,11 @@ export const metadata: Metadata = {
     "import export CRM",
     "SaaS development",
   ],
+  icons: {
+    icon: "/fevicon.jpg",
+  },
   openGraph: {
-    title: "Elevate — AI Automation & MVP Development",
+    title: "protype — AI Automation & MVP Development",
     description:
       "Build AI systems. Launch products. Scale faster. Custom AI agents and MVPs for global businesses.",
     type: "website",
