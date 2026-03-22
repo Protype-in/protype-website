@@ -46,7 +46,7 @@ export default function Footer() {
                             <img 
                               src="/logo1.png" 
                               alt="protype logo" 
-                                                            className="h-[42px] w-auto object-contain shrink-0"
+                                                            className="h-32 w-auto object-contain shrink-0 scale-[1.2] origin-left"
                             />
                         </a>
                         <p className="text-zinc-400 font-light leading-relaxed mb-8 max-w-sm text-sm">

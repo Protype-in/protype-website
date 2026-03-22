@@ -42,13 +42,13 @@ export default function Navbar() {
                 : "bg-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
                 {/* Logo */}
                 <a href="#" className="flex items-center gap-3 group">
                     <img 
                       src="/logo1.png"
                       alt="protype logo" 
-                                            className="h-[42px] w-auto object-contain shrink-0"
+                                            className="h-28 w-auto object-contain shrink-0 scale-[1.3] origin-left"
                     />
                 </a>
 
@@ -105,7 +105,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "100vh", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="fixed inset-0 top-24 md:hidden overflow-hidden bg-[#030305] border-t border-white/5 z-40"
+                        className="fixed inset-0 top-28 md:hidden overflow-hidden bg-[#030305] border-t border-white/5 z-40"
                     >
                         <div className="h-full w-full pb-20">
                             <FlowingMenu items={demoItems} />
