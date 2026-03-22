@@ -42,11 +42,11 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
                     {/* Brand Column */}
                     <div className="lg:col-span-2 pr-8">
-                        <a href="#" className="flex items-center gap-3 group mb-8 inline-flex">
+                        <a href="#" className="inline-flex items-center gap-3 group mb-8">
                             <img 
                               src="/logo1.png" 
                               alt="protype logo" 
-                              className="h-16 w-auto object-contain"
+                                                            className="h-[42px] w-auto object-contain shrink-0"
                             />
                         </a>
                         <p className="text-zinc-400 font-light leading-relaxed mb-8 max-w-sm text-sm">

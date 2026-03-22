@@ -48,7 +48,7 @@ export default function Navbar() {
                     <img 
                       src="/logo1.png"
                       alt="protype logo" 
-                      className="h-16 w-auto object-contain"
+                                            className="h-[42px] w-auto object-contain shrink-0"
                     />
                 </a>
 
