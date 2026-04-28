@@ -45,7 +45,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased bg-white text-zinc-900" suppressHydrationWarning>
         {children}
         <div className="pointer-events-none fixed inset-0 z-[9999]">
           <SplashCursor />

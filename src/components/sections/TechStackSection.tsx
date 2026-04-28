@@ -8,7 +8,7 @@ const categories = [
     {
         label: "Frontend & UI",
         items: [
-            { name: "Next.js", color: "#ffffff" },
+            { name: "Next.js", color: "#000000" },
             { name: "React", color: "#61dafb" },
             { name: "Tailwind CSS", color: "#38bdf8" },
         ],
@@ -40,7 +40,7 @@ const categories = [
     {
         label: "Cloud & DevOps",
         items: [
-            { name: "Vercel", color: "#ffffff" },
+            { name: "Vercel", color: "#000000" },
             { name: "AWS", color: "#ff9900" },
             { name: "Docker", color: "#2496ed" },
         ],
@@ -49,15 +49,15 @@ const categories = [
 
 export default function TechStackSection() {
     return (
-        <section className="relative overflow-hidden py-16 bg-[#fafafa] border-y border-black/5">
+        <section className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa] border-y border-black/5">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-8 md:mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-500 text-sm font-medium mb-6 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                         <Terminal className="w-4 h-4" />
                         <span>Technology Stack</span>
                     </div>

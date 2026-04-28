@@ -7,7 +7,7 @@ import Magnet from "../react-bits/Magnet";
 
 export default function CTASection() {
     return (
-        <section id="cta" className="relative overflow-hidden py-20 bg-[#fafafa]">
+        <section id="cta" className="relative overflow-hidden py-6 lg:py-10 bg-[#fafafa]">
             <div className="absolute inset-0 z-0 overflow-hidden opacity-30">
                 <Aurora
                     colorStops={["#3b82f6", "#8b5cf6", "#0ea5e9"]}
@@ -41,7 +41,7 @@ export default function CTASection() {
                                 href="https://wa.me/8637584923"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-zinc-900 text-white hover:bg-zinc-800 hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 w-full sm:w-auto justify-center"
+                                className="bg-zinc-900 text-white shadow-[0_0_20px_rgba(59,130,246,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-105 active:scale-95 transition-all duration-300 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 w-full sm:w-auto justify-center"
                             >
                                 <MessageCircle className="w-5 h-5" />
                                 WhatsApp Chat

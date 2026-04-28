@@ -33,8 +33,10 @@ const solutions = [
             "Continuous autonomous operation",
             "Seamless system integrations",
         ],
-        glowColor: "rgba(59, 130, 246, 0.2)" as const,
-        iconBg: "bg-blue-500/10 text-blue-400",
+        glowColor: "rgba(59, 130, 246, 0.3)" as const,
+        iconBg: "bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 text-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.2)]",
+        borderColor: "hover:border-blue-500/30",
+        bulletColor: "text-blue-500",
     },
     {
         icon: <Rocket className="w-8 h-8" />,
@@ -46,20 +48,22 @@ const solutions = [
             "Embedded AI-powered features",
             "Enterprise-ready infrastructure",
         ],
-        glowColor: "rgba(139, 92, 246, 0.2)" as const,
-        iconBg: "bg-purple-500/10 text-purple-400",
+        glowColor: "rgba(139, 92, 246, 0.3)" as const,
+        iconBg: "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 text-purple-500 shadow-[0_0_15px_rgba(139,92,246,0.2)]",
+        borderColor: "hover:border-purple-500/30",
+        bulletColor: "text-purple-500",
     },
 ];
 
 export default function SolutionSection() {
     return (
-        <section id="solutions" className="relative overflow-hidden py-16 bg-[#fafafa]">
+        <section id="solutions" className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-8 md:mb-10"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
                         <Cpu className="w-4 h-4" />
@@ -93,12 +97,12 @@ export default function SolutionSection() {
                         <motion.div key={i} variants={itemVariants} className="h-full">
                             <SpotlightCard
                                 spotlightColor={s.glowColor}
-                                className="bg-white border-black/5 rounded-3xl h-full flex flex-col"
+                                className={`bg-white border border-black/5 ${s.borderColor} transition-colors duration-500 rounded-3xl h-full flex flex-col group`}
                             >
                                 <div className="relative z-10 flex flex-col flex-grow">
                                     {/* Icon */}
                                     <div
-                                        className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${s.iconBg} transform transition-transform group-hover:scale-110`}
+                                        className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 ${s.iconBg} transform transition-transform group-hover:scale-110 group-hover:rotate-3`}
                                     >
                                         {s.icon}
                                     </div>
@@ -110,7 +114,7 @@ export default function SolutionSection() {
                                     <ul className="space-y-3 mb-8 flex-grow">
                                         {s.features.map((f, fi) => (
                                             <li key={fi} className="flex items-start gap-3 text-zinc-600 font-light">
-                                                <span className="text-blue-400 mt-1">•</span>
+                                                <span className={`${s.bulletColor} mt-1 font-bold`}>•</span>
                                                 {f}
                                             </li>
                                         ))}

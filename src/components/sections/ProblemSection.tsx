@@ -55,17 +55,20 @@ const problems = [
 
 export default function ProblemSection() {
     return (
-        <section className="relative overflow-hidden py-16 bg-[#fafafa]">
+        <section className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-8 md:mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-500/20 bg-red-500/10 text-red-400 text-sm font-medium mb-6">
-                        <AlertTriangle className="w-4 h-4" />
-                        <span>The Bottlenecks</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/20 bg-red-500/10 text-red-500 text-sm font-bold mb-6 shadow-[0_0_15px_rgba(239,68,68,0.2)] tracking-wide uppercase">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                        <span>Critical Bottlenecks</span>
                     </div>
                     
                     <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
@@ -77,9 +80,9 @@ export default function ProblemSection() {
                             ease="easeOut"
                         />
                         <br />
-                        <span className="text-red-400">Thousands of Hours</span>
+                        <span className="text-red-500">Thousands of Hours</span>
                         <br />
-                        on Manual Work
+                        <span className="text-zinc-600">on Manual Work</span>
                     </h2>
                     
                     <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
@@ -98,15 +101,18 @@ export default function ProblemSection() {
                     {problems.map((p, i) => (
                         <motion.div key={i} variants={itemVariants} className="h-full">
                             <SpotlightCard
-                                spotlightColor="rgba(239, 68, 68, 0.15)"
-                                className="bg-white border-black/5 rounded-2xl group h-full"
+                                spotlightColor="rgba(239, 68, 68, 0.2)"
+                                className="bg-white border border-black/5 hover:border-red-500/30 transition-all duration-500 rounded-3xl group h-full relative overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                             >
-                                <div className="relative z-10 flex flex-col h-full">
-                                    <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <div className="absolute -bottom-4 -right-4 text-9xl font-black text-red-500/[0.03] group-hover:text-red-500/[0.08] transition-colors duration-500 pointer-events-none select-none">
+                                    0{i + 1}
+                                </div>
+                                <div className="relative z-10 flex flex-col h-full p-2">
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20 text-red-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.2)] transition-all duration-300">
                                         {p.icon}
                                     </div>
-                                    <h3 className="text-xl font-bold text-zinc-900 mb-3 tracking-tight">{p.title}</h3>
-                                    <p className="text-zinc-600 leading-relaxed text-sm">{p.desc}</p>
+                                    <h3 className="text-2xl font-bold text-zinc-900 mb-3 tracking-tight">{p.title}</h3>
+                                    <p className="text-zinc-600 leading-relaxed font-light text-[15px]">{p.desc}</p>
                                 </div>
                             </SpotlightCard>
                         </motion.div>
@@ -115,13 +121,15 @@ export default function ProblemSection() {
                     {/* Final spanning card */}
                     <motion.div variants={itemVariants} className="md:col-span-2 lg:col-span-1 h-full">
                         <SpotlightCard
-                            spotlightColor="rgba(59, 130, 246, 0.15)"
-                            className="bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-500/20 rounded-2xl h-full flex flex-col items-center justify-center text-center p-8"
+                            spotlightColor="rgba(59, 130, 246, 0.3)"
+                            className="bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-colors duration-500 rounded-3xl h-full flex flex-col items-center justify-center text-center p-8 relative overflow-hidden group shadow-2xl"
                         >
-                            <h3 className="text-2xl font-bold text-zinc-900 mb-2">Sound Familiar?</h3>
-                            <p className="text-blue-800/80 mb-6">Let's fix it with intelligent systems.</p>
-                            <a href="#solutions" className="bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-colors">
+                            <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                            <h3 className="text-3xl font-black text-white mb-3 relative z-10 tracking-tight">Sound Familiar?</h3>
+                            <p className="text-zinc-400 mb-8 relative z-10 font-light text-lg">Let's fix it with intelligent systems.</p>
+                            <a href="#solutions" className="bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] px-8 py-4 rounded-full font-bold text-sm hover:scale-105 transition-all duration-300 relative z-10 flex items-center gap-2 group/btn">
                                 See Solutions
+                                <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                             </a>
                         </SpotlightCard>
                     </motion.div>

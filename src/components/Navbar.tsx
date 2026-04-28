@@ -85,15 +85,15 @@ export default function Navbar() {
                 >
                     <motion.span
                         animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-white"
+                        className="block w-5 h-0.5 bg-zinc-900"
                     />
                     <motion.span
                         animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="block w-5 h-0.5 bg-white"
+                        className="block w-5 h-0.5 bg-zinc-900"
                     />
                     <motion.span
                         animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-white"
+                        className="block w-5 h-0.5 bg-zinc-900"
                     />
                 </button>
             </div>

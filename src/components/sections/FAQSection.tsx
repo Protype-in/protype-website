@@ -31,13 +31,13 @@ export default function FAQSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section id="faq" className="relative overflow-hidden py-16 bg-[#fafafa] border-t border-black/5">
+        <section id="faq" className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa] border-t border-black/5">
             <div className="section-container relative z-10 max-w-3xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-8 md:mb-10"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
                         <HelpCircle className="w-4 h-4" />

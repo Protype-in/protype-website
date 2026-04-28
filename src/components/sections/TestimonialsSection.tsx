@@ -27,13 +27,13 @@ const testimonials = [
 
 export default function TestimonialsSection() {
     return (
-        <section id="testimonials" className="relative overflow-hidden py-16 bg-white">
+        <section id="testimonials" className="relative overflow-hidden py-4 lg:py-6 bg-white">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-8 md:mb-10"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
                         <MessageSquareQuote className="w-4 h-4" />

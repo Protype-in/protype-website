@@ -66,13 +66,13 @@ const plans = [
 
 export default function PricingSection() {
     return (
-        <section id="pricing" className="relative overflow-hidden py-16 bg-[#fafafa]">
+        <section id="pricing" className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa]">
             <div className="section-container relative z-10 w-full max-w-7xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-8 md:mb-10"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
                         <Crown className="w-4 h-4" />

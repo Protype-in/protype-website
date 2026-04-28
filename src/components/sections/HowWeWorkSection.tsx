@@ -40,15 +40,15 @@ const steps = [
 
 export default function HowWeWorkSection() {
     return (
-        <section id="process" className="relative overflow-hidden py-16 bg-white">
+        <section id="process" className="relative overflow-hidden py-4 lg:py-6 bg-white">
             <div className="section-container relative z-10 w-full max-w-7xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-8 md:mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/10 text-rose-500 text-sm font-medium mb-6 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
                         <Settings className="w-4 h-4" />
                         <span>The Process</span>
                     </div>
@@ -75,11 +75,11 @@ export default function HowWeWorkSection() {
                         {steps.map((s, i) => (
                             <Step key={i}>
                                 <SpotlightCard
-                                    spotlightColor="rgba(0, 0, 0, 0.05)"
-                                    className="bg-[#fafafa] border border-black/5 rounded-3xl w-full h-full min-h-[250px]"
+                                    spotlightColor="rgba(244, 63, 94, 0.2)"
+                                    className="bg-white border border-rose-500/10 hover:border-rose-500/30 transition-colors duration-500 rounded-3xl w-full h-full min-h-[250px] group"
                                 >
                                     <div className="relative z-10 flex flex-col h-full items-center justify-center text-center p-6">
-                                        <div className="w-16 h-16 rounded-2xl bg-black/5 flex items-center justify-center text-zinc-700 mb-6">
+                                        <div className="w-16 h-16 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-500 mb-6 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(244,63,94,0.3)] transition-all duration-300">
                                             {s.icon}
                                         </div>
                                         <h3 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">{s.title}</h3>

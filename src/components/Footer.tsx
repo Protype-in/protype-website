@@ -54,13 +54,13 @@ export default function Footer() {
                         </p>
                         
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-zinc-600 hover:text-zinc-900 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300 group">
+                            <a href="#" className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-zinc-600 hover:text-blue-500 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                                 <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-zinc-600 hover:text-zinc-900 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300 group">
+                            <a href="https://www.linkedin.com/in/harshpatel101/" className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-zinc-600 hover:text-blue-500 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                                 <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-zinc-600 hover:text-zinc-900 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300 group">
+                            <a href="https://github.com/QuickHarsh" className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-zinc-600 hover:text-purple-500 hover:bg-purple-500/10 hover:border-purple-500/30 transition-all duration-300 group shadow-sm hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]">
                                 <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
                             </a>
                         </div>
@@ -75,10 +75,10 @@ export default function Footer() {
                                     <li key={j}>
                                         <a
                                             href={link.href}
-                                            className="text-zinc-600 hover:text-zinc-900 font-light text-sm transition-colors block relative group w-fit"
+                                            className="text-zinc-600 hover:text-blue-500 font-medium text-sm transition-colors block relative group w-fit"
                                         >
                                             {link.label}
-                                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-blue-500/50 group-hover:w-full transition-all duration-300 ease-out" />
+                                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300 ease-out" />
                                         </a>
                                     </li>
                                 ))}

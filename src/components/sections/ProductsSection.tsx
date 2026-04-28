@@ -26,15 +26,15 @@ const itemVariants: Variants = {
 
 export default function ProductsSection() {
     return (
-        <section id="products" className="relative overflow-hidden py-16 bg-[#fafafa] border-t border-black/5">
+        <section id="products" className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa] border-t border-black/5">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12"
+                    className="mb-8 md:mb-10"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-500 text-sm font-medium mb-6 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                         <Package className="w-4 h-4" />
                         <span>Internal Products</span>
                     </div>
@@ -68,20 +68,20 @@ export default function ProductsSection() {
                             className="bg-white border-black/10 rounded-[3xl] p-12 md:p-24 text-center relative overflow-hidden group w-full"
                         >
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/20 blur-[100px] rounded-full pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-amber-500/20 blur-[100px] rounded-full pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
                             
                             <div className="relative z-10 flex flex-col items-center justify-center">
                                 <motion.div 
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                    className="w-20 h-20 rounded-2xl bg-[#fafafa] border border-black/10 flex items-center justify-center text-zinc-900 mb-8 shadow-2xl relative"
+                                    className="w-20 h-20 rounded-2xl bg-white border border-amber-500/20 flex items-center justify-center text-zinc-900 mb-8 shadow-[0_0_30px_rgba(245,158,11,0.2)] relative"
                                 >
-                                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-50" />
-                                    <Zap className="w-10 h-10 text-blue-400 relative z-10" />
+                                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 opacity-50" />
+                                    <Zap className="w-10 h-10 text-amber-500 relative z-10" />
                                 </motion.div>
                                 
-                                <h3 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-zinc-500 tracking-tight mb-6">
-                                    Something <span className="text-blue-400">Incredible</span> <br /> is Coming Soon
+                                <h3 className="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight mb-6">
+                                    Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Incredible</span> <br /> is Coming Soon
                                 </h3>
                                 
                                 <p className="text-lg text-zinc-600 font-light max-w-xl mx-auto leading-relaxed mb-10">
@@ -90,11 +90,11 @@ export default function ProductsSection() {
                                 
                                 <a 
                                     href="#cta"
-                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-zinc-900 text-white hover:bg-zinc-800 hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 font-semibold cursor-pointer group/btn"
+                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 font-semibold cursor-pointer group/btn"
                                 >
                                     <span className="relative flex h-3 w-3">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
                                     </span>
                                     Join the Waitlist
                                     <span className="group-hover/btn:translate-x-1 transition-transform">→</span>

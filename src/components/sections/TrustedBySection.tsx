@@ -13,7 +13,7 @@ const logos = [
 
 export default function TrustedBySection() {
     return (
-        <section className="py-12 bg-[#fafafa] border-y border-black/5 overflow-hidden">
+        <section className="py-6 bg-[#fafafa] border-y border-black/5 overflow-hidden">
             <div className="section-container !py-4">
                 <div className="text-center mb-6">
                     <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">

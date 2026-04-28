@@ -124,6 +124,14 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
     });
 
     const [activeIndex, setActiveIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         // Map 0-1 to 0-4 based on 5 steps
@@ -211,7 +219,7 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                             const offset = i - activeIndex;
                             
                             const rotation = offset * 8;
-                            const translateY = offset * 100;
+                            const translateY = offset * (isMobile ? 50 : 100);
                             const scale = isActive ? 1.05 : 0.9;
                             const blur = Math.abs(offset) * 2;
                             const opacity = 1 - Math.min(Math.abs(offset) * 0.3, 0.7);
@@ -259,7 +267,7 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                     </div>
 
                     {/* RIGHT PANEL: Description & Visual (55%) */}
-                    <div className="w-full md:w-[55%] h-[60vh] md:h-full flex flex-col justify-center gap-6 md:gap-8 z-20 pb-10 md:pb-0 px-0 md:px-10 -mt-10 md:-mt-20">
+                    <div className="w-full md:w-[55%] h-[60vh] md:h-full flex flex-col justify-center gap-6 md:gap-8 z-20 pb-10 md:pb-0 px-0 md:px-10 mt-8 md:-mt-20">
                         {/* 3D Visual Box */}
                         <div 
                             ref={cardRef}
