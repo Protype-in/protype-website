@@ -26,7 +26,7 @@ const itemVariants: Variants = {
 
 export default function ProductsSection() {
     return (
-        <section id="products" className="relative overflow-hidden py-16 bg-[#030305] border-t border-white/5">
+        <section id="products" className="relative overflow-hidden py-16 bg-[#fafafa] border-t border-black/5">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -34,11 +34,11 @@ export default function ProductsSection() {
                     viewport={{ once: true }}
                     className="mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
                         <Package className="w-4 h-4" />
                         <span>Internal Products</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="Products Built By"
                             className="inline-block"
@@ -49,7 +49,7 @@ export default function ProductsSection() {
                         {" "}
                         <span className="text-blue-400">protype</span>
                     </h2>
-                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
                         We don't just build for clients. We continuously launch our own
                         internal products to master the latest technologies.
                     </p>
@@ -65,7 +65,7 @@ export default function ProductsSection() {
                     <motion.div variants={itemVariants} className="w-full">
                         <SpotlightCard
                             spotlightColor="rgba(59, 130, 246, 0.15)"
-                            className="bg-[#0a0a0f] border-white/10 rounded-[3xl] p-12 md:p-24 text-center relative overflow-hidden group w-full"
+                            className="bg-white border-black/10 rounded-[3xl] p-12 md:p-24 text-center relative overflow-hidden group w-full"
                         >
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/20 blur-[100px] rounded-full pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
@@ -74,7 +74,7 @@ export default function ProductsSection() {
                                 <motion.div 
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                    className="w-20 h-20 rounded-2xl bg-[#030305] border border-white/10 flex items-center justify-center text-white mb-8 shadow-2xl relative"
+                                    className="w-20 h-20 rounded-2xl bg-[#fafafa] border border-black/10 flex items-center justify-center text-zinc-900 mb-8 shadow-2xl relative"
                                 >
                                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-50" />
                                     <Zap className="w-10 h-10 text-blue-400 relative z-10" />
@@ -84,13 +84,13 @@ export default function ProductsSection() {
                                     Something <span className="text-blue-400">Incredible</span> <br /> is Coming Soon
                                 </h3>
                                 
-                                <p className="text-lg text-zinc-400 font-light max-w-xl mx-auto leading-relaxed mb-10">
+                                <p className="text-lg text-zinc-600 font-light max-w-xl mx-auto leading-relaxed mb-10">
                                     We are building next-generation products that will redefine the way you work. Our engineering team is currently heads down in the lab. Stay tuned.
                                 </p>
                                 
                                 <a 
                                     href="#cta"
-                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 font-semibold cursor-pointer group/btn"
+                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-zinc-900 text-white hover:bg-zinc-800 hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all duration-300 font-semibold cursor-pointer group/btn"
                                 >
                                     <span className="relative flex h-3 w-3">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>

@@ -53,7 +53,7 @@ const solutions = [
 
 export default function SolutionSection() {
     return (
-        <section id="solutions" className="relative overflow-hidden py-16 bg-[#030305]">
+        <section id="solutions" className="relative overflow-hidden py-16 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -65,7 +65,7 @@ export default function SolutionSection() {
                         <Cpu className="w-4 h-4" />
                         <span>Core Systems</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="AI Systems That Work"
                             className="inline-block"
@@ -76,7 +76,7 @@ export default function SolutionSection() {
                         <br className="hidden md:block" />
                         <span className="text-blue-400">For Your Business</span>
                     </h2>
-                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
                         Two powerful pillars designed to accelerate your growth — scalable 
                         automation and rapid product development workflows.
                     </p>
@@ -93,7 +93,7 @@ export default function SolutionSection() {
                         <motion.div key={i} variants={itemVariants} className="h-full">
                             <SpotlightCard
                                 spotlightColor={s.glowColor}
-                                className="bg-[#0a0a0f] border-white/5 rounded-3xl h-full flex flex-col"
+                                className="bg-white border-black/5 rounded-3xl h-full flex flex-col"
                             >
                                 <div className="relative z-10 flex flex-col flex-grow">
                                     {/* Icon */}
@@ -103,13 +103,13 @@ export default function SolutionSection() {
                                         {s.icon}
                                     </div>
 
-                                    <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{s.title}</h3>
-                                    <p className="text-zinc-400 mb-8 leading-relaxed font-light">{s.desc}</p>
+                                    <h3 className="text-2xl font-bold text-zinc-900 mb-3 tracking-tight">{s.title}</h3>
+                                    <p className="text-zinc-600 mb-8 leading-relaxed font-light">{s.desc}</p>
 
                                     {/* Feature list */}
                                     <ul className="space-y-3 mb-8 flex-grow">
                                         {s.features.map((f, fi) => (
-                                            <li key={fi} className="flex items-start gap-3 text-zinc-400 font-light">
+                                            <li key={fi} className="flex items-start gap-3 text-zinc-600 font-light">
                                                 <span className="text-blue-400 mt-1">•</span>
                                                 {f}
                                             </li>
@@ -118,7 +118,7 @@ export default function SolutionSection() {
 
                                     <a
                                         href="#services"
-                                        className="inline-flex items-center font-medium text-white hover:text-blue-400 transition-colors group mt-auto"
+                                        className="inline-flex items-center font-medium text-zinc-900 hover:text-blue-400 transition-colors group mt-auto"
                                     >
                                         Learn More
                                         <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>

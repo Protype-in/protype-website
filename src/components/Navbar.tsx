@@ -38,7 +38,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-[#030305]/80 backdrop-blur-xl border-b border-white/5"
+                ? "bg-[#fafafa]/80 backdrop-blur-xl border-b border-black/5"
                 : "bg-transparent"
                 }`}
         >
@@ -58,7 +58,7 @@ export default function Navbar() {
                         <Magnet key={link.href} padding={10} disabled={false} magnetStrength={2}>
                             <a
                                 href={link.href}
-                                className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 font-medium tracking-wide relative group block"
+                                className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors duration-200 font-medium tracking-wide relative group block"
                             >
                                 {link.label}
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
@@ -70,7 +70,7 @@ export default function Navbar() {
                             href="https://wa.me/8637584923"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white text-black hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 inline-block"
+                            className="bg-zinc-900 text-white hover:bg-zinc-800 hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 inline-block"
                         >
                             Get in Touch
                         </a>
@@ -105,7 +105,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "100vh", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="fixed inset-0 top-28 md:hidden overflow-hidden bg-[#030305] border-t border-white/5 z-40"
+                        className="fixed inset-0 top-28 md:hidden overflow-hidden bg-[#fafafa] border-t border-black/5 z-40"
                     >
                         <div className="h-full w-full pb-20">
                             <FlowingMenu items={demoItems} />

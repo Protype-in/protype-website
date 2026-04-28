@@ -13,7 +13,7 @@ const logos = [
 
 export default function TrustedBySection() {
     return (
-        <section className="py-12 bg-[#030305] border-y border-white/5 overflow-hidden">
+        <section className="py-12 bg-[#fafafa] border-y border-black/5 overflow-hidden">
             <div className="section-container !py-4">
                 <div className="text-center mb-6">
                     <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">
@@ -37,10 +37,10 @@ export default function TrustedBySection() {
                                 key={i}
                                 className="flex items-center gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0 cursor-default"
                             >
-                                <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center font-bold text-white text-xs">
+                                <div className="w-8 h-8 rounded bg-black/10 flex items-center justify-center font-bold text-zinc-900 text-xs">
                                     {logo.name[0]}
                                 </div>
-                                <span className="font-bold text-lg text-white tracking-tight">
+                                <span className="font-bold text-lg text-zinc-900 tracking-tight">
                                     {logo.name}
                                 </span>
                             </div>

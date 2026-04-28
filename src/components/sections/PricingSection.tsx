@@ -66,7 +66,7 @@ const plans = [
 
 export default function PricingSection() {
     return (
-        <section id="pricing" className="relative overflow-hidden py-16 bg-[#030305]">
+        <section id="pricing" className="relative overflow-hidden py-16 bg-[#fafafa]">
             <div className="section-container relative z-10 w-full max-w-7xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -78,7 +78,7 @@ export default function PricingSection() {
                         <Crown className="w-4 h-4" />
                         <span>Investment Levels</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="Transparent Pricing"
                             className="inline-block"
@@ -87,7 +87,7 @@ export default function PricingSection() {
                             ease="easeOut"
                         />
                     </h2>
-                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
                         No hidden fees. Just clear milestones and predictable costs for
                         delivering high-impact automation and software.
                     </p>
@@ -105,28 +105,28 @@ export default function PricingSection() {
                             <motion.div whileHover={{ y: -8, scale: 1.02 }} transition={{ duration: 0.3 }} className="h-full">
                                 <SpotlightCard
                                     spotlightColor={plan.popular ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0.05)"}
-                                    className={`bg-[#0a0a0f] border rounded-3xl relative h-full flex flex-col ${
-                                        plan.popular ? "border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]" : "border-white/5"
+                                    className={`bg-white border rounded-3xl relative h-full flex flex-col ${
+                                        plan.popular ? "border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]" : "border-black/5"
                                     }`}
                                 >
                                     <div className="relative z-10 flex flex-col flex-grow h-full">
                                         {plan.popular && (
-                                            <div className="absolute -top-12 -right-8 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                                            <div className="absolute -top-12 -right-8 bg-blue-500 text-zinc-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                                                 Most Popular
                                             </div>
                                         )}
                                         
-                                        <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{plan.name}</h3>
-                                        <p className="text-zinc-400 text-sm mb-6 font-light h-10">{plan.desc}</p>
+                                        <h3 className="text-2xl font-bold text-zinc-900 mb-2 tracking-tight">{plan.name}</h3>
+                                        <p className="text-zinc-600 text-sm mb-6 font-light h-10">{plan.desc}</p>
                                         
                                         <div className="mb-8">
-                                            <span className="text-4xl font-black text-white tracking-tighter">{plan.price}</span>
+                                            <span className="text-4xl font-black text-zinc-900 tracking-tighter">{plan.price}</span>
                                             {plan.price !== "Custom" && <span className="text-zinc-500 text-sm ml-2">base</span>}
                                         </div>
 
                                         <ul className="space-y-4 mb-10 flex-grow">
                                             {plan.features.map((f, fi) => (
-                                                <li key={fi} className="flex items-start gap-3 text-zinc-300 text-sm font-light">
+                                                <li key={fi} className="flex items-start gap-3 text-zinc-700 text-sm font-light">
                                                     <CheckCircle2 className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.popular ? "text-blue-400" : "text-zinc-500"}`} />
                                                     {f}
                                                 </li>
@@ -137,8 +137,8 @@ export default function PricingSection() {
                                             href="#cta"
                                             className={`w-full text-center py-4 mt-auto rounded-xl font-bold text-sm transition-all duration-300 ${
                                                 plan.popular
-                                                    ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25"
-                                                    : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+                                                    ? "bg-blue-600 hover:bg-blue-500 text-zinc-900 shadow-lg shadow-blue-500/25"
+                                                    : "bg-black/5 hover:bg-black/10 text-zinc-900 border border-black/10"
                                             }`}
                                         >
                                             Get Started

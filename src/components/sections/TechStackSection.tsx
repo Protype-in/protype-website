@@ -49,7 +49,7 @@ const categories = [
 
 export default function TechStackSection() {
     return (
-        <section className="relative overflow-hidden py-16 bg-[#030305] border-y border-white/5">
+        <section className="relative overflow-hidden py-16 bg-[#fafafa] border-y border-black/5">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -57,14 +57,14 @@ export default function TechStackSection() {
                     viewport={{ once: true }}
                     className="mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
                         <Terminal className="w-4 h-4" />
                         <span>Technology Stack</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         Built With <span className="text-blue-400">Modern Technology</span>
                     </h2>
-                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
                         We use industry-leading tools and frameworks to build reliable,
                         scalable, and performant solutions.
                     </p>
@@ -88,7 +88,7 @@ export default function TechStackSection() {
                                 {cat.items.map((item, ii) => (
                                     <Magnet key={ii} padding={20} disabled={false} magnetStrength={3}>
                                         <div
-                                            className="px-6 py-3 rounded-full border border-white/10 bg-[#0a0a0f] flex items-center gap-3 cursor-pointer group hover:bg-white/5 hover:border-white/20 transition-all duration-300 shadow-xl"
+                                            className="px-6 py-3 rounded-full border border-black/10 bg-white flex items-center gap-3 cursor-pointer group hover:bg-black/5 hover:border-black/20 transition-all duration-300 shadow-xl"
                                         >
                                             <div
                                                 className="w-2.5 h-2.5 rounded-full flex-shrink-0"
@@ -97,7 +97,7 @@ export default function TechStackSection() {
                                                     boxShadow: `0 0 10px ${item.color}80`,
                                                 }}
                                             />
-                                            <span className="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors">
+                                            <span className="text-sm font-medium text-zinc-700 group-hover:text-zinc-900 transition-colors">
                                                 {item.name}
                                             </span>
                                         </div>

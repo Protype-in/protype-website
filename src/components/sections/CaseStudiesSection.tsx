@@ -31,7 +31,7 @@ const metrics = [
 
 export default function CaseStudiesSection() {
     return (
-        <section id="case-studies" className="relative overflow-hidden py-16 bg-[#0a0a0f]">
+        <section id="case-studies" className="relative overflow-hidden py-16 bg-white">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -39,11 +39,11 @@ export default function CaseStudiesSection() {
                     viewport={{ once: true }}
                     className="mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
                         <BarChart className="w-4 h-4" />
                         <span>Proven Impact</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="Real Results for"
                             className="inline-block"
@@ -54,7 +54,7 @@ export default function CaseStudiesSection() {
                         {" "}
                         <span className="text-blue-400">Real Companies</span>
                     </h2>
-                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
                         See how our intelligent automation and MVPs have transformed operations
                         for businesses worldwide.
                     </p>
@@ -72,27 +72,27 @@ export default function CaseStudiesSection() {
                         <motion.div whileHover={{ y: -5, scale: 1.01 }} transition={{ duration: 0.3 }} className="h-full">
                             <SpotlightCard
                                 spotlightColor="rgba(59, 130, 246, 0.15)"
-                                className="bg-[#030305] border-white/5 rounded-3xl h-full"
+                                className="bg-[#fafafa] border-black/5 rounded-3xl h-full"
                             >
                                 <div className="relative z-10 flex flex-col justify-between h-full">
                                     <div>
                                         <span className="text-sm font-medium text-blue-400 mb-4 block">Logistics Automation</span>
-                                        <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Global Freight Forwarder</h3>
-                                        <p className="text-zinc-400 leading-relaxed font-light mb-8 max-w-lg">
+                                        <h3 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Global Freight Forwarder</h3>
+                                        <p className="text-zinc-600 leading-relaxed font-light mb-8 max-w-lg">
                                             We deployed a custom AI agent fleet to read incoming custom declarations,
                                             extract data, and push it directly into their global ERP. This eliminated manual
                                             data entry errors and reduced processing times from days to seconds.
                                         </p>
                                     </div>
                                     
-                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-white/5 mt-auto">
+                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-black/5 mt-auto">
                                         {metrics.map((m, i) => (
                                             <div key={i}>
                                                 <div className="text-zinc-500 font-light text-xs uppercase tracking-widest flex items-center gap-2 mb-1">
                                                     {m.icon}
                                                     {m.label}
                                                 </div>
-                                                <div className="text-2xl font-bold text-white">{m.value}</div>
+                                                <div className="text-2xl font-bold text-zinc-900">{m.value}</div>
                                             </div>
                                         ))}
                                     </div>
@@ -111,11 +111,11 @@ export default function CaseStudiesSection() {
                             >
                                 <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
                                     <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
-                                    <h3 className="text-xl font-bold text-white mb-2 tracking-tight">Smart Lending App</h3>
-                                    <p className="text-zinc-300 text-sm font-light mb-4">
+                                    <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">Smart Lending App</h3>
+                                    <p className="text-zinc-700 text-sm font-light mb-4">
                                         Validated and launched a complex platform in 4 weeks.
                                     </p>
-                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-emerald-300 transition-colors">
+                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-zinc-900 hover:text-emerald-300 transition-colors">
                                         Read Story <ArrowUpRight className="w-4 h-4" />
                                     </a>
                                 </div>
@@ -130,11 +130,11 @@ export default function CaseStudiesSection() {
                             >
                                 <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
                                     <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
-                                    <h3 className="text-xl font-bold text-white mb-2 tracking-tight">AI Recruitment Bot</h3>
-                                    <p className="text-zinc-300 text-sm font-light mb-4">
+                                    <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">AI Recruitment Bot</h3>
+                                    <p className="text-zinc-700 text-sm font-light mb-4">
                                         Automated initial candidate screening scheduling.
                                     </p>
-                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-white hover:text-purple-300 transition-colors">
+                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-zinc-900 hover:text-purple-300 transition-colors">
                                         Read Story <ArrowUpRight className="w-4 h-4" />
                                     </a>
                                 </div>

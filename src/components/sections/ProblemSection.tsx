@@ -55,7 +55,7 @@ const problems = [
 
 export default function ProblemSection() {
     return (
-        <section className="relative overflow-hidden py-16 bg-[#030305]">
+        <section className="relative overflow-hidden py-16 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -68,7 +68,7 @@ export default function ProblemSection() {
                         <span>The Bottlenecks</span>
                     </div>
                     
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="Businesses Waste"
                             className="inline-block"
@@ -82,7 +82,7 @@ export default function ProblemSection() {
                         on Manual Work
                     </h2>
                     
-                    <p className="text-lg text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
                         Legacy systems and fragmented tools drain your team's productivity. It's time to let automation do the heavy lifting so you can focus on growth.
                     </p>
                 </motion.div>
@@ -99,14 +99,14 @@ export default function ProblemSection() {
                         <motion.div key={i} variants={itemVariants} className="h-full">
                             <SpotlightCard
                                 spotlightColor="rgba(239, 68, 68, 0.15)"
-                                className="bg-[#0a0a0f] border-white/5 rounded-2xl group h-full"
+                                className="bg-white border-black/5 rounded-2xl group h-full"
                             >
                                 <div className="relative z-10 flex flex-col h-full">
                                     <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                                         {p.icon}
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{p.title}</h3>
-                                    <p className="text-zinc-400 leading-relaxed text-sm">{p.desc}</p>
+                                    <h3 className="text-xl font-bold text-zinc-900 mb-3 tracking-tight">{p.title}</h3>
+                                    <p className="text-zinc-600 leading-relaxed text-sm">{p.desc}</p>
                                 </div>
                             </SpotlightCard>
                         </motion.div>
@@ -116,11 +116,11 @@ export default function ProblemSection() {
                     <motion.div variants={itemVariants} className="md:col-span-2 lg:col-span-1 h-full">
                         <SpotlightCard
                             spotlightColor="rgba(59, 130, 246, 0.15)"
-                            className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20 rounded-2xl h-full flex flex-col items-center justify-center text-center p-8"
+                            className="bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-500/20 rounded-2xl h-full flex flex-col items-center justify-center text-center p-8"
                         >
-                            <h3 className="text-2xl font-bold text-white mb-2">Sound Familiar?</h3>
-                            <p className="text-blue-200/80 mb-6">Let's fix it with intelligent systems.</p>
-                            <a href="#solutions" className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-colors">
+                            <h3 className="text-2xl font-bold text-zinc-900 mb-2">Sound Familiar?</h3>
+                            <p className="text-blue-800/80 mb-6">Let's fix it with intelligent systems.</p>
+                            <a href="#solutions" className="bg-zinc-900 text-white hover:bg-zinc-800 px-6 py-3 rounded-full font-semibold text-sm hover:bg-zinc-200 transition-colors">
                                 See Solutions
                             </a>
                         </SpotlightCard>

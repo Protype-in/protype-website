@@ -49,7 +49,7 @@ const timeline = [
 
 export default function ServicesSection() {
     return (
-        <section id="services" className="relative overflow-hidden py-16 bg-[#030305]">
+        <section id="services" className="relative overflow-hidden py-16 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 
                 {/* AI Agents Setup */}
@@ -63,7 +63,7 @@ export default function ServicesSection() {
                         <Bot className="w-4 h-4" />
                         <span>The Automation Suite</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="Custom AI Agents for"
                             className="inline-block"
@@ -72,7 +72,7 @@ export default function ServicesSection() {
                             ease="easeOut"
                         />
                         <br />
-                        <span className="text-zinc-400">Business Workflows</span>
+                        <span className="text-zinc-600">Business Workflows</span>
                     </h2>
                 </motion.div>
 
@@ -89,14 +89,14 @@ export default function ServicesSection() {
                             <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
                                 <SpotlightCard
                                     spotlightColor="rgba(255, 255, 255, 0.05)"
-                                    className="bg-[#0a0a0f] border-white/5 rounded-2xl group h-full"
+                                    className="bg-white border-black/5 rounded-2xl group h-full"
                                 >
                                     <div className="relative z-10">
-                                        <div className="mb-6 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-blue-500/10 group-hover:text-blue-400 group-hover:border-blue-500/20 transition-colors">
+                                        <div className="mb-6 w-12 h-12 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-zinc-900 group-hover:bg-blue-500/10 group-hover:text-blue-400 group-hover:border-blue-500/20 transition-colors">
                                             {s.icon}
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-2 tracking-tight">{s.title}</h3>
-                                        <p className="text-zinc-400 text-sm leading-relaxed font-light">{s.desc}</p>
+                                        <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">{s.title}</h3>
+                                        <p className="text-zinc-600 text-sm leading-relaxed font-light">{s.desc}</p>
                                     </div>
                                 </SpotlightCard>
                             </motion.div>
@@ -109,8 +109,8 @@ export default function ServicesSection() {
                             spotlightColor="rgba(59, 130, 246, 0.1)"
                             className="bg-blue-500/5 border-blue-500/10 rounded-2xl flex flex-col items-center justify-center text-center p-6 h-full min-h-[200px]"
                         >
-                            <h3 className="text-lg font-bold text-white mb-2">Need Custom Logic?</h3>
-                            <p className="text-blue-200/60 text-sm">We can build agents for any niche process.</p>
+                            <h3 className="text-lg font-bold text-zinc-900 mb-2">Need Custom Logic?</h3>
+                            <p className="text-blue-800/80 text-sm">We can build agents for any niche process.</p>
                         </SpotlightCard>
                     </motion.div>
                 </motion.div>
@@ -126,7 +126,7 @@ export default function ServicesSection() {
                         <Rocket className="w-4 h-4" />
                         <span>Fast-Track Development</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         <SplitText
                             text="Build Your Startup MVP"
                             className="inline-block"
@@ -135,7 +135,7 @@ export default function ServicesSection() {
                             ease="easeOut"
                         />
                         <br />
-                        <span className="text-zinc-400">in Just 4 Weeks</span>
+                        <span className="text-zinc-600">in Just 4 Weeks</span>
                     </h2>
                 </motion.div>
 
@@ -152,11 +152,11 @@ export default function ServicesSection() {
                             key={i}
                             variants={itemVariants}
                             whileHover={{ scale: 1.02 }}
-                            className="relative flex flex-col p-8 rounded-3xl border border-white/5 bg-[#0a0a0f] hover:bg-white/[0.02] transition-colors"
+                            className="relative flex flex-col p-8 rounded-3xl border border-black/5 bg-white hover:bg-black/[0.02] transition-colors"
                         >
-                            <div className="text-4xl font-black text-white/5 mb-4">{t.step}</div>
-                            <h3 className="text-xl font-bold text-white mb-2">{t.title}</h3>
-                            <p className="text-zinc-400 text-sm font-light leading-relaxed">{t.desc}</p>
+                            <div className="text-4xl font-black text-zinc-900/5 mb-4">{t.step}</div>
+                            <h3 className="text-xl font-bold text-zinc-900 mb-2">{t.title}</h3>
+                            <p className="text-zinc-600 text-sm font-light leading-relaxed">{t.desc}</p>
                         </motion.div>
                     ))}
                 </motion.div>

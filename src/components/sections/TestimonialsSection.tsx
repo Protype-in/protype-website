@@ -27,7 +27,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
     return (
-        <section id="testimonials" className="relative overflow-hidden py-16 bg-[#0a0a0f]">
+        <section id="testimonials" className="relative overflow-hidden py-16 bg-white">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -35,11 +35,11 @@ export default function TestimonialsSection() {
                     viewport={{ once: true }}
                     className="mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-zinc-700 text-sm font-medium mb-6">
                         <MessageSquareQuote className="w-4 h-4" />
                         <span>Client Success</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
                         Hear from the <span className="text-blue-400">Founders</span>
                     </h2>
                 </motion.div>
@@ -49,7 +49,7 @@ export default function TestimonialsSection() {
                         <SpotlightCard
                             key={i}
                             spotlightColor="rgba(255, 255, 255, 0.05)"
-                            className="bg-[#030305] border-white/5 rounded-3xl"
+                            className="bg-[#fafafa] border-black/5 rounded-3xl"
                         >
                             <div className="relative z-10 flex flex-col h-full">
                                 <div className="mb-8">
@@ -58,13 +58,13 @@ export default function TestimonialsSection() {
                                     </span>
                                 </div>
                                 
-                                <blockquote className="text-zinc-300 font-light leading-relaxed mb-8 flex-1">
+                                <blockquote className="text-zinc-700 font-light leading-relaxed mb-8 flex-1">
                                     "{t.quote}"
                                 </blockquote>
                                 
-                                <div className="flex items-center justify-between border-t border-white/5 pt-6 mt-auto">
+                                <div className="flex items-center justify-between border-t border-black/5 pt-6 mt-auto">
                                     <div>
-                                        <div className="font-bold text-white text-sm">{t.author}</div>
+                                        <div className="font-bold text-zinc-900 text-sm">{t.author}</div>
                                         <div className="text-zinc-500 text-xs mt-0.5">{t.role}</div>
                                     </div>
                                     <CheckCircle2 className="w-5 h-5 text-blue-500/50" />
