@@ -31,7 +31,10 @@ const metrics = [
 
 export default function CaseStudiesSection() {
     return (
-        <section id="case-studies" className="relative overflow-hidden py-4 lg:py-6 bg-white">
+        <section id="case-studies" className="relative overflow-hidden py-6 lg:py-10 bg-[#fafafa]">
+            {/* Global background aura */}
+            <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-gradient-to-br from-emerald-100/40 via-teal-100/40 to-cyan-100/40 blur-[100px] rounded-full pointer-events-none -z-10" />
+            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-blue-100/40 via-indigo-100/40 to-transparent blur-[100px] rounded-full pointer-events-none -z-10" />
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -72,27 +75,34 @@ export default function CaseStudiesSection() {
                         <motion.div whileHover={{ y: -5, scale: 1.01 }} transition={{ duration: 0.3 }} className="h-full">
                             <SpotlightCard
                                 spotlightColor="rgba(59, 130, 246, 0.15)"
-                                className="bg-[#fafafa] border-black/5 rounded-3xl h-full"
+                                className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_4px_20px_rgba(0,0,0,0.02)] hover:bg-white/60 hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_8px_30px_rgba(0,0,0,0.05)] rounded-[32px] h-full p-8 md:p-12 transition-all duration-300 relative overflow-hidden"
                             >
+                                {/* Subtle inner bloom */}
+                                <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/50 to-transparent pointer-events-none rounded-t-[32px]" />
+
                                 <div className="relative z-10 flex flex-col justify-between h-full">
                                     <div>
-                                        <span className="text-sm font-medium text-blue-400 mb-4 block">Logistics Automation</span>
-                                        <h3 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Global Freight Forwarder</h3>
-                                        <p className="text-zinc-600 leading-relaxed font-light mb-8 max-w-lg">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-500 text-xs font-bold mb-6 tracking-wide uppercase shadow-sm">
+                                            Logistics Automation
+                                        </div>
+                                        <h3 className="text-3xl md:text-4xl font-extrabold text-zinc-900 mb-6 tracking-tight drop-shadow-sm">Global Freight Forwarder</h3>
+                                        <p className="text-zinc-600/90 leading-relaxed font-medium mb-10 max-w-xl text-lg">
                                             We deployed a custom AI agent fleet to read incoming custom declarations,
                                             extract data, and push it directly into their global ERP. This eliminated manual
                                             data entry errors and reduced processing times from days to seconds.
                                         </p>
                                     </div>
                                     
-                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8 border-t border-black/5 mt-auto">
+                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 pt-8 border-t border-black/5 mt-auto">
                                         {metrics.map((m, i) => (
-                                            <div key={i}>
-                                                <div className="text-zinc-500 font-light text-xs uppercase tracking-widest flex items-center gap-2 mb-1">
-                                                    {m.icon}
+                                            <div key={i} className="bg-white/50 p-4 rounded-2xl border border-white/80 shadow-sm">
+                                                <div className="text-zinc-500 font-bold text-xs uppercase tracking-widest flex items-center gap-2 mb-2">
+                                                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                                                        {m.icon}
+                                                    </div>
                                                     {m.label}
                                                 </div>
-                                                <div className="text-2xl font-bold text-zinc-900">{m.value}</div>
+                                                <div className="text-3xl font-black text-zinc-900 tracking-tighter">{m.value}</div>
                                             </div>
                                         ))}
                                     </div>
@@ -103,42 +113,46 @@ export default function CaseStudiesSection() {
 
                     {/* Secondary Studies Column */}
                     <div className="flex flex-col gap-8 lg:w-1/3 mt-12 md:mt-0">
-                        <motion.div variants={itemVariants} className="h-full w-full flex justify-center overflow-hidden rounded-3xl group relative">
-                            <DecayCard 
-                                width={350} 
-                                height={350} 
-                                image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
-                            >
-                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                    <span className="text-sm font-medium text-emerald-400 mb-2 block">FinTech MVP</span>
-                                    <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">Smart Lending App</h3>
-                                    <p className="text-zinc-700 text-sm font-light mb-4">
-                                        Validated and launched a complex platform in 4 weeks.
-                                    </p>
-                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-zinc-900 hover:text-emerald-300 transition-colors">
-                                        Read Story <ArrowUpRight className="w-4 h-4" />
-                                    </a>
-                                </div>
-                            </DecayCard>
+                        <motion.div variants={itemVariants} className="h-full w-full flex justify-center rounded-[32px] overflow-hidden group relative border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.05)] p-2 bg-white/40 backdrop-blur-xl">
+                            <div className="rounded-[24px] overflow-hidden w-full h-full relative">
+                                <DecayCard 
+                                    width={350} 
+                                    height={350} 
+                                    image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
+                                >
+                                    <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-white via-white/90 to-transparent">
+                                        <span className="text-xs font-bold text-emerald-600 mb-2 block uppercase tracking-wide">FinTech MVP</span>
+                                        <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">Smart Lending App</h3>
+                                        <p className="text-zinc-600 text-sm font-medium mb-4">
+                                            Validated and launched a complex platform in 4 weeks.
+                                        </p>
+                                        <a href="#" className="flex items-center gap-1 text-sm font-bold text-emerald-600 hover:text-emerald-500 transition-colors">
+                                            Read Story <ArrowUpRight className="w-4 h-4" />
+                                        </a>
+                                    </div>
+                                </DecayCard>
+                            </div>
                         </motion.div>
 
-                        <motion.div variants={itemVariants} className="h-full w-full flex justify-center overflow-hidden rounded-3xl group relative">
-                            <DecayCard 
-                                width={350} 
-                                height={350} 
-                                image="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2940&auto=format&fit=crop"
-                            >
-                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                    <span className="text-sm font-medium text-purple-400 mb-2 block">HR Automation</span>
-                                    <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">AI Recruitment Bot</h3>
-                                    <p className="text-zinc-700 text-sm font-light mb-4">
-                                        Automated initial candidate screening scheduling.
-                                    </p>
-                                    <a href="#" className="flex items-center gap-1 text-sm font-medium text-zinc-900 hover:text-purple-300 transition-colors">
-                                        Read Story <ArrowUpRight className="w-4 h-4" />
-                                    </a>
-                                </div>
-                            </DecayCard>
+                        <motion.div variants={itemVariants} className="h-full w-full flex justify-center rounded-[32px] overflow-hidden group relative border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.05)] p-2 bg-white/40 backdrop-blur-xl">
+                            <div className="rounded-[24px] overflow-hidden w-full h-full relative">
+                                <DecayCard 
+                                    width={350} 
+                                    height={350} 
+                                    image="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2940&auto=format&fit=crop"
+                                >
+                                    <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-white via-white/90 to-transparent">
+                                        <span className="text-xs font-bold text-purple-600 mb-2 block uppercase tracking-wide">HR Automation</span>
+                                        <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">AI Recruitment Bot</h3>
+                                        <p className="text-zinc-600 text-sm font-medium mb-4">
+                                            Automated initial candidate screening scheduling.
+                                        </p>
+                                        <a href="#" className="flex items-center gap-1 text-sm font-bold text-purple-600 hover:text-purple-500 transition-colors">
+                                            Read Story <ArrowUpRight className="w-4 h-4" />
+                                        </a>
+                                    </div>
+                                </DecayCard>
+                            </div>
                         </motion.div>
                     </div>
                 </motion.div>

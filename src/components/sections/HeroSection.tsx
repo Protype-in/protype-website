@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, TerminalSquare, Smartphone, GitBranch, Settings, BrainCircuit } from "lucide-react";
 
 const services = [
   {
@@ -57,63 +57,12 @@ const services = [
   }
 ];
 
-// Placeholder SVGs
-const LaptopCodeSVG = ({ color }: { color: string }) => (
-    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
-        <rect x="20" y="30" width="60" height="40" rx="2" fill="#fff" stroke={color} strokeWidth="1.5" />
-        <rect x="15" y="70" width="70" height="4" rx="1" fill={color} />
-        <circle cx="50" cy="50" r="10" fill="transparent" stroke={color} strokeWidth="1" strokeDasharray="4 2" className="animate-[spin_4s_linear_infinite]" />
-        <rect x="25" y="35" width="30" height="2" fill={color} className="animate-pulse" />
-        <rect x="25" y="40" width="40" height="2" fill={color} className="animate-pulse" style={{ animationDelay: '200ms' }} />
-        <rect x="25" y="45" width="20" height="2" fill={color} className="animate-pulse" style={{ animationDelay: '400ms' }} />
-    </svg>
-);
-
-const PhoneAppSVG = ({ color }: { color: string }) => (
-    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
-        <rect x="30" y="15" width="40" height="70" rx="4" fill="#fff" stroke={color} strokeWidth="1.5" />
-        <rect x="35" y="25" width="30" height="40" rx="2" fill="#f4f4f5" />
-        <circle cx="50" cy="75" r="3" fill={color} />
-        <circle cx="50" cy="45" r="8" fill="transparent" stroke={color} strokeWidth="1" className="animate-ping origin-center" style={{ animationDuration: '3s' }} />
-    </svg>
-);
-
-const FlowchartSVG = ({ color }: { color: string }) => (
-    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
-        <circle cx="30" cy="30" r="8" fill="#fff" stroke={color} strokeWidth="1.5" className="animate-pulse" />
-        <circle cx="70" cy="30" r="8" fill="#fff" stroke={color} strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '300ms' }} />
-        <circle cx="50" cy="70" r="8" fill="#fff" stroke={color} strokeWidth="1.5" className="animate-pulse" style={{ animationDelay: '600ms' }} />
-        <path d="M 35 35 L 45 65" stroke={color} strokeWidth="1.5" strokeDasharray="4" className="animate-[dash_2s_linear_infinite]" />
-        <path d="M 65 35 L 55 65" stroke={color} strokeWidth="1.5" strokeDasharray="4" className="animate-[dash_2s_linear_infinite]" />
-        <path d="M 38 30 L 62 30" stroke={color} strokeWidth="1.5" strokeDasharray="4" className="animate-[dash_2s_linear_infinite]" />
-        <style>{`@keyframes dash { to { stroke-dashoffset: -10; } }`}</style>
-    </svg>
-);
-
-const GearsSVG = ({ color }: { color: string }) => (
-    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
-        <circle cx="40" cy="40" r="15" fill="transparent" stroke={color} strokeWidth="2" strokeDasharray="4 2" className="animate-[spin_4s_linear_infinite]" />
-        <circle cx="65" cy="60" r="10" fill="transparent" stroke={color} strokeWidth="2" strokeDasharray="3 2" className="animate-[spin_3s_linear_infinite_reverse]" />
-        <circle cx="40" cy="40" r="5" fill={color} />
-        <circle cx="65" cy="60" r="3" fill={color} />
-    </svg>
-);
-
-const NeuralSVG = ({ color }: { color: string }) => (
-    <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
-        <path d="M 50 20 C 30 20, 20 40, 30 60 C 40 80, 60 80, 70 60 C 80 40, 70 20, 50 20 Z" fill="transparent" stroke={color} strokeWidth="1" strokeDasharray="5 5" className="animate-[spin_10s_linear_infinite]" />
-        <circle cx="50" cy="50" r="12" fill="#fff" stroke={color} strokeWidth="2" className="animate-pulse" />
-        <circle cx="50" cy="50" r="4" fill={color} />
-        <circle cx="50" cy="50" r="20" fill="transparent" stroke={color} strokeWidth="0.5" className="animate-ping" style={{ animationDuration: '2s' }} />
-    </svg>
-);
-
 const VisualMap: Record<string, React.FC<{ color: string }>> = {
-    laptop_code: LaptopCodeSVG,
-    phone_app: PhoneAppSVG,
-    flowchart: FlowchartSVG,
-    gears: GearsSVG,
-    neural: NeuralSVG
+    laptop_code: (props) => <TerminalSquare color={props.color} strokeWidth={1} className="w-full h-full drop-shadow-xl" />,
+    phone_app: (props) => <Smartphone color={props.color} strokeWidth={1} className="w-full h-full drop-shadow-xl" />,
+    flowchart: (props) => <GitBranch color={props.color} strokeWidth={1} className="w-full h-full drop-shadow-xl" />,
+    gears: (props) => <Settings color={props.color} strokeWidth={1} className="w-full h-full drop-shadow-xl" />,
+    neural: (props) => <BrainCircuit color={props.color} strokeWidth={1} className="w-full h-full drop-shadow-xl" />
 };
 
 export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<string, any> }) {
@@ -246,18 +195,18 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                                         mass: 1,
                                         delay: i * 0.05
                                     }}
-                                    className={`absolute w-[280px] md:w-[380px] lg:w-[460px] h-[90px] md:h-[120px] rounded-2xl flex items-center justify-center cursor-pointer transition-all duration-300 backdrop-blur-md border-[2px] group ${
-                                        isActive ? 'shadow-2xl' : 'bg-white hover:bg-zinc-50'
+                                    className={`absolute w-[280px] md:w-[380px] lg:w-[460px] h-[90px] md:h-[120px] rounded-[32px] flex items-center justify-center cursor-pointer transition-all duration-500 backdrop-blur-2xl group ${
+                                        isActive 
+                                        ? 'border border-white/40 shadow-[inset_0_2px_20px_rgba(255,255,255,0.5),0_15px_30px_rgba(0,0,0,0.1)]' 
+                                        : 'bg-white/40 border border-white/60 shadow-[inset_0_2px_15px_rgba(255,255,255,0.9)] hover:bg-white/60'
                                     }`}
                                     style={{
                                         backgroundColor: isActive ? service.color : undefined,
-                                        borderColor: isActive ? service.color : 'rgba(0,0,0,0.05)',
-                                        boxShadow: isActive ? `0 10px 30px -10px ${service.color}` : '0 4px 20px -10px rgba(0,0,0,0.1)',
                                     }}
                                 >
                                     <h3 
-                                        className="font-bold text-xl md:text-3xl tracking-wider uppercase transition-colors duration-300 text-center"
-                                        style={{ color: isActive ? '#ffffff' : service.color }}
+                                        className="font-extrabold text-xl md:text-3xl tracking-wide transition-colors duration-500 text-center drop-shadow-sm uppercase"
+                                        style={{ color: isActive ? '#ffffff' : '#71717a' }}
                                     >
                                         {service.name}
                                     </h3>
@@ -267,15 +216,18 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                     </div>
 
                     {/* RIGHT PANEL: Description & Visual (55%) */}
-                    <div className="w-full md:w-[55%] h-[60vh] md:h-full flex flex-col justify-center gap-6 md:gap-8 z-20 pb-10 md:pb-0 px-0 md:px-10 mt-8 md:-mt-20">
+                    <div className="w-full md:w-[55%] h-[60vh] md:h-full flex flex-col justify-center gap-6 md:gap-8 z-20 pb-10 md:pb-0 px-0 md:px-10 mt-8 md:mt-0">
                         {/* 3D Visual Box */}
                         <div 
                             ref={cardRef}
                             onMouseMove={handleMouseMove}
                             onMouseLeave={handleMouseLeave}
-                            className="w-full aspect-[16/10] md:aspect-video rounded-2xl relative transition-transform duration-200 ease-out preserve-3d"
+                            className="w-full aspect-[16/9] md:aspect-[21/9] lg:aspect-[16/8] xl:aspect-video max-h-[35vh] rounded-[40px] relative transition-transform duration-200 ease-out preserve-3d bg-white/30 backdrop-blur-3xl border border-white/70 shadow-[inset_0_2px_30px_rgba(255,255,255,0.9),0_20px_50px_rgba(0,0,0,0.05)] overflow-hidden shrink-0"
                             style={{ transformStyle: 'preserve-3d' }}
                         >
+                            {/* Subtle Inner Bloom */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/60 to-transparent opacity-60 pointer-events-none" />
+
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeService.id}
@@ -284,18 +236,24 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                                     exit={{ opacity: 0, scale: 0.8, rotateY: -15, z: -100 }}
                                     transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.05 }}
                                     className="absolute inset-0 flex items-center justify-center"
-                                    style={{
-                                        filter: `drop-shadow(0 20px 40px ${activeService.glow}40)`,
-                                    }}
                                 >
-                                    {/* Inline SVG Placeholder */}
-                                    <div className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 transform translate-z-10 animate-[float_3s_ease-in-out_infinite]">
-                                        {React.createElement(VisualMap[activeService.visual], { color: activeService.color })}
+                                    {/* Icon Container with glowing aura */}
+                                    <div 
+                                        className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 transform translate-z-10 animate-[float_4s_ease-in-out_infinite] relative flex items-center justify-center"
+                                    >
+                                        {/* Glow behind icon */}
+                                        <div 
+                                            className="absolute inset-0 rounded-full blur-[60px] opacity-40 mix-blend-multiply"
+                                            style={{ backgroundColor: activeService.color }}
+                                        />
+                                        <div className="relative z-10 w-full h-full p-8 md:p-12 lg:p-16 rounded-full bg-white/50 backdrop-blur-md border border-white/80 shadow-[inset_0_2px_15px_rgba(255,255,255,1),0_10px_30px_rgba(0,0,0,0.05)] flex items-center justify-center">
+                                            {React.createElement(VisualMap[activeService.visual], { color: activeService.color })}
+                                        </div>
                                     </div>
                                     <style>{`
                                         @keyframes float {
-                                            0%, 100% { transform: translateY(0px); }
-                                            50% { transform: translateY(-8px); }
+                                            0%, 100% { transform: translateY(0px) translateZ(30px); }
+                                            50% { transform: translateY(-15px) translateZ(30px); }
                                         }
                                     `}</style>
                                 </motion.div>
@@ -303,7 +261,7 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                         </div>
 
                         {/* Description Box */}
-                        <div className="relative min-h-[200px] md:min-h-[240px]">
+                        <div className="relative min-h-[260px] md:min-h-[240px] lg:min-h-[280px]">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeService.id}
@@ -318,14 +276,14 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                                         },
                                         exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
                                     }}
-                                    className="absolute top-0 left-0 w-full flex flex-col gap-3 md:gap-5"
+                                    className="absolute top-0 left-0 w-full flex flex-col gap-3 md:gap-4"
                                 >
                                     <motion.h4 
                                         variants={{
                                             hidden: { opacity: 0, y: 15, filter: "blur(4px)" },
                                             visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { type: "spring", stiffness: 200, damping: 20 } }
                                         }}
-                                        className="text-xl md:text-3xl lg:text-4xl font-semibold text-zinc-900"
+                                        className="text-2xl md:text-3xl font-semibold text-zinc-900"
                                     >
                                         {activeService.tagline}
                                     </motion.h4>
@@ -334,7 +292,7 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                                             hidden: { opacity: 0, y: 15, filter: "blur(4px)" },
                                             visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { type: "spring", stiffness: 200, damping: 20 } }
                                         }}
-                                        className="text-zinc-600 font-light text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl"
+                                        className="text-zinc-600 font-light text-base md:text-lg leading-relaxed max-w-2xl"
                                     >
                                         {activeService.description}
                                     </motion.p>

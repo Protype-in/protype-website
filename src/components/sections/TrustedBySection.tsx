@@ -13,7 +13,7 @@ const logos = [
 
 export default function TrustedBySection() {
     return (
-        <section className="py-6 bg-[#fafafa] border-y border-black/5 overflow-hidden">
+        <section className="py-6 bg-white/40 backdrop-blur-lg border-y border-white/60 shadow-sm overflow-hidden relative z-10">
             <div className="section-container !py-4">
                 <div className="text-center mb-6">
                     <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">
@@ -23,8 +23,8 @@ export default function TrustedBySection() {
                 
                 {/* Scrolling Marquee */}
                 <div className="relative w-full flex overflow-x-hidden">
-                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#030305] to-transparent z-10" />
-                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#030305] to-transparent z-10" />
+                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#fafafa] to-transparent z-10" />
+                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#fafafa] to-transparent z-10" />
                     
                     <motion.div
                         className="flex items-center gap-12 py-4 whitespace-nowrap"
@@ -35,9 +35,9 @@ export default function TrustedBySection() {
                         {[...logos, ...logos].map((logo, i) => (
                             <div
                                 key={i}
-                                className="flex items-center gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0 cursor-default"
+                                className="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0 cursor-default"
                             >
-                                <div className="w-8 h-8 rounded bg-black/10 flex items-center justify-center font-bold text-zinc-900 text-xs">
+                                <div className="w-10 h-10 rounded-xl bg-white border border-black/5 shadow-sm flex items-center justify-center font-bold text-zinc-900 text-sm">
                                     {logo.name[0]}
                                 </div>
                                 <span className="font-bold text-lg text-zinc-900 tracking-tight">

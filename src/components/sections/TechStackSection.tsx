@@ -49,7 +49,10 @@ const categories = [
 
 export default function TechStackSection() {
     return (
-        <section className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa] border-y border-black/5">
+        <section className="relative overflow-hidden pt-6 lg:pt-10 pb-2 lg:pb-4 bg-white border-y border-black/5">
+            {/* Global background aura */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-to-br from-emerald-100/40 via-cyan-100/40 to-blue-100/40 blur-[150px] rounded-full pointer-events-none -z-10" />
+            
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -70,42 +73,44 @@ export default function TechStackSection() {
                     </p>
                 </motion.div>
 
-                <div className="flex flex-col gap-16 max-w-5xl mx-auto items-center">
-                    {categories.map((cat, ci) => (
-                        <motion.div
-                            key={ci}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: ci * 0.1 }}
-                            className="w-full text-center"
-                        >
-                            <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-8">
-                                {cat.label}
-                            </h3>
+                <div className="relative max-w-5xl mx-auto">
+                    <div className="flex flex-col gap-12 items-center p-4 md:p-8">
+                        {categories.map((cat, ci) => (
+                            <motion.div
+                                key={ci}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: ci * 0.1 }}
+                                className="w-full text-center"
+                            >
+                                <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-[0.2em] mb-6 drop-shadow-sm">
+                                    {cat.label}
+                                </h3>
 
-                            <div className="flex flex-wrap justify-center gap-4">
-                                {cat.items.map((item, ii) => (
-                                    <Magnet key={ii} padding={20} disabled={false} magnetStrength={3}>
-                                        <div
-                                            className="px-6 py-3 rounded-full border border-black/10 bg-white flex items-center gap-3 cursor-pointer group hover:bg-black/5 hover:border-black/20 transition-all duration-300 shadow-xl"
-                                        >
+                                <div className="flex flex-wrap justify-center gap-4">
+                                    {cat.items.map((item, ii) => (
+                                        <Magnet key={ii} padding={20} disabled={false} magnetStrength={3}>
                                             <div
-                                                className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                                                style={{
-                                                    backgroundColor: item.color,
-                                                    boxShadow: `0 0 10px ${item.color}80`,
-                                                }}
-                                            />
-                                            <span className="text-sm font-medium text-zinc-700 group-hover:text-zinc-900 transition-colors">
-                                                {item.name}
-                                            </span>
-                                        </div>
-                                    </Magnet>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
+                                                className="px-6 py-3 rounded-2xl border border-white/80 bg-white/50 backdrop-blur-sm flex items-center gap-3 cursor-pointer group hover:bg-white/80 hover:border-white hover:scale-105 transition-all duration-300 shadow-[inset_0_1px_10px_rgba(255,255,255,0.5),0_4px_10px_rgba(0,0,0,0.02)] hover:shadow-[inset_0_1px_10px_rgba(255,255,255,0.8),0_8px_20px_rgba(0,0,0,0.05)]"
+                                            >
+                                                <div
+                                                    className="w-3 h-3 rounded-full flex-shrink-0 border border-black/5"
+                                                    style={{
+                                                        backgroundColor: item.color,
+                                                        boxShadow: `0 0 12px ${item.color}80, inset 0 0 4px rgba(255,255,255,0.5)`,
+                                                    }}
+                                                />
+                                                <span className="text-[15px] font-bold text-zinc-700 group-hover:text-zinc-900 transition-colors drop-shadow-sm">
+                                                    {item.name}
+                                                </span>
+                                            </div>
+                                        </Magnet>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

@@ -27,7 +27,10 @@ const testimonials = [
 
 export default function TestimonialsSection() {
     return (
-        <section id="testimonials" className="relative overflow-hidden py-4 lg:py-6 bg-white">
+        <section id="testimonials" className="relative overflow-hidden py-6 lg:py-10 bg-white border-y border-black/5">
+            {/* Global background aura */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-100/40 via-cyan-100/40 to-teal-100/40 blur-[120px] rounded-full pointer-events-none -z-10" />
+            
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -44,21 +47,24 @@ export default function TestimonialsSection() {
                     </h2>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
+                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
                     {testimonials.map((t, i) => (
                         <SpotlightCard
                             key={i}
-                            spotlightColor="rgba(255, 255, 255, 0.05)"
-                            className="bg-[#fafafa] border-black/5 rounded-3xl"
+                            spotlightColor="rgba(59, 130, 246, 0.15)"
+                            className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.05)] rounded-[32px] p-8 transition-all duration-300 hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_15px_40px_rgba(0,0,0,0.08)] relative overflow-hidden group"
                         >
+                            {/* Subtle inner bloom */}
+                            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/60 to-transparent pointer-events-none rounded-t-[32px]" />
+
                             <div className="relative z-10 flex flex-col h-full">
                                 <div className="mb-8">
-                                    <span className="text-[10px] font-bold tracking-widest px-2 py-1 rounded bg-blue-500/10 text-blue-400 uppercase">
+                                    <span className="text-[11px] font-bold tracking-widest px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20 uppercase shadow-sm">
                                         {t.tag}
                                     </span>
                                 </div>
                                 
-                                <blockquote className="text-zinc-700 font-light leading-relaxed mb-8 flex-1">
+                                <blockquote className="text-zinc-700 font-medium leading-relaxed mb-10 flex-1 text-[15px]">
                                     "{t.quote}"
                                 </blockquote>
                                 

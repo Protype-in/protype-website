@@ -27,35 +27,50 @@ const itemVariants: Variants = {
 
 const problems = [
     {
-        icon: <FileText className="w-6 h-6" />,
+        icon: <FileText className="w-5 h-5 text-red-600" />,
         title: "Manual Documentation",
-        desc: "Hours wasted on repetitive paperwork and data entry across spreadhseets.",
+        desc: "Hours wasted on repetitive paperwork and data entry across spreadsheets.",
+        pastelBg: "bg-gradient-to-br from-[#fef2f2] to-[#fee2e2]",
+        badgeText: "-40 HR/WK",
+        glow: "rgba(239, 68, 68, 0.4)" as const,
     },
     {
-        icon: <Package className="w-6 h-6" />,
+        icon: <Package className="w-5 h-5 text-orange-600" />,
         title: "Shipment Tracking Chaos",
         desc: "No centralized system to track shipments, deliveries, and logistics.",
+        pastelBg: "bg-gradient-to-br from-[#fff7ed] to-[#ffedd5]",
+        badgeText: "-20 HR/WK",
+        glow: "rgba(249, 115, 22, 0.4)" as const,
     },
     {
-        icon: <MessageSquare className="w-6 h-6" />,
+        icon: <MessageSquare className="w-5 h-5 text-emerald-600" />,
         title: "Unorganized Communication",
         desc: "Client conversations scattered across email, WhatsApp, and calls.",
+        pastelBg: "bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7]",
+        badgeText: "-15 HR/WK",
+        glow: "rgba(16, 185, 129, 0.4)" as const,
     },
     {
-        icon: <Target className="w-6 h-6" />,
+        icon: <Target className="w-5 h-5 text-blue-600" />,
         title: "Missed Leads",
         desc: "Potential clients fall through the cracks without proper follow-up.",
+        pastelBg: "bg-gradient-to-br from-[#eff6ff] to-[#dbeafe]",
+        badgeText: "-50 HR/WK",
+        glow: "rgba(59, 130, 246, 0.4)" as const,
     },
     {
-        icon: <Clock className="w-6 h-6" />,
+        icon: <Clock className="w-5 h-5 text-purple-600" />,
         title: "Slow Development",
         desc: "Months spent building products that could be launched in weeks.",
+        pastelBg: "bg-gradient-to-br from-[#faf5ff] to-[#f3e8ff]",
+        badgeText: "-60 HR/WK",
+        glow: "rgba(168, 85, 247, 0.4)" as const,
     },
 ];
 
 export default function ProblemSection() {
     return (
-        <section className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa]">
+        <section className="relative overflow-hidden pt-6 lg:pt-10 pb-2 lg:pb-4 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -91,49 +106,75 @@ export default function ProblemSection() {
                 </motion.div>
 
                 {/* Spotlight Cards Grid */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto text-left"
-                >
-                    {problems.map((p, i) => (
-                        <motion.div key={i} variants={itemVariants} className="h-full">
-                            <SpotlightCard
-                                spotlightColor="rgba(239, 68, 68, 0.2)"
-                                className="bg-white border border-black/5 hover:border-red-500/30 transition-all duration-500 rounded-3xl group h-full relative overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
-                            >
-                                <div className="absolute -bottom-4 -right-4 text-9xl font-black text-red-500/[0.03] group-hover:text-red-500/[0.08] transition-colors duration-500 pointer-events-none select-none">
-                                    0{i + 1}
-                                </div>
-                                <div className="relative z-10 flex flex-col h-full p-2">
-                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20 text-red-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.2)] transition-all duration-300">
-                                        {p.icon}
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-zinc-900 mb-3 tracking-tight">{p.title}</h3>
-                                    <p className="text-zinc-600 leading-relaxed font-light text-[15px]">{p.desc}</p>
-                                </div>
-                            </SpotlightCard>
+                <div className="relative max-w-6xl mx-auto">
+                    {/* The beautiful aura background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-100/40 via-orange-100/40 to-yellow-100/40 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="grid md:grid-cols-2 gap-8 text-left relative z-10"
+                    >
+                        {problems.map((p, i) => (
+                            <motion.div key={i} variants={itemVariants} className="h-full">
+                                <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
+                                    <SpotlightCard
+                                        spotlightColor={p.glow}
+                                        className={`rounded-[32px] p-6 md:p-8 ${p.pastelBg} border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_4px_10px_rgba(0,0,0,0.02)] relative flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_8px_25px_rgba(0,0,0,0.05)]`}
+                                    >
+                                        {/* Optional subtle light bloom inside the card */}
+                                        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/50 to-transparent pointer-events-none rounded-t-[32px]" />
+                                        
+                                        {/* Watermark Number */}
+                                        <div className="absolute -bottom-4 -right-4 text-9xl font-black text-black/[0.03] transition-colors duration-500 pointer-events-none select-none">
+                                            0{i + 1}
+                                        </div>
+
+                                        {/* Top Bar */}
+                                        <div className="flex justify-between items-start mb-8 relative z-10">
+                                            <div className="w-12 h-12 rounded-[18px] bg-white/80 backdrop-blur-md flex items-center justify-center shadow-sm border border-white/80">
+                                                {p.icon}
+                                            </div>
+                                            <div className="w-4 h-4 rounded-full border-[3px] border-black/10 bg-transparent mt-1 mr-1" />
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="relative z-10 flex-grow">
+                                            <h3 className="text-2xl font-bold text-zinc-900 mb-3 tracking-tight">{p.title}</h3>
+                                            <p className="text-zinc-600/90 text-[15px] font-medium leading-relaxed mb-6">{p.desc}</p>
+                                        </div>
+
+                                        {/* Bottom Badge */}
+                                        <div className="mt-auto self-end px-4 py-1.5 rounded-full bg-red-500/[0.08] text-red-600/70 text-[11px] font-bold tracking-wider backdrop-blur-md border border-red-500/[0.05] relative z-10 shadow-sm uppercase">
+                                            {p.badgeText}
+                                        </div>
+                                    </SpotlightCard>
+                                </motion.div>
+                            </motion.div>
+                        ))}
+                        
+                        {/* Final spanning card */}
+                        <motion.div variants={itemVariants} className="h-full">
+                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
+                                <SpotlightCard
+                                    spotlightColor="rgba(59, 130, 246, 0.4)"
+                                    className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_15px_40px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[32px] h-full flex flex-col items-center justify-center text-center p-8 relative overflow-hidden group"
+                                >
+                                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent pointer-events-none rounded-t-[32px]" />
+                                    <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                    <h3 className="text-3xl font-black text-zinc-900 mb-3 relative z-10 tracking-tight drop-shadow-sm">Sound Familiar?</h3>
+                                    <p className="text-zinc-600 font-medium mb-8 relative z-10 text-[15px]">Let's fix it with intelligent systems.</p>
+                                    <a href="#solutions" className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] px-8 py-3.5 rounded-full font-bold text-[13px] tracking-wide hover:scale-105 transition-all duration-300 relative z-10 flex items-center gap-2 group/btn uppercase">
+                                        See Solutions
+                                        <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                                    </a>
+                                </SpotlightCard>
+                            </motion.div>
                         </motion.div>
-                    ))}
-                    
-                    {/* Final spanning card */}
-                    <motion.div variants={itemVariants} className="md:col-span-2 lg:col-span-1 h-full">
-                        <SpotlightCard
-                            spotlightColor="rgba(59, 130, 246, 0.3)"
-                            className="bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-colors duration-500 rounded-3xl h-full flex flex-col items-center justify-center text-center p-8 relative overflow-hidden group shadow-2xl"
-                        >
-                            <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                            <h3 className="text-3xl font-black text-white mb-3 relative z-10 tracking-tight">Sound Familiar?</h3>
-                            <p className="text-zinc-400 mb-8 relative z-10 font-light text-lg">Let's fix it with intelligent systems.</p>
-                            <a href="#solutions" className="bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] px-8 py-4 rounded-full font-bold text-sm hover:scale-105 transition-all duration-300 relative z-10 flex items-center gap-2 group/btn">
-                                See Solutions
-                                <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                            </a>
-                        </SpotlightCard>
                     </motion.div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

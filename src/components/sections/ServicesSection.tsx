@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Target, Mail, FileText, Briefcase, Smartphone, Bot, Rocket } from "lucide-react";
+import { Target, Mail, FileText, Briefcase, Smartphone, Bot, Rocket, BarChart, Headphones, LineChart, PieChart, Users, Zap } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
 import SplitText from "../react-bits/SplitText";
 
@@ -24,34 +24,36 @@ const itemVariants: Variants = {
 
 const aiServices = [
     {
-        icon: <Mail className="w-6 h-6" />,
+        icon: <Mail className="w-5 h-5 text-blue-600" />,
         title: "Email Automation",
         desc: "Read emails, draft intelligent replies, and send automated follow-ups.",
+        pastelBg: "bg-gradient-to-br from-[#eff6ff] to-[#dbeafe]",
+        badgeText: "20 1000",
         glow: "rgba(59, 130, 246, 0.4)" as const,
-        borderHover: "hover:border-blue-500/50",
-        iconGlow: "group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]",
-        iconText: "group-hover:text-blue-500",
-        iconBg: "group-hover:bg-blue-500/10",
     },
     {
-        icon: <FileText className="w-6 h-6" />,
+        icon: <FileText className="w-5 h-5 text-emerald-600" />,
         title: "Document Processing",
         desc: "Extract data from invoices and PDFs automatically with precise OCR.",
+        pastelBg: "bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7]",
+        badgeText: "50 2000",
         glow: "rgba(16, 185, 129, 0.4)" as const,
-        borderHover: "hover:border-emerald-500/50",
-        iconGlow: "group-hover:shadow-[0_0_15px_rgba(16,185,129,0.3)]",
-        iconText: "group-hover:text-emerald-500",
-        iconBg: "group-hover:bg-emerald-500/10",
     },
     {
-        icon: <Briefcase className="w-6 h-6" />,
+        icon: <Briefcase className="w-5 h-5 text-indigo-600" />,
         title: "CRM Management",
         desc: "Keep your pipeline organized and update deal statuses effortlessly.",
-        glow: "rgba(245, 158, 11, 0.4)" as const,
-        borderHover: "hover:border-amber-500/50",
-        iconGlow: "group-hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]",
-        iconText: "group-hover:text-amber-500",
-        iconBg: "group-hover:bg-amber-500/10",
+        pastelBg: "bg-gradient-to-br from-[#eef2ff] to-[#e0e7ff]",
+        badgeText: "30 0000",
+        glow: "rgba(99, 102, 241, 0.4)" as const,
+    },
+    {
+        icon: <Zap className="w-5 h-5 text-purple-600" />,
+        title: "Need Custom Logic?",
+        desc: "We can build agents for any niche process.",
+        pastelBg: "bg-gradient-to-br from-[#faf5ff] to-[#f3e8ff]",
+        badgeText: "20 0000",
+        glow: "rgba(168, 85, 247, 0.4)" as const,
     },
 ];
 
@@ -64,7 +66,7 @@ const timeline = [
 
 export default function ServicesSection() {
     return (
-        <section id="services" className="relative overflow-hidden py-4 lg:py-6 bg-[#fafafa]">
+        <section id="services" className="relative overflow-hidden pt-2 lg:pt-4 pb-2 lg:pb-4 bg-[#fafafa]">
             <div className="section-container relative z-10 text-center">
                 
                 {/* AI Agents Setup */}
@@ -92,43 +94,51 @@ export default function ServicesSection() {
                 </motion.div>
 
                 {/* Agents Grid */}
-                <motion.div 
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 max-w-6xl mx-auto text-left"
-                >
-                    {aiServices.map((s, i) => (
-                        <motion.div key={i} variants={itemVariants} className="h-full">
-                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
-                                <SpotlightCard
-                                    spotlightColor={s.glow}
-                                    className={`bg-white border border-black/5 ${s.borderHover} transition-colors duration-500 rounded-2xl group h-full`}
-                                >
-                                    <div className="relative z-10">
-                                        <div className={`mb-6 w-12 h-12 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-zinc-600 ${s.iconBg} ${s.iconText} ${s.iconGlow} transition-all duration-300`}>
-                                            {s.icon}
+                <div className="relative mb-20 max-w-6xl mx-auto">
+                    {/* The beautiful aura background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/40 via-purple-100/40 to-teal-100/40 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="grid md:grid-cols-2 gap-6 text-left relative z-10"
+                    >
+                        {aiServices.map((s, i) => (
+                            <motion.div key={i} variants={itemVariants} className="h-full">
+                                <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
+                                    <SpotlightCard
+                                        spotlightColor={s.glow}
+                                        className={`rounded-[32px] p-6 md:p-8 ${s.pastelBg} border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_4px_10px_rgba(0,0,0,0.02)] relative flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_8px_25px_rgba(0,0,0,0.05)]`}
+                                    >
+                                        {/* Optional subtle light bloom inside the card */}
+                                        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/50 to-transparent pointer-events-none rounded-t-[32px]" />
+                                        
+                                        {/* Top Bar */}
+                                        <div className="flex justify-between items-start mb-8 relative z-10">
+                                            <div className="w-12 h-12 rounded-[18px] bg-white/80 backdrop-blur-md flex items-center justify-center shadow-sm border border-white/80">
+                                                {s.icon}
+                                            </div>
+                                            <div className="w-4 h-4 rounded-full border-[3px] border-black/10 bg-transparent mt-1 mr-1" />
                                         </div>
-                                        <h3 className="text-xl font-bold text-zinc-900 mb-2 tracking-tight">{s.title}</h3>
-                                        <p className="text-zinc-600 text-sm leading-relaxed font-light">{s.desc}</p>
-                                    </div>
-                                </SpotlightCard>
+
+                                        {/* Content */}
+                                        <div className="relative z-10 flex-grow">
+                                            <h3 className="text-2xl font-bold text-zinc-900 mb-3 tracking-tight">{s.title}</h3>
+                                            <p className="text-zinc-600/90 text-[15px] font-medium leading-relaxed mb-6">{s.desc}</p>
+                                        </div>
+
+                                        {/* Bottom Badge */}
+                                        <div className="mt-auto self-end px-4 py-1.5 rounded-full bg-black/[0.04] text-black/50 text-[11px] font-bold tracking-wider backdrop-blur-md border border-black/[0.02] relative z-10 shadow-sm uppercase">
+                                            {s.badgeText}
+                                        </div>
+                                    </SpotlightCard>
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
-                    ))}
-                    
-                    {/* Filler Card */}
-                    <motion.div variants={itemVariants} className="h-full">
-                        <SpotlightCard
-                            spotlightColor="rgba(59, 130, 246, 0.3)"
-                            className="bg-blue-500/5 border border-blue-500/10 hover:border-blue-500/30 transition-colors duration-500 rounded-2xl flex flex-col items-center justify-center text-center p-6 h-full min-h-[200px] group"
-                        >
-                            <h3 className="text-lg font-bold text-zinc-900 mb-2 group-hover:text-blue-600 transition-colors">Need Custom Logic?</h3>
-                            <p className="text-blue-900/80 text-sm font-medium">We can build agents for any niche process.</p>
-                        </SpotlightCard>
+                        ))}
                     </motion.div>
-                </motion.div>
+                </div>
 
                 {/* MVP Setup */}
                 <motion.div
@@ -160,7 +170,7 @@ export default function ServicesSection() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="max-w-4xl mx-auto text-left grid md:grid-cols-2 gap-8 relative"
+                    className="max-w-6xl mx-auto text-left grid md:grid-cols-2 gap-8 relative"
                 >
                     {timeline.map((t, i) => {
                         const colors = [
@@ -186,7 +196,7 @@ export default function ServicesSection() {
                             key={i}
                             variants={itemVariants}
                             whileHover={{ scale: 1.02 }}
-                            className={`relative flex flex-col p-8 rounded-3xl border border-black/5 bg-white ${borderColors[i]} transition-colors group duration-500`}
+                            className={`relative flex flex-col p-8 rounded-3xl border border-white/60 bg-white/40 backdrop-blur-xl shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_4px_10px_rgba(0,0,0,0.02)] hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.05)] ${borderColors[i]} transition-all group duration-500`}
                         >
                             <div className={`absolute top-8 right-8 w-12 h-12 rounded-2xl border ${colors[i]} flex items-center justify-center transition-all duration-300 font-bold text-lg`}>
                                 {t.step}
