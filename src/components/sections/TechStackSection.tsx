@@ -89,10 +89,9 @@ export default function TechStackSection() {
                                 className="w-full flex flex-col md:flex-row items-center md:items-center gap-6 md:gap-12 p-8 md:p-10 rounded-[32px] border border-white/60 bg-white/40 backdrop-blur-2xl shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_4px_15px_rgba(0,0,0,0.03)] hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-500"
                             >
                                 <div className="md:w-[220px] shrink-0 flex flex-col items-center md:items-start text-center md:text-left">
-                                    <h3 className="text-xl font-extrabold text-zinc-800 tracking-tight mb-3">
+                                    <h3 className="text-xl font-extrabold text-zinc-800 tracking-tight mb-3 md:mb-0">
                                         {cat.label}
                                     </h3>
-                                    <div className="w-12 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" />
                                 </div>
 
                                 <div className="flex-1 flex flex-wrap justify-center md:justify-start gap-4 md:gap-5 w-full">
