@@ -8,9 +8,10 @@ const services = [
   {
     id: "mvp",
     name: "MVP Development",
+    headline: "Launch in Weeks, Not Months",
     color: "#1a1aff",
     glow: "#4d4dff",
-    tagline: "From idea to live product in 4 weeks.",
+    tagline: "From idea to live product — fast.",
     description: "We engineer your minimum viable product with precision — full-stack architecture, AI-embedded features, and enterprise-grade infrastructure. No fluff, just shipping.",
     bullets: ["4-week delivery cycle", "Modern full-stack (Next.js + Node.js)", "Embedded AI features", "Deployment & scaling included"],
     visual: "laptop_code"
@@ -18,42 +19,46 @@ const services = [
   {
     id: "mobile",
     name: "Mobile Apps",
+    headline: "Ship Your App",
     color: "#7c3aed",
     glow: "#a855f7",
-    tagline: "Native performance. AI-powered features.",
+    tagline: "iOS & Android, AI-native from day one.",
     description: "Cross-platform mobile apps built with React Native or Flutter. Designed for speed, built for retention — with AI personalization baked in from day one.",
     bullets: ["iOS & Android", "React Native / Flutter", "AI-driven UX", "App Store deployment"],
     visual: "phone_app"
   },
   {
     id: "workflows",
-    name: "AI Workflows",
+    name: "AI Automation Systems",
+    headline: "Put Your Operations on Autopilot",
     color: "#0891b2",
     glow: "#06b6d4",
-    tagline: "Automate complex processes intelligently.",
-    description: "We design and deploy intelligent workflow systems using LangChain, n8n, and custom agents — turning multi-step manual processes into autonomous pipelines.",
-    bullets: ["LangChain & LLM integration", "n8n / Make automation", "Document processing", "API orchestration"],
+    tagline: "Automate the work that's slowing you down.",
+    description: "We design and deploy intelligent workflow systems — turning multi-step manual processes into autonomous pipelines. Email responses, CRM updates, and document extraction handled by AI.",
+    bullets: ["Email & CRM automation", "LangChain & LLM integration", "Document processing", "Custom API orchestration"],
     visual: "flowchart"
-  },
-  {
-    id: "automation",
-    name: "Automation",
-    color: "#059669",
-    glow: "#10b981",
-    tagline: "Stop doing what machines should.",
-    description: "Email responses, CRM updates, lead follow-ups, invoice extraction — we automate the busywork so your team focuses on what humans do best.",
-    bullets: ["Email & CRM automation", "Lead nurturing bots", "Document data extraction", "Zapier / Make / Custom"],
-    visual: "gears"
   },
   {
     id: "orchestration",
     name: "AI Orchestration",
+    headline: "Build AI That Thinks for Itself",
     color: "#d97706",
     glow: "#f59e0b",
-    tagline: "Coordinate multiple agents as one system.",
+    tagline: "Multi-agent systems that run your business backend.",
     description: "Multi-agent architectures where specialized AI models collaborate — one orchestrating brain directing workers across research, writing, coding, and deployment.",
     bullets: ["Multi-agent systems", "OpenAI + Llama hybrid", "Autonomous pipelines", "Real-time monitoring"],
     visual: "neural"
+  },
+  {
+    id: "partnership",
+    name: "End-to-End Partnership",
+    headline: "From Zero to AI-Powered",
+    color: "#059669",
+    glow: "#10b981",
+    tagline: "We don't just build — we think with you from day one to launch and beyond.",
+    description: "A true technical partnership. We act as your fractional CTO and engineering team, aligning technology decisions with your core business objectives to guarantee long-term success.",
+    bullets: ["Fractional CTO", "Technical strategy", "Architecture design", "Ongoing support & scaling"],
+    visual: "gears"
   }
 ];
 
@@ -204,12 +209,20 @@ export default function HeroSection({ serviceAssets }: { serviceAssets?: Record<
                                         backgroundColor: isActive ? service.color : undefined,
                                     }}
                                 >
-                                    <h3 
-                                        className="font-extrabold text-xl md:text-3xl tracking-wide transition-colors duration-500 text-center drop-shadow-sm uppercase"
-                                        style={{ color: isActive ? '#ffffff' : '#71717a' }}
-                                    >
-                                        {service.name}
-                                    </h3>
+                                    <div className="text-center flex flex-col items-center justify-center px-4">
+                                        <div 
+                                            className="text-xs md:text-sm font-bold tracking-widest uppercase mb-1.5 md:mb-2 transition-colors duration-500" 
+                                            style={{ color: isActive ? 'rgba(255,255,255,0.8)' : '#a1a1aa' }}
+                                        >
+                                            {service.name}
+                                        </div>
+                                        <h3 
+                                            className="font-extrabold text-lg md:text-2xl lg:text-[1.75rem] leading-tight tracking-wide transition-colors duration-500 drop-shadow-sm"
+                                            style={{ color: isActive ? '#ffffff' : '#71717a' }}
+                                        >
+                                            {service.headline}
+                                        </h3>
+                                    </div>
                                 </motion.div>
                             );
                         })}
