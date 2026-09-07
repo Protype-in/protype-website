@@ -22,6 +22,11 @@ interface SplashCursorProps {
   COLOR_UPDATE_SPEED?: number;
   BACK_COLOR?: ColorRGB;
   TRANSPARENT?: boolean;
+  /** Confine the fluid to this element instead of the full viewport. */
+  containerRef?: React.RefObject<HTMLElement | null>;
+  /** HSV hue range (0-1) the splat colors are drawn from. Defaults to the full spectrum. */
+  HUE_MIN?: number;
+  HUE_MAX?: number;
 }
 
 interface Pointer {
@@ -66,13 +71,24 @@ export default function SplashCursor({
   SHADING = true,
   COLOR_UPDATE_SPEED = 10,
   BACK_COLOR = { r: 0.5, g: 0, b: 0 },
-  TRANSPARENT = true
+  TRANSPARENT = true,
+  containerRef,
+  HUE_MIN = 0,
+  HUE_MAX = 1
 }: SplashCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    const container = containerRef?.current ?? null;
+    const eventTarget: HTMLElement | Window = container ?? window;
+    const getOffset = () => {
+      if (!container) return { left: 0, top: 0 };
+      const rect = container.getBoundingClientRect();
+      return { left: rect.left, top: rect.top };
+    };
 
     let pointers: Pointer[] = [pointerPrototype()];
 
@@ -1130,7 +1146,8 @@ export default function SplashCursor({
     }
 
     function generateColor(): ColorRGB {
-      const c = HSVtoRGB(Math.random(), 1.0, 1.0);
+      const hue = HUE_MIN + Math.random() * (HUE_MAX - HUE_MIN);
+      const c = HSVtoRGB(hue, 1.0, 1.0);
       c.r *= 0.15;
       c.g *= 0.15;
       c.b *= 0.15;
@@ -1188,76 +1205,90 @@ export default function SplashCursor({
       return ((value - min) % range) + min;
     }
 
-    window.addEventListener('mousedown', e => {
+    eventTarget.addEventListener('mousedown', (e: Event) => {
+      const me = e as MouseEvent;
+      const offset = getOffset();
       const pointer = pointers[0];
-      const posX = scaleByPixelRatio(e.clientX);
-      const posY = scaleByPixelRatio(e.clientY);
+      const posX = scaleByPixelRatio(me.clientX - offset.left);
+      const posY = scaleByPixelRatio(me.clientY - offset.top);
       updatePointerDownData(pointer, -1, posX, posY);
       clickSplat(pointer);
     });
 
-    function handleFirstMouseMove(e: MouseEvent) {
+    const firstMoveTarget: HTMLElement | Document = container ?? document.body;
+    function handleFirstMouseMove(e: Event) {
+      const me = e as MouseEvent;
+      const offset = getOffset();
       const pointer = pointers[0];
-      const posX = scaleByPixelRatio(e.clientX);
-      const posY = scaleByPixelRatio(e.clientY);
+      const posX = scaleByPixelRatio(me.clientX - offset.left);
+      const posY = scaleByPixelRatio(me.clientY - offset.top);
       const color = generateColor();
       updateFrame();
       updatePointerMoveData(pointer, posX, posY, color);
-      document.body.removeEventListener('mousemove', handleFirstMouseMove);
+      firstMoveTarget.removeEventListener('mousemove', handleFirstMouseMove);
     }
-    document.body.addEventListener('mousemove', handleFirstMouseMove);
+    firstMoveTarget.addEventListener('mousemove', handleFirstMouseMove);
 
-    window.addEventListener('mousemove', e => {
+    eventTarget.addEventListener('mousemove', (e: Event) => {
+      const me = e as MouseEvent;
+      const offset = getOffset();
       const pointer = pointers[0];
-      const posX = scaleByPixelRatio(e.clientX);
-      const posY = scaleByPixelRatio(e.clientY);
+      const posX = scaleByPixelRatio(me.clientX - offset.left);
+      const posY = scaleByPixelRatio(me.clientY - offset.top);
       const color = pointer.color;
       updatePointerMoveData(pointer, posX, posY, color);
     });
 
-    function handleFirstTouchStart(e: TouchEvent) {
-      const touches = e.targetTouches;
+    function handleFirstTouchStart(e: Event) {
+      const te = e as TouchEvent;
+      const offset = getOffset();
+      const touches = te.targetTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
-        const posX = scaleByPixelRatio(touches[i].clientX);
-        const posY = scaleByPixelRatio(touches[i].clientY);
+        const posX = scaleByPixelRatio(touches[i].clientX - offset.left);
+        const posY = scaleByPixelRatio(touches[i].clientY - offset.top);
         updateFrame();
         updatePointerDownData(pointer, touches[i].identifier, posX, posY);
       }
-      document.body.removeEventListener('touchstart', handleFirstTouchStart);
+      firstMoveTarget.removeEventListener('touchstart', handleFirstTouchStart);
     }
-    document.body.addEventListener('touchstart', handleFirstTouchStart);
+    firstMoveTarget.addEventListener('touchstart', handleFirstTouchStart);
 
-    window.addEventListener(
+    eventTarget.addEventListener(
       'touchstart',
-      e => {
-        const touches = e.targetTouches;
+      (e: Event) => {
+        const te = e as TouchEvent;
+        const offset = getOffset();
+        const touches = te.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
-          const posX = scaleByPixelRatio(touches[i].clientX);
-          const posY = scaleByPixelRatio(touches[i].clientY);
+          const posX = scaleByPixelRatio(touches[i].clientX - offset.left);
+          const posY = scaleByPixelRatio(touches[i].clientY - offset.top);
           updatePointerDownData(pointer, touches[i].identifier, posX, posY);
         }
       },
       false
     );
 
-    window.addEventListener(
+    eventTarget.addEventListener(
       'touchmove',
-      e => {
-        const touches = e.targetTouches;
+      (e: Event) => {
+        const te = e as TouchEvent;
+        const offset = getOffset();
+        const touches = te.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
-          const posX = scaleByPixelRatio(touches[i].clientX);
-          const posY = scaleByPixelRatio(touches[i].clientY);
+          const posX = scaleByPixelRatio(touches[i].clientX - offset.left);
+          const posY = scaleByPixelRatio(touches[i].clientY - offset.top);
           updatePointerMoveData(pointer, posX, posY, pointer.color);
         }
       },
       false
     );
 
-    window.addEventListener('touchend', e => {
-      const touches = e.changedTouches;
+    eventTarget.addEventListener('touchend', (e: Event) => {
+      const te = e as TouchEvent;
+      const touches = te.changedTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
         updatePointerUpData(pointer);
@@ -1277,8 +1308,19 @@ export default function SplashCursor({
     SHADING,
     COLOR_UPDATE_SPEED,
     BACK_COLOR,
-    TRANSPARENT
+    TRANSPARENT,
+    containerRef,
+    HUE_MIN,
+    HUE_MAX
   ]);
+
+  if (containerRef) {
+    return (
+      <div className="absolute inset-0 z-0 h-full w-full pointer-events-none overflow-hidden">
+        <canvas ref={canvasRef} className="block h-full w-full"></canvas>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed top-0 left-0 z-50 pointer-events-none w-full h-full">

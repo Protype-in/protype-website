@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FileText, Package, MessageSquare, Target, Clock, AlertTriangle } from "lucide-react";
+import { MessageSquare, Workflow, Target, Sparkles, Boxes, ArrowRight } from "lucide-react";
 import SpotlightCard from "../react-bits/SpotlightCard";
 import SplitText from "../react-bits/SplitText";
 
@@ -27,148 +27,134 @@ const itemVariants: Variants = {
 
 const problems = [
     {
-        icon: <FileText className="w-5 h-5 text-red-600" />,
-        title: "Manual Documentation",
-        desc: "Hours wasted on repetitive paperwork and data entry across spreadsheets.",
-        pastelBg: "bg-gradient-to-br from-[#fef2f2] to-[#fee2e2]",
+        icon: <MessageSquare className="h-5 w-5" />,
+        title: "Support queues never stop growing",
+        desc: "Customers and employees wait hours for replies that should take seconds — and every hire only buys a little headroom.",
         badgeText: "-40 HR/WK",
-        glow: "rgba(239, 68, 68, 0.4)" as const,
+        tone: "text-rose-300",
+        ring: "border-rose-400/20 bg-rose-500/10",
+        glow: "rgba(244, 63, 94, 0.35)" as const,
     },
     {
-        icon: <Package className="w-5 h-5 text-orange-600" />,
-        title: "Shipment Tracking Chaos",
-        desc: "No centralized system to track shipments, deliveries, and logistics.",
-        pastelBg: "bg-gradient-to-br from-[#fff7ed] to-[#ffedd5]",
+        icon: <Workflow className="h-5 w-5" />,
+        title: "Manual ops eat the whole week",
+        desc: "Data entry, follow-ups, and internal handoffs quietly consume the hours your team should spend on higher-value work.",
+        badgeText: "-25 HR/WK",
+        tone: "text-rose-300",
+        ring: "border-rose-400/20 bg-rose-500/10",
+        glow: "rgba(244, 63, 94, 0.35)" as const,
+    },
+    {
+        icon: <Target className="h-5 w-5" />,
+        title: "Leads and follow-ups slip through",
+        desc: "Without a system chasing every conversation, warm leads and loyal customers go quiet — and stay quiet.",
+        badgeText: "-30 HR/WK",
+        tone: "text-rose-300",
+        ring: "border-rose-400/20 bg-rose-500/10",
+        glow: "rgba(244, 63, 94, 0.35)" as const,
+    },
+    {
+        icon: <Sparkles className="h-5 w-5" />,
+        title: "Customer experience feels generic",
+        desc: "One-size-fits-all replies and silent post-purchase gaps make customers feel like a ticket number, not a relationship.",
         badgeText: "-20 HR/WK",
-        glow: "rgba(249, 115, 22, 0.4)" as const,
+        tone: "text-rose-300",
+        ring: "border-rose-400/20 bg-rose-500/10",
+        glow: "rgba(244, 63, 94, 0.35)" as const,
     },
     {
-        icon: <MessageSquare className="w-5 h-5 text-emerald-600" />,
-        title: "Unorganized Communication",
-        desc: "Client conversations scattered across email, WhatsApp, and calls.",
-        pastelBg: "bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7]",
-        badgeText: "-15 HR/WK",
-        glow: "rgba(16, 185, 129, 0.4)" as const,
-    },
-    {
-        icon: <Target className="w-5 h-5 text-blue-600" />,
-        title: "Missed Leads",
-        desc: "Potential clients fall through the cracks without proper follow-up.",
-        pastelBg: "bg-gradient-to-br from-[#eff6ff] to-[#dbeafe]",
-        badgeText: "-50 HR/WK",
-        glow: "rgba(59, 130, 246, 0.4)" as const,
-    },
-    {
-        icon: <Clock className="w-5 h-5 text-purple-600" />,
-        title: "Slow Development",
-        desc: "Months spent building products that could be launched in weeks.",
-        pastelBg: "bg-gradient-to-br from-[#faf5ff] to-[#f3e8ff]",
-        badgeText: "-60 HR/WK",
-        glow: "rgba(168, 85, 247, 0.4)" as const,
+        icon: <Boxes className="h-5 w-5" />,
+        title: "Systems that don't talk to each other",
+        desc: "Your CRM, helpdesk, WhatsApp, and internal tools all hold half the picture — and nobody has the full one.",
+        badgeText: "-35 HR/WK",
+        tone: "text-rose-300",
+        ring: "border-rose-400/20 bg-rose-500/10",
+        glow: "rgba(244, 63, 94, 0.35)" as const,
     },
 ];
 
 export default function ProblemSection() {
     return (
-        <section className="relative overflow-hidden pt-6 lg:pt-10 pb-2 lg:pb-4 bg-[#fafafa]">
-            <div className="section-container relative z-10 text-center">
+        <section className="relative isolate overflow-hidden py-20 md:py-28">
+            <div className="hero-grid absolute inset-0 opacity-20" />
+            <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-8 md:mb-10"
+                    className="mb-14 md:mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/20 bg-red-500/10 text-red-500 text-sm font-bold mb-6 shadow-[0_0_15px_rgba(239,68,68,0.2)] tracking-wide uppercase">
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-rose-400/20 bg-rose-500/10 px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-rose-200 uppercase backdrop-blur-xl">
                         <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-70" />
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-rose-400" />
                         </span>
-                        <span>Critical Bottlenecks</span>
+                        Critical bottlenecks
                     </div>
-                    
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
-                        <SplitText
-                            text="Businesses Waste"
-                            className="inline-block"
-                            delay={30}
-                            duration={0.5}
-                            ease="easeOut"
-                        />
+
+                    <h2 className="font-[Outfit] text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl">
+                        <SplitText text="Growth breaks" className="inline-block" delay={30} duration={0.5} ease="easeOut" />
                         <br />
-                        <span className="text-red-500">Thousands of Hours</span>
+                        <span className="text-rose-300">support, ops &amp; CX</span>
                         <br />
-                        <span className="text-zinc-600">on Manual Work</span>
+                        <span className="text-slate-400">long before revenue does</span>
                     </h2>
-                    
-                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
-                        Legacy systems and fragmented tools drain your team's productivity. It's time to let automation do the heavy lifting so you can focus on growth.
+
+                    <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-300">
+                        Every pillar of the business — support, operations, and customer experience — leaks hours to manual work. Automation should be doing the heavy lifting, not your team.
                     </p>
                 </motion.div>
 
-                {/* Spotlight Cards Grid */}
-                <div className="relative max-w-6xl mx-auto">
-                    {/* The beautiful aura background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-100/40 via-orange-100/40 to-yellow-100/40 blur-[100px] rounded-full pointer-events-none -z-10" />
-
+                <div className="relative mx-auto max-w-6xl">
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
-                        className="grid md:grid-cols-2 gap-8 text-left relative z-10"
+                        className="relative z-10 grid gap-6 text-left md:grid-cols-2"
                     >
                         {problems.map((p, i) => (
                             <motion.div key={i} variants={itemVariants} className="h-full">
-                                <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
+                                <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.2 }} className="h-full">
                                     <SpotlightCard
                                         spotlightColor={p.glow}
-                                        className={`rounded-[32px] p-6 md:p-8 ${p.pastelBg} border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_4px_10px_rgba(0,0,0,0.02)] relative flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_8px_25px_rgba(0,0,0,0.05)]`}
+                                        className="relative flex h-full flex-col overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] md:p-8"
                                     >
-                                        {/* Optional subtle light bloom inside the card */}
-                                        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/50 to-transparent pointer-events-none rounded-t-[32px]" />
-                                        
-                                        {/* Watermark Number */}
-                                        <div className="absolute -bottom-4 -right-4 text-9xl font-black text-black/[0.03] transition-colors duration-500 pointer-events-none select-none">
+                                        <div className="pointer-events-none absolute -bottom-6 -right-4 select-none text-8xl font-black text-white/[0.03]">
                                             0{i + 1}
                                         </div>
 
-                                        {/* Top Bar */}
-                                        <div className="flex justify-between items-start mb-8 relative z-10">
-                                            <div className="w-12 h-12 rounded-[18px] bg-white/80 backdrop-blur-md flex items-center justify-center shadow-sm border border-white/80">
+                                        <div className="relative z-10 mb-7 flex items-start justify-between">
+                                            <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${p.ring} ${p.tone}`}>
                                                 {p.icon}
                                             </div>
-                                            <div className="w-4 h-4 rounded-full border-[3px] border-black/10 bg-transparent mt-1 mr-1" />
                                         </div>
 
-                                        {/* Content */}
                                         <div className="relative z-10 flex-grow">
-                                            <h3 className="text-2xl font-bold text-zinc-900 mb-3 tracking-tight">{p.title}</h3>
-                                            <p className="text-zinc-600/90 text-[15px] font-medium leading-relaxed mb-6">{p.desc}</p>
+                                            <h3 className="mb-2.5 text-xl font-semibold tracking-tight text-white">{p.title}</h3>
+                                            <p className="mb-6 text-[15px] leading-relaxed text-slate-400">{p.desc}</p>
                                         </div>
 
-                                        {/* Bottom Badge */}
-                                        <div className="mt-auto self-end px-4 py-1.5 rounded-full bg-red-500/[0.08] text-red-600/70 text-[11px] font-bold tracking-wider backdrop-blur-md border border-red-500/[0.05] relative z-10 shadow-sm uppercase">
+                                        <div className={`relative z-10 mt-auto self-start rounded-full border px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider ${p.ring} ${p.tone}`}>
                                             {p.badgeText}
                                         </div>
                                     </SpotlightCard>
                                 </motion.div>
                             </motion.div>
                         ))}
-                        
-                        {/* Final spanning card */}
+
                         <motion.div variants={itemVariants} className="h-full">
-                            <motion.div whileHover={{ y: -5, scale: 1.02 }} transition={{ duration: 0.2 }} className="h-full">
+                            <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.2 }} className="h-full">
                                 <SpotlightCard
-                                    spotlightColor="rgba(59, 130, 246, 0.4)"
-                                    className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_15px_40px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[32px] h-full flex flex-col items-center justify-center text-center p-8 relative overflow-hidden group"
+                                    spotlightColor="rgba(56, 189, 248, 0.3)"
+                                    className="group relative flex h-full flex-col items-center justify-center overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-500 hover:border-cyan-300/30"
                                 >
-                                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent pointer-events-none rounded-t-[32px]" />
-                                    <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                                    <h3 className="text-3xl font-black text-zinc-900 mb-3 relative z-10 tracking-tight drop-shadow-sm">Sound Familiar?</h3>
-                                    <p className="text-zinc-600 font-medium mb-8 relative z-10 text-[15px]">Let's fix it with intelligent systems.</p>
-                                    <a href="#solutions" className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] px-8 py-3.5 rounded-full font-bold text-[13px] tracking-wide hover:scale-105 transition-all duration-300 relative z-10 flex items-center gap-2 group/btn uppercase">
-                                        See Solutions
-                                        <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                                    <div className="absolute -inset-8 -z-10 rounded-full bg-cyan-500/10 opacity-0 blur-[70px] transition-opacity duration-700 group-hover:opacity-100" />
+                                    <h3 className="relative z-10 mb-3 text-2xl font-semibold tracking-tight text-white">Sound familiar?</h3>
+                                    <p className="relative z-10 mb-7 text-[15px] text-slate-400">Let&apos;s fix it with the three pillars.</p>
+                                    <a href="#solutions" className="group/btn relative z-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100">
+                                        See the pillars
+                                        <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                                     </a>
                                 </SpotlightCard>
                             </motion.div>

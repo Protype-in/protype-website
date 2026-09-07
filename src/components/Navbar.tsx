@@ -2,23 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu } from "lucide-react";
 import Magnet from "./react-bits/Magnet";
-import FlowingMenu from "./react-bits/FlowingMenu";
-
-const demoItems = [
-    { link: '#home', text: 'Home', image: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=2532&auto=format&fit=crop' },
-    { link: '#process', text: 'Process', image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2670&auto=format&fit=crop' },
-    { link: '#services', text: 'Services', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop' },
-    { link: '#products', text: 'Products', image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2670&auto=format&fit=crop' },
-    { link: '#pricing', text: 'Pricing', image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2670&auto=format&fit=crop' }
-];
 
 const navLinks = [
-    { label: "Services", href: "#services" },
-    { label: "Products", href: "#products" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "Capabilities", href: "#services" },
     { label: "Process", href: "#process" },
     { label: "Pricing", href: "#pricing" },
+    { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#cta" },
 ];
 
@@ -38,30 +29,30 @@ export default function Navbar() {
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-[#fafafa]/80 backdrop-blur-xl border-b border-black/5"
+                ? "bg-[#070b18]/85 backdrop-blur-xl border-b border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
                 : "bg-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
                 {/* Logo */}
                 <a href="#" className="flex items-center gap-3 group">
-                    <img 
-                      src="/logo1.png"
-                      alt="protype logo" 
-                                            className="h-28 w-auto object-contain shrink-0 scale-[1.3] origin-left"
+                    <img
+                      src="/logo3-white.png"
+                      alt="protype logo"
+                      className="h-16 md:h-20 w-auto object-contain shrink-0 transition-all"
                     />
                 </a>
 
                 {/* Desktop Links */}
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-6 lg:gap-8">
                     {navLinks.map((link) => (
                         <Magnet key={link.href} padding={10} disabled={false} magnetStrength={2}>
                             <a
                                 href={link.href}
-                                className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors duration-200 font-medium tracking-wide relative group block"
+                                className="text-sm transition-colors duration-200 font-medium tracking-wide relative group block text-white/70 hover:text-white"
                             >
                                 {link.label}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-300 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
                             </a>
                         </Magnet>
                     ))}
@@ -70,7 +61,7 @@ export default function Navbar() {
                             href="https://wa.me/8637584923"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-zinc-900 text-white hover:bg-zinc-800 hover:bg-zinc-200 px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 inline-block"
+                            className="bg-white text-zinc-950 hover:bg-cyan-100 px-5 py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 inline-block shadow-sm"
                         >
                             Get in Touch
                         </a>
@@ -85,15 +76,15 @@ export default function Navbar() {
                 >
                     <motion.span
                         animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-zinc-900"
+                        className="block w-5 h-0.5 bg-white"
                     />
                     <motion.span
                         animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="block w-5 h-0.5 bg-zinc-900"
+                        className="block w-5 h-0.5 bg-white"
                     />
                     <motion.span
                         animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-zinc-900"
+                        className="block w-5 h-0.5 bg-white"
                     />
                 </button>
             </div>
@@ -105,11 +96,34 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "100vh", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="fixed inset-0 top-28 md:hidden overflow-hidden bg-[#fafafa] border-t border-black/5 z-40"
+                        className="fixed inset-0 top-20 md:hidden overflow-hidden bg-[#070b18] border-t border-white/10 z-40"
                     >
-                        <div className="h-full w-full pb-20">
-                            <FlowingMenu items={demoItems} />
+                    <div className="mx-auto flex h-full max-w-7xl flex-col px-6 pt-12">
+                        <div className="flex flex-col divide-y divide-white/10 border-y border-white/10">
+                            {navLinks.map((link, index) => (
+                                <motion.a
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    initial={{ opacity: 0, x: -16 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    className="flex items-center justify-between py-5 text-2xl font-semibold tracking-tight text-white"
+                                >
+                                    {link.label}
+                                    <span className="text-cyan-300">↗</span>
+                                </motion.a>
+                            ))}
                         </div>
+                        <a
+                            href="https://wa.me/8637584923"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-4 font-semibold text-slate-950 transition hover:bg-cyan-100"
+                        >
+                            Start a conversation
+                        </a>
+                    </div>
                     </motion.div>
                 )}
             </AnimatePresence>

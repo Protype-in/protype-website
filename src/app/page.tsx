@@ -16,7 +16,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main>
+    <main id="home" className="site-shell">
       <Navbar />
       <HeroSection />
       {/* <TrustedBySection /> */}
@@ -25,7 +25,8 @@ export default function Home() {
       <ServicesSection />
       <ProductsSection />
       <HowWeWorkSection />
-      <TechStackSection />
+      {/* <TechStackSection /> */}
+      <PricingSection />
       {/* <CaseStudiesSection /> */}
       {/* <PricingSection /> */}
       {/* <TestimonialsSection /> */}

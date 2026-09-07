@@ -1,27 +1,26 @@
 import type { Metadata } from "next";
-import SplashCursor from "../components/react-bits/SplashCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "protype — AI Automation & MVP Development for Global Businesses",
+  title: "protype — AI Agents for Support, Operations & Customer Experience",
   description:
-    "We build AI agents, automation systems, and startup MVPs that help companies scale faster. Custom AI solutions for import-export, logistics, trading, and SaaS businesses.",
+    "protype builds highly customizable AI agents and automation systems for business support, operations, and customer experience — WhatsApp support, workflow automation, and proactive CX, live in weeks.",
   keywords: [
-    "AI automation",
-    "MVP development",
     "AI agents",
     "business automation",
-    "startup MVP",
-    "import export CRM",
-    "SaaS development",
+    "customer support automation",
+    "workflow automation",
+    "customer experience AI",
+    "WhatsApp support bot",
+    "operations automation",
   ],
   icons: {
     icon: "/fevicon.jpg",
   },
   openGraph: {
-    title: "protype — AI Automation & MVP Development",
+    title: "protype — AI Agents for Support, Operations & Customer Experience",
     description:
-      "Build AI systems. Launch products. Scale faster. Custom AI agents and MVPs for global businesses.",
+      "Custom AI agents that handle support, automate operations, and elevate customer experience — built around your business, not a template.",
     type: "website",
   },
 };
@@ -45,11 +44,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-white text-zinc-900" suppressHydrationWarning>
+      <body className="antialiased bg-[#080d1d] text-white" suppressHydrationWarning>
         {children}
-        <div className="pointer-events-none fixed inset-0 z-[9999]">
-          <SplashCursor />
-        </div>
       </body>
     </html>
   );

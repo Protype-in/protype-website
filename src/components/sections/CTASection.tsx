@@ -1,57 +1,58 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import Aurora from "../react-bits/Aurora";
 import Magnet from "../react-bits/Magnet";
 
 export default function CTASection() {
     return (
-        <section id="cta" className="relative overflow-hidden py-6 lg:py-10 bg-white">
-            <div className="absolute inset-0 z-0 overflow-hidden opacity-30">
+        <section id="cta" className="relative isolate overflow-hidden py-20 lg:py-28">
+            <div className="absolute inset-0 z-0 overflow-hidden opacity-40">
                 <Aurora
-                    colorStops={["#3b82f6", "#8b5cf6", "#0ea5e9"]}
+                    colorStops={["#22d3ee", "#3b82f6", "#8b5cf6"]}
                     blend={0.5}
                     amplitude={1.5}
                     speed={0.7}
                 />
             </div>
 
-            <div className="section-container relative z-10 w-full max-w-5xl mx-auto px-6 text-center">
+            <div className="relative z-10 mx-auto w-full max-w-5xl px-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="py-12 md:py-24 relative z-10 flex flex-col items-center"
+                    className="relative z-10 flex flex-col items-center rounded-[36px] border border-white/10 bg-white/[0.05] px-6 py-16 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:px-16 md:py-20"
                 >
-                    
-                    <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-zinc-900 mb-6 drop-shadow-sm relative z-10">
-                        Ready to <span className="text-blue-500">Scale?</span>
+                    <span className="mb-6 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100 backdrop-blur-xl">Build with protype</span>
+                    <h2 className="relative z-10 mb-6 font-[Outfit] text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl">
+                        Ready to <span className="bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">automate?</span>
                     </h2>
-                    
-                    <p className="text-xl text-zinc-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10 relative z-10">
-                        Stop burning hours on manual tasks or waiting months for a product launch. Let's build your intelligent system today.
+
+                    <p className="relative z-10 mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
+                        Stop losing hours to support queues and manual ops. Let&apos;s design the agents your business actually needs — across support, operations, and customer experience.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
+                    <div className="relative z-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <Magnet padding={15} disabled={false} magnetStrength={3}>
                             <a
                                 href="https://wa.me/8637584923"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 active:scale-95 transition-all duration-300 px-8 py-4 rounded-2xl font-bold text-lg inline-flex items-center gap-2 w-full sm:w-auto justify-center"
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-bold text-slate-950 transition-all duration-300 hover:scale-[1.02] hover:bg-cyan-100 active:scale-95 sm:w-auto"
                             >
-                                <MessageCircle className="w-5 h-5" />
+                                <MessageCircle className="h-5 w-5" />
                                 WhatsApp Chat
                             </a>
                         </Magnet>
                         <Magnet padding={20} disabled={false} magnetStrength={3}>
                             <a
                                 href="mailto:info@protype.in"
-                                className="bg-white/80 backdrop-blur-md border border-white shadow-sm text-zinc-900 hover:bg-white px-8 py-4 rounded-2xl font-bold text-lg inline-flex items-center w-full sm:w-auto justify-center transition-all duration-300"
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-7 py-3.5 font-bold text-white transition-all duration-300 hover:border-white/30 hover:bg-white/[0.09] sm:w-auto"
                             >
                                 Email Us
+                                <ArrowUpRight className="h-4 w-4" />
                             </a>
                         </Magnet>
                     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Package, Zap } from "lucide-react";
+import { Package, Zap, ArrowRight } from "lucide-react";
 import SplitText from "../react-bits/SplitText";
 import SpotlightCard from "../react-bits/SpotlightCard";
 
@@ -15,8 +15,8 @@ const containerVariants: Variants = {
 
 const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-        opacity: 1, 
+    visible: {
+        opacity: 1,
         y: 0,
         transition: { duration: 0.6, ease: "easeOut" }
     },
@@ -24,83 +24,73 @@ const itemVariants: Variants = {
 
 export default function ProductsSection() {
     return (
-        <section id="products" className="relative overflow-hidden pt-2 lg:pt-4 pb-0 lg:pb-0 bg-white border-t border-black/5">
-            {/* Global background aura */}
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-br from-amber-100/40 via-orange-100/40 to-yellow-100/40 blur-[120px] rounded-full pointer-events-none -z-10" />
-            
-            <div className="section-container relative z-10 text-center">
+        <section id="products" className="relative isolate overflow-hidden py-20 md:py-28">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_30%,rgba(167,139,250,.12),transparent_35%)]" />
+
+            <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-8 md:mb-10"
+                    className="mb-14 md:mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-500 text-sm font-medium mb-6 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                        <Package className="w-4 h-4" />
-                        <span>Internal Products</span>
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-blue-100 uppercase backdrop-blur-xl">
+                        <Package className="h-3.5 w-3.5" />
+                        The agent lab
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 mb-6">
-                        <SplitText
-                            text="Products Built By"
-                            className="inline-block"
-                            delay={40}
-                            duration={0.6}
-                            ease="easeOut"
-                        />
+                    <h2 className="font-[Outfit] text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl">
+                        <SplitText text="Built by" className="inline-block" delay={40} duration={0.6} ease="easeOut" />
                         {" "}
-                        <span className="text-amber-500">protype</span>
+                        <span className="bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">protype</span>
                     </h2>
-                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto font-medium leading-relaxed">
-                        We don't just build for clients. Our engineering lab is constantly developing next-generation internal tools.
+                    <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-300">
+                        We don&apos;t just deploy agents for clients. Our internal lab is constantly shipping new automation building blocks.
                     </p>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="flex justify-center max-w-4xl mx-auto px-4 mt-4"
+                    className="mx-auto flex max-w-4xl justify-center px-4"
                 >
                     <motion.div variants={itemVariants} className="w-full">
                         <SpotlightCard
-                            spotlightColor="rgba(245, 158, 11, 0.15)"
-                            className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_10px_40px_rgba(0,0,0,0.05)] rounded-[40px] p-12 md:p-24 text-center relative overflow-hidden group w-full transition-all duration-500 hover:shadow-[inset_0_2px_20px_rgba(255,255,255,0.9),0_15px_50px_rgba(0,0,0,0.08)]"
+                            spotlightColor="rgba(167, 139, 250, 0.3)"
+                            className="group relative w-full overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.04] p-10 text-center shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-500 hover:border-white/20 md:p-20"
                         >
-                            {/* Subtle inner bloom */}
-                            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent pointer-events-none rounded-t-[40px]" />
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-amber-500/10 blur-[80px] rounded-full pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-                            
+                            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/10 opacity-50 blur-[90px] transition-opacity duration-700 group-hover:opacity-100" />
+
                             <div className="relative z-10 flex flex-col items-center justify-center">
-                            
-                            <motion.div 
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                className="w-24 h-24 rounded-3xl bg-white/80 backdrop-blur-md border border-white/80 flex items-center justify-center text-zinc-900 mb-10 shadow-[0_10px_30px_rgba(245,158,11,0.15)] relative"
-                            >
-                                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 opacity-50" />
-                                <Zap className="w-10 h-10 text-amber-500 relative z-10" />
-                            </motion.div>
-                            
-                            <h3 className="text-5xl md:text-7xl font-black text-zinc-900 tracking-tight mb-8 drop-shadow-sm">
-                                Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Incredible</span> <br /> is Coming Soon
-                            </h3>
-                            
-                            <p className="text-xl text-zinc-600 font-medium max-w-2xl mx-auto leading-relaxed mb-12 relative z-10">
-                                We are actively engineering AI-native solutions that will completely redefine your daily workflows. The future is currently compiling in our lab. Stay tuned.
-                            </p>
-                            
-                            <a 
-                                href="#cta"
-                                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 font-bold text-lg cursor-pointer group/btn relative z-10"
-                            >
-                                <span className="relative flex h-3 w-3">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                                </span>
-                                Join the Waitlist
-                                <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                            </a>
+
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                    className="relative mb-9 flex h-24 w-24 items-center justify-center rounded-3xl border border-violet-400/20 bg-violet-500/10 text-violet-300 shadow-[0_10px_30px_rgba(167,139,250,0.15)]"
+                                >
+                                    <Zap className="h-10 w-10" />
+                                </motion.div>
+
+                                <h3 className="mb-7 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl">
+                                    Something <span className="bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">incredible</span> <br /> is coming soon
+                                </h3>
+
+                                <p className="relative z-10 mx-auto mb-11 max-w-2xl text-lg leading-relaxed text-slate-300">
+                                    We&apos;re engineering pre-built agent templates and integrations that will make deploying support, ops, and CX automation even faster. Stay tuned.
+                                </p>
+
+                                <a
+                                    href="#cta"
+                                    className="group/btn relative z-10 inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 font-semibold text-slate-950 transition hover:bg-cyan-100"
+                                >
+                                    <span className="relative flex h-2.5 w-2.5">
+                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+                                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400" />
+                                    </span>
+                                    Join the waitlist
+                                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                                </a>
                             </div>
                         </SpotlightCard>
                     </motion.div>
