@@ -23,14 +23,14 @@ export default function Home() {
       <ProblemSection />
       <SolutionSection />
       <ServicesSection />
-      <ProductsSection />
+      {/* <ProductsSection /> */}
       <HowWeWorkSection />
       {/* <TechStackSection /> */}
-      <PricingSection />
+      {/* <PricingSection /> */}
       {/* <CaseStudiesSection /> */}
       {/* <PricingSection /> */}
       {/* <TestimonialsSection /> */}
-      <FAQSection />
+      {/* <FAQSection /> */}
       <CTASection />
       <Footer />
     </main>

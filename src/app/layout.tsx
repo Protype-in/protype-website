@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "operations automation",
   ],
   icons: {
-    icon: "/fevicon.jpg",
+    icon: "/fevicon.png",
   },
   openGraph: {
     title: "protype — AI Agents for Support, Operations & Customer Experience",
@@ -44,7 +44,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-[#080d1d] text-white" suppressHydrationWarning>
+      <body className="antialiased bg-white text-slate-900" suppressHydrationWarning>
         {children}
       </body>
     </html>

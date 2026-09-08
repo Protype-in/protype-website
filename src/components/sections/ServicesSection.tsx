@@ -1,170 +1,202 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { MessageCircle, Package, UserCheck, Workflow, FileText, Bot, Bell, Gift, Layers } from "lucide-react";
-import SpotlightCard from "../react-bits/SpotlightCard";
-import SplitText from "../react-bits/SplitText";
+import { motion } from "framer-motion";
+import { ShoppingCart, Package, Truck, Smile, ArrowRight } from "lucide-react";
+import Magnet from "../react-bits/Magnet";
 
-const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.08, delayChildren: 0.2 },
-    },
-};
+interface StepItem {
+  id: string;
+  stepNumber: string;
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+  iconBg: string;
+  iconColor: string;
+  accent: string;
+}
 
-const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, ease: "easeOut" }
-    },
-};
-
-const capabilities = [
-    {
-        icon: <MessageCircle className="h-5 w-5" />,
-        title: "WhatsApp-native support",
-        desc: "Meet customers where they already are, with full conversational context carried across every message.",
-        pillar: "Support",
-        tone: "text-cyan-300",
-        ring: "border-cyan-400/20 bg-cyan-500/10",
-        glow: "rgba(34, 211, 238, 0.35)" as const,
-    },
-    {
-        icon: <Package className="h-5 w-5" />,
-        title: "Order & status queries",
-        desc: "Instant, accurate answers on order status, shipping, and account questions — no ticket required.",
-        pillar: "Support",
-        tone: "text-cyan-300",
-        ring: "border-cyan-400/20 bg-cyan-500/10",
-        glow: "rgba(34, 211, 238, 0.35)" as const,
-    },
-    {
-        icon: <UserCheck className="h-5 w-5" />,
-        title: "Human escalation",
-        desc: "Agents know their limits and hand off to a person, with full context, the moment it matters.",
-        pillar: "Support",
-        tone: "text-cyan-300",
-        ring: "border-cyan-400/20 bg-cyan-500/10",
-        glow: "rgba(34, 211, 238, 0.35)" as const,
-    },
-    {
-        icon: <Workflow className="h-5 w-5" />,
-        title: "Workflow automation",
-        desc: "Repetitive, multi-step processes run themselves end to end, freeing your team for higher-value work.",
-        pillar: "Operations",
-        tone: "text-blue-300",
-        ring: "border-blue-400/20 bg-blue-500/10",
-        glow: "rgba(96, 165, 250, 0.35)" as const,
-    },
-    {
-        icon: <FileText className="h-5 w-5" />,
-        title: "Data & document processing",
-        desc: "Extract, structure, and route information from invoices, forms, and PDFs without manual entry.",
-        pillar: "Operations",
-        tone: "text-blue-300",
-        ring: "border-blue-400/20 bg-blue-500/10",
-        glow: "rgba(96, 165, 250, 0.35)" as const,
-    },
-    {
-        icon: <Bot className="h-5 w-5" />,
-        title: "Agent-to-agent workflows",
-        desc: "Specialized agents hand work to each other automatically to complete complex, multi-step tasks.",
-        pillar: "Operations",
-        tone: "text-blue-300",
-        ring: "border-blue-400/20 bg-blue-500/10",
-        glow: "rgba(96, 165, 250, 0.35)" as const,
-    },
-    {
-        icon: <Bell className="h-5 w-5" />,
-        title: "Proactive updates",
-        desc: "Customers hear from you before they have to ask — shipping delays, renewals, and milestones included.",
-        pillar: "Experience",
-        tone: "text-violet-300",
-        ring: "border-violet-400/20 bg-violet-500/10",
-        glow: "rgba(167, 139, 250, 0.35)" as const,
-    },
-    {
-        icon: <Gift className="h-5 w-5" />,
-        title: "Post-purchase journeys",
-        desc: "Turn a single sale into an ongoing relationship with timely, relevant follow-up communication.",
-        pillar: "Experience",
-        tone: "text-violet-300",
-        ring: "border-violet-400/20 bg-violet-500/10",
-        glow: "rgba(167, 139, 250, 0.35)" as const,
-    },
-    {
-        icon: <Layers className="h-5 w-5" />,
-        title: "Omnichannel experiences",
-        desc: "One consistent agent personality across chat, email, WhatsApp, and voice — never a cold restart.",
-        pillar: "Experience",
-        tone: "text-violet-300",
-        ring: "border-violet-400/20 bg-violet-500/10",
-        glow: "rgba(167, 139, 250, 0.35)" as const,
-    },
+const steps: StepItem[] = [
+  {
+    id: "inquiry",
+    stepNumber: "01",
+    title: "Customer Inquiry",
+    desc: "Answer questions, resolve issues, build trust.",
+    icon: <ShoppingCart className="h-5 w-5" />,
+    iconBg: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    accent: "#10b981",
+  },
+  {
+    id: "processing",
+    stepNumber: "02",
+    title: "Order Processing",
+    desc: "Validate, check inventory, initiate fulfilment.",
+    icon: <Package className="h-5 w-5" />,
+    iconBg: "bg-blue-50",
+    iconColor: "text-blue-600",
+    accent: "#3b82f6",
+  },
+  {
+    id: "fulfilment",
+    stepNumber: "03",
+    title: "Fulfilment & Shipping",
+    desc: "Coordinate with warehouses, track and deliver.",
+    icon: <Truck className="h-5 w-5" />,
+    iconBg: "bg-purple-50",
+    iconColor: "text-purple-600",
+    accent: "#a855f7",
+  },
+  {
+    id: "post-purchase",
+    stepNumber: "04",
+    title: "Post-Purchase",
+    desc: "Send updates, handle returns, keep them coming back.",
+    icon: <Smile className="h-5 w-5" />,
+    iconBg: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    accent: "#10b981",
+  },
 ];
 
 export default function ServicesSection() {
-    return (
-        <section id="services" className="relative isolate overflow-hidden py-20 md:py-28">
-            <div className="hero-grid absolute inset-0 opacity-20" />
-            <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+  return (
+    <section
+      id="services"
+      aria-labelledby="services-title"
+      className="relative isolate overflow-hidden bg-[#fafcfc] py-20 md:py-28"
+    >
+      {/* Background ambient glows */}
+      <div
+        className="pointer-events-none absolute top-1/3 right-1/4 h-[500px] w-[500px] rounded-full bg-emerald-200/20 blur-[130px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute bottom-10 left-1/4 h-[480px] w-[480px] rounded-full bg-cyan-200/20 blur-[130px]"
+        aria-hidden="true"
+      />
 
+      {/* Background grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(16, 185, 129, 0.16) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(16, 185, 129, 0.16) 1px, transparent 1px)
+          `,
+          backgroundSize: "44px 44px",
+          maskImage: "radial-gradient(ellipse 90% 80% at 50% 50%, black 25%, transparent 92%)",
+          WebkitMaskImage: "radial-gradient(ellipse 90% 80% at 50% 50%, black 25%, transparent 92%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+        
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-3xl"
+        >
+          {/* Pill Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 text-[11.5px] font-semibold tracking-[0.14em] text-emerald-900 uppercase backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            END-TO-END SOLUTIONS
+          </div>
+
+          {/* Heading */}
+          <h2
+            id="services-title"
+            className="font-[Outfit] text-4xl font-bold leading-[1.08] tracking-[-0.035em] text-slate-900 sm:text-5xl lg:text-[56px]"
+          >
+            From first click to happy customer.
+          </h2>
+
+          {/* Subtitle */}
+          <p className="mt-4 text-base leading-relaxed text-slate-500 sm:text-lg">
+            We support every stage of your e-commerce journey.
+          </p>
+        </motion.div>
+
+        {/* 4-Step Horizontal Pipeline */}
+        <div className="relative mx-auto mt-16 max-w-6xl">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, idx) => (
+              <div key={step.id} className="relative flex items-center">
+                
+                {/* Step Card */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mb-14 md:mb-16"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  whileHover={{ y: -6 }}
+                  className="group relative flex w-full flex-col rounded-[22px] border border-slate-200/80 bg-white/95 p-6 text-left shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all duration-300 hover:border-slate-300 hover:shadow-[0_24px_50px_rgba(15,23,42,0.1)]"
                 >
-                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-blue-100 uppercase backdrop-blur-xl">
-                        <Bot className="h-3.5 w-3.5" />
-                        Inside the pillars
-                    </div>
-                    <h2 className="font-[Outfit] text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl">
-                        <SplitText text="Capabilities across" className="inline-block" delay={30} duration={0.5} ease="easeOut" />
-                        <br />
-                        <span className="bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">every pillar</span>
-                    </h2>
-                    <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-300">
-                        A closer look at what these agents actually do once they&apos;re live in your business.
-                    </p>
+                  {/* Step Icon */}
+                  <div
+                    className={`mb-4 flex h-11 w-11 items-center justify-center rounded-2xl ${step.iconBg} ${step.iconColor} transition-transform duration-300 group-hover:scale-105`}
+                  >
+                    {step.icon}
+                  </div>
+
+                  {/* Step Title */}
+                  <h3 className="text-base font-semibold text-slate-900 leading-tight">
+                    {step.title}
+                  </h3>
+
+                  {/* Step Description */}
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    {step.desc}
+                  </p>
                 </motion.div>
 
-                <div className="relative mx-auto max-w-6xl">
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="relative z-10 grid gap-6 text-left md:grid-cols-2 lg:grid-cols-3"
+                {/* Right Arrow (Desktop only, except on last card) */}
+                {idx < steps.length - 1 && (
+                  <div
+                    className="pointer-events-none absolute -right-4 z-20 hidden lg:flex items-center justify-center text-slate-300"
+                    aria-hidden="true"
+                  >
+                    <motion.span
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                      className="text-lg font-light"
                     >
-                        {capabilities.map((s, i) => (
-                            <motion.div key={i} variants={itemVariants} className="h-full">
-                                <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.2 }} className="h-full">
-                                    <SpotlightCard
-                                        spotlightColor={s.glow}
-                                        className="relative flex h-full flex-col overflow-hidden rounded-[26px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
-                                    >
-                                        <div className="relative z-10 mb-6 flex items-start justify-between">
-                                            <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${s.ring} ${s.tone}`}>
-                                                {s.icon}
-                                            </div>
-                                            <span className={`rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${s.ring} ${s.tone}`}>{s.pillar}</span>
-                                        </div>
+                      →
+                    </motion.span>
+                  </div>
+                )}
 
-                                        <div className="relative z-10 flex-grow">
-                                            <h3 className="mb-2.5 text-lg font-semibold tracking-tight text-white">{s.title}</h3>
-                                            <p className="text-sm leading-relaxed text-slate-400">{s.desc}</p>
-                                        </div>
-                                    </SpotlightCard>
-                                </motion.div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </div>
-        </section>
-    );
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-14 flex justify-center"
+        >
+          <Magnet padding={15} magnetStrength={3}>
+            <a
+              href="#process"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-[#0a2018] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(10,32,24,0.24)] transition-all duration-300 hover:bg-[#12362a] hover:shadow-[0_18px_38px_rgba(10,32,24,0.32)] hover:-translate-y-0.5"
+            >
+              See how Protype works
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+          </Magnet>
+        </motion.div>
+
+      </div>
+    </section>
+  );
 }

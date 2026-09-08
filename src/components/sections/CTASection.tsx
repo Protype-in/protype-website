@@ -8,7 +8,7 @@ import Magnet from "../react-bits/Magnet";
 export default function CTASection() {
     return (
         <section id="cta" className="relative isolate overflow-hidden py-20 lg:py-28">
-            <div className="absolute inset-0 z-0 overflow-hidden opacity-40">
+            <div className="absolute inset-0 z-0 overflow-hidden opacity-25">
                 <Aurora
                     colorStops={["#22d3ee", "#3b82f6", "#8b5cf6"]}
                     blend={0.5}
@@ -23,14 +23,14 @@ export default function CTASection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="relative z-10 flex flex-col items-center rounded-[36px] border border-white/10 bg-white/[0.05] px-6 py-16 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:px-16 md:py-20"
+                    className="relative z-10 flex flex-col items-center rounded-[36px] border border-slate-200 bg-white px-6 py-16 shadow-[0_30px_90px_rgba(15,23,42,0.1)] backdrop-blur-2xl md:px-16 md:py-20"
                 >
-                    <span className="mb-6 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100 backdrop-blur-xl">Build with protype</span>
-                    <h2 className="relative z-10 mb-6 font-[Outfit] text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl">
-                        Ready to <span className="bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">automate?</span>
+                    <span className="mb-6 rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-600 backdrop-blur-xl">Build with protype</span>
+                    <h2 className="relative z-10 mb-6 font-[Outfit] text-4xl font-semibold tracking-[-0.03em] text-slate-900 sm:text-5xl md:text-6xl">
+                        Ready to <span className="bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 bg-clip-text text-transparent">automate?</span>
                     </h2>
 
-                    <p className="relative z-10 mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
+                    <p className="relative z-10 mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-600 md:text-xl">
                         Stop losing hours to support queues and manual ops. Let&apos;s design the agents your business actually needs — across support, operations, and customer experience.
                     </p>
 
@@ -40,7 +40,7 @@ export default function CTASection() {
                                 href="https://wa.me/8637584923"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-bold text-slate-950 transition-all duration-300 hover:scale-[1.02] hover:bg-cyan-100 active:scale-95 sm:w-auto"
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-3.5 font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-slate-800 active:scale-95 sm:w-auto"
                             >
                                 <MessageCircle className="h-5 w-5" />
                                 WhatsApp Chat
@@ -49,7 +49,7 @@ export default function CTASection() {
                         <Magnet padding={20} disabled={false} magnetStrength={3}>
                             <a
                                 href="mailto:info@protype.in"
-                                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-7 py-3.5 font-bold text-white transition-all duration-300 hover:border-white/30 hover:bg-white/[0.09] sm:w-auto"
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 font-bold text-slate-900 transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
                             >
                                 Email Us
                                 <ArrowUpRight className="h-4 w-4" />

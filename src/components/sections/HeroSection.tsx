@@ -1,149 +1,737 @@
 "use client";
 
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Bot, Check, Headset, Layers, ShieldCheck, Sparkles, Timer, Workflow } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { ArrowRight, MessageSquare, Package, Truck, Bell, FileText, CheckCircle2, X } from "lucide-react";
 import Magnet from "../react-bits/Magnet";
-import SplashCursor from "../react-bits/SplashCursor";
-import CountUp from "../react-bits/CountUp";
-
-const signals = ["Customer support agents", "Operations automation", "Customer experience AI"];
-
-const stats = [
-  { icon: <Layers className="h-3.5 w-3.5" />, value: 40, suffix: "+", label: "Agents deployed" },
-  { icon: <Timer className="h-3.5 w-3.5" />, value: 500, suffix: "+", label: "Hours saved weekly" },
-  { icon: <ShieldCheck className="h-3.5 w-3.5" />, value: 90, suffix: "%", label: "Requests automated" },
-];
 
 export default function HeroSection() {
-  const heroRef = useRef<HTMLElement>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   return (
-    <section ref={heroRef} id="hero" aria-labelledby="hero-title" className="relative isolate min-h-[820px] overflow-hidden bg-[#070b18] pt-28 text-white md:min-h-[760px] md:pt-32">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_35%,rgba(59,130,246,.28),transparent_27%),radial-gradient(circle_at_78%_20%,rgba(139,92,246,.2),transparent_24%),linear-gradient(135deg,#070b18_0%,#0a1025_55%,#070b18_100%)]" />
-      <div className="hero-grid absolute inset-0 opacity-40" />
-      <div className="hero-noise absolute inset-0 opacity-[0.035]" />
-      <SplashCursor
-        containerRef={heroRef}
-        SIM_RESOLUTION={96}
-        DYE_RESOLUTION={800}
-        SPLAT_RADIUS={0.28}
-        SPLAT_FORCE={4200}
-        PRESSURE_ITERATIONS={14}
-        DENSITY_DISSIPATION={3.2}
-        VELOCITY_DISSIPATION={2.4}
-        HUE_MIN={0.5}
-        HUE_MAX={0.78}
+    <section
+      id="hero"
+      aria-labelledby="hero-title"
+      className="relative isolate min-h-[880px] overflow-hidden bg-[#fafcfc] pt-24 text-slate-900 md:min-h-[820px] md:pt-28"
+    >
+      {/* Ambient background glows */}
+      <div
+        className="pointer-events-none absolute -bottom-36 -left-36 h-[520px] w-[520px] rounded-full bg-emerald-200/35 blur-[120px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute top-1/4 right-[5%] h-[600px] w-[600px] rounded-full bg-cyan-200/25 blur-[140px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 h-[480px] w-[480px] rounded-full bg-emerald-300/15 blur-[110px]"
+        aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 pb-20 lg:grid-cols-[.93fr_1.07fr] lg:gap-8 lg:px-10">
-        <div className="relative z-10 max-w-2xl">
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-semibold tracking-[0.14em] text-blue-100 uppercase backdrop-blur-xl">
-            <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-70" /><span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-300" /></span>
-            AI agents for support, ops &amp; CX
-          </motion.div>
-          <motion.h1 id="hero-title" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.08 }} className="font-[Outfit] text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-6xl lg:text-7xl">
-            AI agents for support,
-            <span className="block bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">operations &amp; experience.</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.16 }} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 md:text-xl">
-            protype designs and deploys highly customizable AI agents that answer customers, automate the busywork inside your business, and turn every interaction into something faster and more personal.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.24 }} className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Magnet padding={10} magnetStrength={4}>
-              <a href="#cta" className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-semibold text-slate-950 transition hover:bg-cyan-100 sm:w-auto">Deploy your first agent <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></a>
-            </Magnet>
-            <a href="#solutions" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3.5 font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.09]">Explore the pillars <span className="text-cyan-300">↗</span></a>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.38 }} className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-sm text-slate-300">
-            {signals.map((signal) => <span key={signal} className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-cyan-300" />{signal}</span>)}
+      {/* Clean, smoothly visible background grid matching screenshot */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(16, 185, 129, 0.16) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(16, 185, 129, 0.16) 1px, transparent 1px)
+          `,
+          backgroundSize: "44px 44px",
+          maskImage: "radial-gradient(ellipse 90% 80% at 62% 45%, black 25%, transparent 92%)",
+          WebkitMaskImage: "radial-gradient(ellipse 90% 80% at 62% 45%, black 25%, transparent 92%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Main Hero Container */}
+      <div className="relative z-10 mx-auto grid max-w-[1400px] items-center gap-8 px-6 pt-4 pb-16 lg:grid-cols-[440px_1fr] lg:gap-12 lg:px-10 lg:pt-8 xl:grid-cols-[480px_1fr]">
+        
+        {/* Left Column: Typography & CTAs */}
+        <div className="relative z-10 max-w-lg">
+          {/* Pill Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 text-[11.5px] font-semibold tracking-[0.14em] text-emerald-900 uppercase backdrop-blur-md"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            CUSTOM SYSTEMS FOR E-COMMERCE
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }} className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-7">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <div className="mb-1.5 flex items-center gap-1.5 text-cyan-300">{s.icon}</div>
-                <div className="flex items-baseline font-[Outfit] text-3xl font-semibold text-white">
-                  <CountUp to={s.value} duration={2} delay={0.6} />
-                  <span>{s.suffix}</span>
-                </div>
-                <div className="mt-1 text-xs leading-snug text-slate-400">{s.label}</div>
-              </div>
-            ))}
+          {/* Main Headline */}
+          <motion.h1
+            id="hero-title"
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.08 }}
+            className="font-[Outfit] text-[52px] font-bold leading-[1.02] tracking-[-0.04em] text-slate-900 sm:text-6xl lg:text-[76px]"
+          >
+            Support.
+            <br />
+            Operations.
+            <br />
+            <span className="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 bg-clip-text text-transparent">
+              In flow.
+            </span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.16 }}
+            className="mt-7 max-w-md text-base leading-relaxed text-slate-500 sm:text-lg lg:text-[19px]"
+          >
+            Protype builds custom systems that connect customer support, operations, and every step in between.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.24 }}
+            className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center"
+          >
+            <Magnet padding={10} magnetStrength={3}>
+              <a
+                href="#cta"
+                className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[#0a2018] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(10,32,24,0.22)] transition-all duration-300 hover:bg-[#12362a] hover:shadow-[0_16px_36px_rgba(10,32,24,0.3)] hover:-translate-y-0.5 sm:w-auto"
+              >
+                Talk to us
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+            </Magnet>
+
+            <Magnet padding={10} magnetStrength={2}>
+              <a
+                href="#process"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200/90 bg-white px-6 py-3.5 text-sm font-semibold text-slate-900 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm sm:w-auto"
+              >
+                See how it works <span className="text-slate-700">↗</span>
+              </a>
+            </Magnet>
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.94, x: 28 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }} className="relative mx-auto w-full max-w-[650px] lg:max-w-none">
-          <div className="absolute -inset-8 rounded-full bg-blue-500/20 blur-[90px]" />
-          <div className="relative overflow-hidden rounded-[30px] border border-white/15 bg-[#0d1430]/75 p-3 shadow-[0_35px_100px_rgba(0,0,0,.42)] backdrop-blur-2xl">
-            <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.045] px-4 py-3 text-xs text-slate-300"><div className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-cyan-300" /> PROTYPE / AGENT OS</div><span className="font-mono text-cyan-200">LIVE</span></div>
-            <div className="relative mt-3 aspect-[1.18/1] overflow-hidden rounded-2xl border border-white/10 bg-[#0a1025]">
-              <SystemCanvas />
-              <div className="absolute inset-x-4 bottom-4 grid grid-cols-3 gap-2">
-                <MiniMetric icon={<Headset className="h-3.5 w-3.5" />} label="Support" value="Online" tone="cyan" />
-                <MiniMetric icon={<Workflow className="h-3.5 w-3.5" />} label="Operate" value="Running" tone="blue" />
-                <MiniMetric icon={<Sparkles className="h-3.5 w-3.5" />} label="Delight" value="Personalized" tone="violet" />
-              </div>
-            </div>
-          </div>
-          <motion.div animate={{ y: [0, -9, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="absolute -right-3 top-12 hidden rounded-2xl border border-white/15 bg-[#111936]/90 px-4 py-3 shadow-2xl backdrop-blur-xl sm:block">
-            <div className="flex items-center gap-2 text-xs font-semibold text-white"><Bot className="h-4 w-4 text-cyan-300" /> Automation layer live</div>
-            <div className="mt-2 h-1.5 w-28 overflow-hidden rounded-full bg-white/10"><motion.div animate={{ x: ["-100%", "100%"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }} className="h-full w-1/2 rounded-full bg-gradient-to-r from-transparent via-cyan-300 to-transparent" /></div>
-          </motion.div>
-          <motion.div animate={{ y: [0, 9, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} className="absolute -bottom-5 left-5 hidden rounded-2xl border border-white/15 bg-[#111936]/90 px-4 py-3 shadow-2xl backdrop-blur-xl sm:block">
-            <div className="text-[10px] font-bold tracking-[0.15em] text-slate-400 uppercase">Avg. response time</div>
-            <div className="mt-1 text-lg font-semibold text-white">&lt;2 min <span className="text-sm text-cyan-300">across channels</span></div>
-          </motion.div>
+        {/* Right Column: Interactive Diagram Hub */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.85, delay: 0.15, ease: "easeOut" }}
+          className="relative w-full"
+        >
+          <WorkflowHub onShowToast={(msg) => setToastMessage(msg)} />
         </motion.div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent" />
+
+      {/* Interactive Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 15, scale: 0.95 }}
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/95 px-5 py-3.5 text-sm font-medium text-slate-800 shadow-[0_20px_40px_rgba(0,0,0,0.12)] backdrop-blur-md"
+          >
+            <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+            <span>{toastMessage}</span>
+            <button
+              onClick={() => setToastMessage(null)}
+              className="ml-2 text-slate-400 hover:text-slate-600"
+              aria-label="Dismiss notification"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
 
-function MiniMetric({ icon, label, value, tone }: { icon: React.ReactNode; label: string; value: string; tone: "blue" | "cyan" | "violet" }) {
-  const colors = { blue: "text-blue-300", cyan: "text-cyan-300", violet: "text-violet-300" };
+// 1000 x 640 Coordinate Wires with precise anchor dots
+interface WireConfig {
+  id: string;
+  stage: number;
+  d: string;
+  color: string;
+  dotPos: { cx: number; cy: number };
+}
+
+const WIRES: WireConfig[] = [
+  // Wire 0: Customer (Top) -> Proto Core (Top)
+  {
+    id: "wire-customer",
+    stage: 0,
+    d: "M 510,124 L 510,245",
+    color: "#0ea5e9",
+    dotPos: { cx: 510, cy: 245 },
+  },
+  // Wire 1: Customer Support (Left) -> Proto Core (Left)
+  {
+    id: "wire-support",
+    stage: 1,
+    d: "M 300,288 L 345,288 C 380,288 400,320 433,320",
+    color: "#10b981",
+    dotPos: { cx: 345, cy: 288 },
+  },
+  // Wire 2: Proto Core (Right) -> Order Operations (Right)
+  {
+    id: "wire-ops",
+    stage: 2,
+    d: "M 587,320 C 620,320 640,292 665,292 L 710,292",
+    color: "#3b82f6",
+    dotPos: { cx: 665, cy: 292 },
+  },
+  // Wire 3: Proto Core (Bottom-Left) -> Fulfilment (Bottom-Left)
+  {
+    id: "wire-fulfilment",
+    stage: 3,
+    d: "M 470,395 C 470,425 410,430 380,450",
+    color: "#10b981",
+    dotPos: { cx: 380, cy: 450 },
+  },
+  // Wire 4: Proto Core (Bottom-Right) -> Customer Update (Bottom-Right)
+  {
+    id: "wire-update",
+    stage: 4,
+    d: "M 550,395 C 550,425 605,430 635,460",
+    color: "#06b6d4",
+    dotPos: { cx: 635, cy: 460 },
+  },
+];
+
+function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
+  const [activeStage, setActiveStage] = useState<number>(0);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // 3D Parallax Mouse Physics
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [3.5, -3.5]), {
+    stiffness: 150,
+    damping: 20,
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-3.5, 3.5]), {
+    stiffness: 150,
+    damping: 20,
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setHoveredCard(null);
+  };
+
+  // Automatic sequential workflow animation loop
+  useEffect(() => {
+    if (hoveredCard !== null) {
+      setActiveStage(hoveredCard);
+      return;
+    }
+    const interval = setInterval(() => {
+      setActiveStage((prev) => (prev + 1) % 5);
+    }, 2400);
+    return () => clearInterval(interval);
+  }, [hoveredCard]);
+
+  const currentActive = hoveredCard !== null ? hoveredCard : activeStage;
+
   return (
-    <motion.div whileHover={{ y: -3, scale: 1.03 }} transition={{ duration: 0.2 }} className="rounded-xl border border-white/10 bg-[#101936]/85 p-2.5 backdrop-blur-xl">
-      <div className={`flex items-center gap-1.5 text-[10px] ${colors[tone]}`}>
-        <motion.span animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}>{icon}</motion.span>
-        {label}
-      </div>
-      <div className="mt-1 text-xs font-semibold text-white">{value}</div>
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full select-none"
+      style={{ perspective: 1200 }}
+    >
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="relative mx-auto w-full max-w-[1000px] aspect-[1000/640]"
+      >
+        {/* Soft aura glow behind central node */}
+        <div
+          className="pointer-events-none absolute left-[51%] top-[50%] h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(16,185,129,0.24) 0%, rgba(6,182,212,0.16) 45%, transparent 72%)",
+            filter: "blur(42px)",
+          }}
+          aria-hidden="true"
+        />
+
+        {/* SVG Connection Wires & Animated Light Beams */}
+        <svg
+          viewBox="0 0 1000 640"
+          className="absolute inset-0 h-full w-full overflow-visible pointer-events-none"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="hubGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {WIRES.map((w) => {
+            const isActive = currentActive === w.stage;
+            return (
+              <g key={w.id}>
+                {/* 1. Base clean subtle wire */}
+                <path
+                  d={w.d}
+                  fill="none"
+                  stroke="#e2e8f0"
+                  strokeWidth={1.5}
+                  strokeLinecap="round"
+                />
+
+                {/* 2. Active glowing wire with flowing animated dashes */}
+                <motion.path
+                  d={w.d}
+                  fill="none"
+                  stroke={w.color}
+                  strokeWidth={isActive ? 2.8 : 1.8}
+                  strokeLinecap="round"
+                  strokeDasharray="4 8"
+                  filter={isActive ? "url(#hubGlow)" : undefined}
+                  animate={{
+                    strokeDashoffset: [0, -24],
+                    opacity: isActive ? 1 : 0.25,
+                  }}
+                  transition={{
+                    strokeDashoffset: { duration: 0.8, repeat: Infinity, ease: "linear" },
+                    opacity: { duration: 0.35 },
+                  }}
+                />
+
+                {/* 3. Traveling photon particle along path */}
+                <circle r={isActive ? 3.5 : 2.5} fill={w.color} filter="url(#hubGlow)">
+                  <animateMotion
+                    path={w.d}
+                    dur={isActive ? "1.4s" : "2.6s"}
+                    repeatCount="indefinite"
+                    keyPoints="0;1"
+                    keyTimes="0;1"
+                  />
+                </circle>
+
+                {/* 4. Anchor dot at connection junction */}
+                <circle
+                  cx={w.dotPos.cx}
+                  cy={w.dotPos.cy}
+                  r={5}
+                  fill={w.color}
+                />
+
+                {/* 5. Pulsing ring wave on active stage */}
+                {isActive && (
+                  <motion.circle
+                    cx={w.dotPos.cx}
+                    cy={w.dotPos.cy}
+                    r={5}
+                    fill="none"
+                    stroke={w.color}
+                    strokeWidth={1.5}
+                    animate={{ r: [5, 14], opacity: [0.9, 0] }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+                  />
+                )}
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* ============================================================ */}
+        {/* CENTER NODE: PROTO CORE                                       */}
+        {/* ============================================================ */}
+        <div
+          className="absolute left-[51%] top-[50%] z-20 -translate-x-1/2 -translate-y-1/2"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <motion.div
+            animate={{
+              boxShadow: [
+                "0 0 45px rgba(16,185,129,0.22), 0 20px 40px -10px rgba(15,23,42,0.1)",
+                "0 0 65px rgba(6,182,212,0.32), 0 20px 40px -10px rgba(15,23,42,0.12)",
+                "0 0 45px rgba(16,185,129,0.22), 0 20px 40px -10px rgba(15,23,42,0.1)",
+              ],
+            }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            className="relative flex h-[150px] w-[154px] flex-col items-center justify-center rounded-[28px] border border-white/90 px-4 text-center backdrop-blur-xl"
+            style={{
+              background:
+                "linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(220,252,231,0.85) 50%, rgba(224,242,254,0.78) 100%)",
+            }}
+          >
+            {/* Dark green badge with speech mark / quotation icon */}
+            <div className="relative mb-2 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#08231c] shadow-inner">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6 fill-emerald-400"
+                aria-hidden="true"
+              >
+                <path d="M7 15h3l2-4V6H6v6h3l-2 3zm8 0h3l2-4V6h-6v6h3l-2 3z" />
+              </svg>
+              {/* Soft inner glow dot */}
+              <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+            </div>
+
+            {/* Title */}
+            <div className="text-[11.5px] font-bold tracking-[0.22em] text-slate-900 uppercase">
+              PROTO CORE
+            </div>
+
+            {/* Subtitle */}
+            <div className="mt-1 text-[9px] font-semibold tracking-wider text-teal-700/90 leading-tight">
+              AI + WORKFLOWS
+              <br />
+              + YOUR SYSTEMS
+            </div>
+
+            {/* Subtle animated border sheen */}
+            <motion.div
+              className="pointer-events-none absolute inset-0 rounded-[28px] border border-emerald-400/30"
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* CARD 1: CUSTOMER (Top)                                       */}
+        {/* ============================================================ */}
+        <HubCard
+          stage={0}
+          currentActive={currentActive}
+          onHover={() => setHoveredCard(0)}
+          onLeave={() => setHoveredCard(null)}
+          className="absolute z-10 w-[245px]"
+          style={{ left: "45.8%", top: "3.1%" }}
+          accent="#0ea5e9"
+          floatingDelay={0}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
+                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+              </div>
+              <span className="text-[13px] font-medium text-slate-700">Customer</span>
+            </div>
+            <span className="text-[11px] font-normal text-slate-400">10:24 AM</span>
+          </div>
+
+          {/* Question Text */}
+          <p className="mt-2 text-[14px] font-semibold text-slate-900">
+            Where is my order?
+          </p>
+
+          {/* Communication Channels */}
+          <div className="mt-2.5 flex items-center gap-1.5">
+            {/* WhatsApp */}
+            <div
+              title="WhatsApp Channel"
+              className="flex h-5 w-5 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xs"
+            >
+              <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.84-3.05-.2-.31a8.106 8.106 0 01-1.25-4.31c0-4.47 3.64-8.11 8.11-8.11 2.17 0 4.2 0.85 5.73 2.38 1.54 1.54 2.38 3.57 2.38 5.73 0 4.47-3.64 8.17-8.11 8.17z" />
+              </svg>
+            </div>
+
+            {/* Website pill */}
+            <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+              <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-blue-500" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+              </svg>
+              <span>Website</span>
+            </div>
+
+            {/* Instagram */}
+            <div
+              title="Instagram DM"
+              className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-2xs"
+            >
+              <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </div>
+
+            {/* +2 */}
+            <div className="flex h-5 items-center justify-center rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-slate-500">
+              +2
+            </div>
+          </div>
+        </HubCard>
+
+        {/* ============================================================ */}
+        {/* CARD 2: CUSTOMER SUPPORT (Middle-Left)                       */}
+        {/* ============================================================ */}
+        <HubCard
+          stage={1}
+          currentActive={currentActive}
+          onHover={() => setHoveredCard(1)}
+          onLeave={() => setHoveredCard(null)}
+          className="absolute z-10 w-[260px]"
+          style={{ left: "4.0%", top: "34.4%" }}
+          accent="#10b981"
+          floatingDelay={0.6}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                <MessageSquare className="h-4 w-4" />
+              </div>
+              <span className="text-[13.5px] font-semibold text-slate-900">
+                Customer Support
+              </span>
+            </div>
+            <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
+              Resolved
+            </span>
+          </div>
+
+          {/* Body Message */}
+          <div className="mt-2 text-[12.5px] leading-snug text-slate-600">
+            <p>Hi! Your order is on track.</p>
+            <p className="text-slate-500">Here&apos;s the latest update...</p>
+          </div>
+
+          {/* Footer with avatar photo and timestamp */}
+          <div className="mt-3 flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <img
+                src="/support-agent.jpg"
+                alt="Support Agent"
+                className="h-6 w-6 rounded-full object-cover border border-emerald-200 shadow-2xs"
+              />
+              <span className="text-[11px] text-slate-400">Agent live</span>
+            </div>
+            <span className="text-[11px] text-slate-400">10:32 AM</span>
+          </div>
+        </HubCard>
+
+        {/* ============================================================ */}
+        {/* CARD 3: ORDER OPERATIONS (Middle-Right)                      */}
+        {/* ============================================================ */}
+        <HubCard
+          stage={2}
+          currentActive={currentActive}
+          onHover={() => setHoveredCard(2)}
+          onLeave={() => setHoveredCard(null)}
+          className="absolute z-10 w-[260px]"
+          style={{ left: "71.0%", top: "35.0%" }}
+          accent="#3b82f6"
+          floatingDelay={1.2}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <Package className="h-4 w-4" />
+              </div>
+              <span className="text-[13.5px] font-semibold text-slate-900">
+                Order Operations
+              </span>
+            </div>
+            <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
+              Processing
+            </span>
+          </div>
+
+          {/* Body Document & Routing */}
+          <div className="mt-3 flex items-start gap-2.5">
+            <div className="mt-0.5 flex h-7 w-6 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
+              <FileText className="h-3.5 w-3.5" />
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
+              <p className="text-[11.5px] text-slate-500">
+                Assigned <span className="text-slate-400">→</span> Warehouse 02
+              </p>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="mt-2.5 flex justify-end">
+            <span className="text-[11px] text-slate-400">10:28 AM</span>
+          </div>
+        </HubCard>
+
+        {/* ============================================================ */}
+        {/* CARD 4: FULFILMENT (Bottom-Left)                             */}
+        {/* ============================================================ */}
+        <HubCard
+          stage={3}
+          currentActive={currentActive}
+          onHover={() => setHoveredCard(3)}
+          onLeave={() => setHoveredCard(null)}
+          className="absolute z-10 w-[250px]"
+          style={{ left: "17.0%", top: "70.3%" }}
+          accent="#10b981"
+          floatingDelay={1.8}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                <Truck className="h-4 w-4" />
+              </div>
+              <span className="text-[13.5px] font-semibold text-slate-900">
+                Fulfilment
+              </span>
+            </div>
+            <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
+              Packed
+            </span>
+          </div>
+
+          {/* Body with 3D cardboard box image */}
+          <div className="mt-3 flex items-center gap-3">
+            <img
+              src="/shipping-box.jpg"
+              alt="Parcel package"
+              className="h-9 w-9 rounded-md object-contain shrink-0"
+            />
+            <div>
+              <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
+              <p className="text-[11.5px] text-slate-500">Ready for shipping</p>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="mt-2 flex justify-end">
+            <span className="text-[11px] text-slate-400">11:12 AM</span>
+          </div>
+        </HubCard>
+
+        {/* ============================================================ */}
+        {/* CARD 5: CUSTOMER UPDATE (Bottom-Right)                       */}
+        {/* ============================================================ */}
+        <HubCard
+          stage={4}
+          currentActive={currentActive}
+          onHover={() => setHoveredCard(4)}
+          onLeave={() => setHoveredCard(null)}
+          className="absolute z-10 w-[250px]"
+          style={{ left: "58.0%", top: "71.8%" }}
+          accent="#06b6d4"
+          floatingDelay={2.4}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <Bell className="h-4 w-4" />
+              </div>
+              <span className="text-[13.5px] font-semibold text-slate-900">
+                Customer Update
+              </span>
+            </div>
+            <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
+              Sent
+            </span>
+          </div>
+
+          {/* Body with tracking action */}
+          <div className="mt-2.5">
+            <p className="text-[13px] font-medium text-slate-800">
+              Your order is on the way!
+            </p>
+            <button
+              type="button"
+              onClick={() =>
+                onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
+              }
+              className="group mt-1 flex items-center gap-1 text-[12px] font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              <span>Track your order</span>
+              <span className="transition-transform group-hover:translate-x-0.5">→</span>
+            </button>
+          </div>
+
+          {/* Footer */}
+          <div className="mt-1 flex justify-end">
+            <span className="text-[11px] text-slate-400">11:15 AM</span>
+          </div>
+        </HubCard>
+      </motion.div>
+    </div>
+  );
+}
+
+// Reusable neo-morphic card wrapper with floating physics, glow border, and hover elevation
+function HubCard({
+  stage,
+  currentActive,
+  onHover,
+  onLeave,
+  className,
+  style,
+  accent,
+  floatingDelay,
+  children,
+}: {
+  stage: number;
+  currentActive: number;
+  onHover: () => void;
+  onLeave: () => void;
+  className?: string;
+  style?: React.CSSProperties;
+  accent: string;
+  floatingDelay: number;
+  children: React.ReactNode;
+}) {
+  const isActive = currentActive === stage;
+
+  return (
+    <motion.div
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      className={`rounded-[22px] border bg-white/95 p-4 backdrop-blur-md transition-all duration-300 ${className}`}
+      style={{
+        ...style,
+        borderColor: isActive ? accent : "#f1f5f9",
+        boxShadow: isActive
+          ? `0 24px 50px -12px rgba(15,23,42,0.12), 0 0 0 1px ${accent}40, 0 0 24px ${accent}25`
+          : "0 18px 40px -10px rgba(15,23,42,0.06), 0 1px 3px rgba(0,0,0,0.02)",
+      }}
+      animate={{
+        y: isActive ? -4 : [0, -3.5, 0],
+        scale: isActive ? 1.02 : 1,
+      }}
+      transition={{
+        y: isActive
+          ? { duration: 0.25 }
+          : { duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: floatingDelay },
+        scale: { duration: 0.25 },
+      }}
+    >
+      {children}
     </motion.div>
-  );
-}
-
-function SystemCanvas() {
-  return (
-    <>
-      <svg viewBox="0 0 640 520" aria-hidden="true" className="absolute inset-0 h-full w-full">
-        <defs>
-          <linearGradient id="flow" x1={0} x2={1}><stop stopColor="#22d3ee" stopOpacity={0} /><stop offset={0.5} stopColor="#60a5fa" /><stop offset={1} stopColor="#a78bfa" stopOpacity={0} /></linearGradient>
-          <radialGradient id="core"><stop stopColor="#e0f2fe" /><stop offset={0.2} stopColor="#38bdf8" /><stop offset={1} stopColor="#2563eb" stopOpacity={0} /></radialGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation={4} result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
-        </defs>
-        <g opacity={0.28} stroke="#7dd3fc" strokeWidth={0.7}><path d="M40 100H600M40 180H600M40 260H600M40 340H600M40 420H600" /><path d="M100 40V470M200 40V470M300 40V470M400 40V470M500 40V470" /></g>
-        <motion.path d="M105 126 C190 126 170 244 290 254 S410 178 518 135" fill="none" stroke="url(#flow)" strokeWidth={2} strokeDasharray="8 10" animate={{ strokeDashoffset: [0, -72] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
-        <motion.path d="M118 375 C200 390 220 304 318 286 S465 330 540 380" fill="none" stroke="url(#flow)" strokeWidth={2} strokeDasharray="8 10" animate={{ strokeDashoffset: [0, 72] }} transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }} />
-        <motion.circle cx={320} cy={260} r={122} fill="none" stroke="#60a5fa" strokeOpacity={0.22} strokeWidth={1} strokeDasharray="4 12" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "320px 260px" }} />
-        <motion.circle cx={320} cy={260} r={78} fill="none" stroke="#a78bfa" strokeOpacity={0.35} strokeWidth={1} strokeDasharray="2 9" animate={{ rotate: -360 }} transition={{ duration: 14, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "320px 260px" }} />
-        <motion.circle cx={320} cy={260} r={100} fill="url(#core)" animate={{ opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} />
-        <motion.circle cx={320} cy={260} r={38} fill="#0b1734" stroke="#67e8f9" strokeWidth={1.5} filter="url(#glow)" animate={{ r: [37, 40, 37] }} transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }} />
-        <text x={320} y={254} textAnchor="middle" fill="#fff" fontSize={12} fontWeight={600}>PROTYPE</text><text x={320} y={272} textAnchor="middle" fill="#67e8f9" fontSize={8} letterSpacing={2}>AGENT CORE</text>
-        <Node x={102} y={125} label="SUPPORT" color="#60a5fa" /><Node x={520} y={132} label="OPERATE" color="#a78bfa" /><Node x={112} y={378} label="DELIGHT" color="#22d3ee" /><Node x={540} y={380} label="LEARN" color="#34d399" />
-      </svg>
-      <div className="absolute left-[9%] top-[18%] h-2 w-2 animate-ping rounded-full bg-blue-300" /><div className="absolute right-[12%] top-[27%] h-2 w-2 animate-ping rounded-full bg-violet-300 [animation-delay:1s]" />
-    </>
-  );
-}
-
-function Node({ x, y, label, color }: { x: number; y: number; label: string; color: string }) {
-  return (
-    <g>
-      <motion.circle cx={x} cy={y} r={24} fill="#0d1733" stroke={color} strokeWidth={1.2} animate={{ strokeOpacity: [0.5, 1, 0.5] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} />
-      <circle cx={x} cy={y} r={5} fill={color} />
-      <text x={x} y={y + 39} textAnchor="middle" fill="#cbd5e1" fontSize={8} letterSpacing={1.5}>{label}</text>
-    </g>
   );
 }

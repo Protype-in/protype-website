@@ -29,7 +29,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-[#070b18]/85 backdrop-blur-xl border-b border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
+                ? "bg-white/85 backdrop-blur-xl border-b border-slate-200 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
                 : "bg-transparent"
                 }`}
         >
@@ -37,7 +37,7 @@ export default function Navbar() {
                 {/* Logo */}
                 <a href="#" className="flex items-center gap-3 group">
                     <img
-                      src="/logo3-white.png"
+                      src="/logo3.png"
                       alt="protype logo"
                       className="h-16 md:h-20 w-auto object-contain shrink-0 transition-all"
                     />
@@ -49,21 +49,19 @@ export default function Navbar() {
                         <Magnet key={link.href} padding={10} disabled={false} magnetStrength={2}>
                             <a
                                 href={link.href}
-                                className="text-sm transition-colors duration-200 font-medium tracking-wide relative group block text-white/70 hover:text-white"
+                                className="text-sm transition-colors duration-200 font-medium tracking-wide relative group block text-slate-600 hover:text-slate-900"
                             >
                                 {link.label}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-300 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-500 group-hover:w-full transition-all duration-300 ease-out rounded-full" />
                             </a>
                         </Magnet>
                     ))}
                     <Magnet padding={15} disabled={false} magnetStrength={3}>
                         <a
-                            href="https://wa.me/8637584923"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white text-zinc-950 hover:bg-cyan-100 px-5 py-2.5 rounded-full text-sm font-semibold transition-colors duration-300 inline-block shadow-sm"
+                            href="#cta"
+                            className="bg-slate-950 text-white hover:bg-slate-800 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 inline-flex items-center gap-2 shadow-sm"
                         >
-                            Get in Touch
+                            Talk to us <span>→</span>
                         </a>
                     </Magnet>
                 </div>
@@ -76,15 +74,15 @@ export default function Navbar() {
                 >
                     <motion.span
                         animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-white"
+                        className="block w-5 h-0.5 bg-slate-900"
                     />
                     <motion.span
                         animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="block w-5 h-0.5 bg-white"
+                        className="block w-5 h-0.5 bg-slate-900"
                     />
                     <motion.span
                         animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-0.5 bg-white"
+                        className="block w-5 h-0.5 bg-slate-900"
                     />
                 </button>
             </div>
@@ -96,10 +94,10 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "100vh", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="fixed inset-0 top-20 md:hidden overflow-hidden bg-[#070b18] border-t border-white/10 z-40"
+                        className="fixed inset-0 top-20 md:hidden overflow-hidden bg-white border-t border-slate-200 z-40"
                     >
                     <div className="mx-auto flex h-full max-w-7xl flex-col px-6 pt-12">
-                        <div className="flex flex-col divide-y divide-white/10 border-y border-white/10">
+                        <div className="flex flex-col divide-y divide-slate-200 border-y border-slate-200">
                             {navLinks.map((link, index) => (
                                 <motion.a
                                     key={link.href}
@@ -108,10 +106,10 @@ export default function Navbar() {
                                     initial={{ opacity: 0, x: -16 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className="flex items-center justify-between py-5 text-2xl font-semibold tracking-tight text-white"
+                                    className="flex items-center justify-between py-5 text-2xl font-semibold tracking-tight text-slate-900"
                                 >
                                     {link.label}
-                                    <span className="text-cyan-300">↗</span>
+                                    <span className="text-cyan-600">↗</span>
                                 </motion.a>
                             ))}
                         </div>
@@ -119,7 +117,7 @@ export default function Navbar() {
                             href="https://wa.me/8637584923"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-4 font-semibold text-slate-950 transition hover:bg-cyan-100"
+                            className="mt-8 inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-4 font-semibold text-white transition hover:bg-slate-800"
                         >
                             Start a conversation
                         </a>
