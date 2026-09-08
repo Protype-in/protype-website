@@ -39,7 +39,7 @@ export default function Navbar() {
                     <img
                       src="/logo3.png"
                       alt="protype logo"
-                      className="h-16 md:h-20 w-auto object-contain shrink-0 transition-all"
+                      className="h-24 md:h-28 w-auto object-contain shrink-0 transition-all"
                     />
                 </a>
 
