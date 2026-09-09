@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "protype — AI Agents for Support, Operations & Customer Experience",
+  title: "Protype - AI Agents for Support, Operations & Customer Experience",
   description:
     "protype builds highly customizable AI agents and automation systems for business support, operations, and customer experience — WhatsApp support, workflow automation, and proactive CX, live in weeks.",
   keywords: [

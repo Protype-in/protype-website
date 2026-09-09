@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowRight, MessageSquare, Package, Truck, Bell, FileText, CheckCircle2, X } from "lucide-react";
-import Magnet from "../react-bits/Magnet";
+import ShineButton from "../ui/ShineButton";
 
 export default function HeroSection() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -96,24 +97,15 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.24 }}
             className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center"
           >
-            <Magnet padding={10} magnetStrength={3}>
-              <a
-                href="#cta"
-                className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[#0a2018] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(10,32,24,0.22)] transition-all duration-300 hover:bg-[#12362a] hover:shadow-[0_16px_36px_rgba(10,32,24,0.3)] hover:-translate-y-0.5 sm:w-auto"
-              >
-                Talk to us
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-            </Magnet>
+            <ShineButton href="#cta" variant="primary" size="lg">
+              <span>Talk to us</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </ShineButton>
 
-            <Magnet padding={10} magnetStrength={2}>
-              <a
-                href="#process"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200/90 bg-white px-6 py-3.5 text-sm font-semibold text-slate-900 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm sm:w-auto"
-              >
-                See how it works <span className="text-slate-700">↗</span>
-              </a>
-            </Magnet>
+            <ShineButton href="#process" variant="secondary" size="lg">
+              <span>See how it works</span>
+              <span className="text-emerald-700 font-semibold">↗</span>
+            </ShineButton>
           </motion.div>
         </div>
 
@@ -151,57 +143,62 @@ export default function HeroSection() {
       </AnimatePresence>
     </section>
   );
-}
-
-// 1000 x 640 Coordinate Wires with precise anchor dots
+}// 1000 x 640 Coordinate Wires with precise dual anchor nodes (Card + Core)
+// Bilateral symmetry around center axis X = 500, Y = 310
 interface WireConfig {
   id: string;
   stage: number;
   d: string;
   color: string;
-  dotPos: { cx: number; cy: number };
+  cardDot: { cx: number; cy: number };
+  coreDot: { cx: number; cy: number };
 }
 
 const WIRES: WireConfig[] = [
-  // Wire 0: Customer (Top) -> Proto Core (Top)
+  // Wire 0: Customer (Top) -> Mascot Orb (Top) - Inward wavy flow
   {
     id: "wire-customer",
     stage: 0,
-    d: "M 510,124 L 510,245",
+    d: "M 500,128 C 528,168 472,224 500,265",
     color: "#0ea5e9",
-    dotPos: { cx: 510, cy: 245 },
+    cardDot: { cx: 500, cy: 128 },
+    coreDot: { cx: 500, cy: 265 },
   },
-  // Wire 1: Customer Support (Left) -> Proto Core (Left)
+  // Wire 1: Mascot Orb (Left) -> Customer Support (Middle-Left) - Outward wavy flow
   {
     id: "wire-support",
     stage: 1,
-    d: "M 300,288 L 345,288 C 380,288 400,320 433,320",
+    d: "M 438,325 C 385,360 330,240 275,275",
     color: "#10b981",
-    dotPos: { cx: 345, cy: 288 },
+    cardDot: { cx: 275, cy: 275 },
+    coreDot: { cx: 438, cy: 325 },
   },
-  // Wire 2: Proto Core (Right) -> Order Operations (Right)
+  // Wire 2: Mascot Orb (Right) -> Order Operations (Middle-Right) - Symmetrical wavy flow
   {
     id: "wire-ops",
     stage: 2,
-    d: "M 587,320 C 620,320 640,292 665,292 L 710,292",
+    d: "M 562,325 C 615,360 670,240 725,275",
     color: "#3b82f6",
-    dotPos: { cx: 665, cy: 292 },
+    cardDot: { cx: 725, cy: 275 },
+    coreDot: { cx: 562, cy: 325 },
   },
-  // Wire 3: Proto Core (Bottom-Left) -> Fulfilment (Bottom-Left)
+  // Wire 3: Mascot Orb (Bottom-Left) -> Fulfilment (Bottom-Left) - Outward wavy flow
   {
     id: "wire-fulfilment",
     stage: 3,
-    d: "M 470,395 C 470,425 410,430 380,450",
+    d: "M 455,375 C 430,445 340,425 310,496",
     color: "#10b981",
-    dotPos: { cx: 380, cy: 450 },
+    cardDot: { cx: 310, cy: 496 },
+    coreDot: { cx: 455, cy: 375 },
   },
-  // Wire 4: Proto Core (Bottom-Right) -> Customer Update (Bottom-Right)
+  // Wire 4: Mascot Orb (Bottom-Right) -> Customer Update (Bottom-Right) - Symmetrical wavy flow
   {
     id: "wire-update",
     stage: 4,
-    d: "M 550,395 C 550,425 605,430 635,460",
+    d: "M 545,375 C 570,445 660,425 690,496",
     color: "#06b6d4",
-    dotPos: { cx: 635, cy: 460 },
+    cardDot: { cx: 690, cy: 496 },
+    coreDot: { cx: 545, cy: 375 },
   },
 ];
 
@@ -214,11 +211,11 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [3.5, -3.5]), {
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [3, -3]), {
     stiffness: 150,
     damping: 20,
   });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-3.5, 3.5]), {
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-3, 3]), {
     stiffness: 150,
     damping: 20,
   });
@@ -262,11 +259,11 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
     >
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative mx-auto w-full max-w-[1000px] aspect-[1000/640]"
+        className="relative mx-auto w-full max-w-[1040px] aspect-[1000/680]"
       >
         {/* Soft aura glow behind central node */}
         <div
-          className="pointer-events-none absolute left-[51%] top-[50%] h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          className="pointer-events-none absolute left-1/2 top-[47.8%] h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{
             background:
               "radial-gradient(circle, rgba(16,185,129,0.24) 0%, rgba(6,182,212,0.16) 45%, transparent 72%)",
@@ -275,9 +272,9 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
           aria-hidden="true"
         />
 
-        {/* SVG Connection Wires & Animated Light Beams */}
+        {/* SVG Connection Wires & Animated Dashed Light Beams */}
         <svg
-          viewBox="0 0 1000 640"
+          viewBox="0 0 1000 680"
           className="absolute inset-0 h-full w-full overflow-visible pointer-events-none"
           aria-hidden="true"
         >
@@ -295,13 +292,15 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
             const isActive = currentActive === w.stage;
             return (
               <g key={w.id}>
-                {/* 1. Base clean subtle wire */}
+                {/* 1. Base clean muted dashed line */}
                 <path
                   d={w.d}
                   fill="none"
-                  stroke="#e2e8f0"
-                  strokeWidth={1.5}
+                  stroke="#cbd5e1"
+                  strokeWidth={1.8}
+                  strokeDasharray="5 5"
                   strokeLinecap="round"
+                  opacity={0.45}
                 />
 
                 {/* 2. Active glowing wire with flowing animated dashes */}
@@ -309,51 +308,100 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
                   d={w.d}
                   fill="none"
                   stroke={w.color}
-                  strokeWidth={isActive ? 2.8 : 1.8}
+                  strokeWidth={isActive ? 2.6 : 1.8}
                   strokeLinecap="round"
-                  strokeDasharray="4 8"
+                  strokeDasharray="6 6"
                   filter={isActive ? "url(#hubGlow)" : undefined}
                   animate={{
                     strokeDashoffset: [0, -24],
                     opacity: isActive ? 1 : 0.25,
                   }}
                   transition={{
-                    strokeDashoffset: { duration: 0.8, repeat: Infinity, ease: "linear" },
-                    opacity: { duration: 0.35 },
+                    strokeDashoffset: { duration: 1.1, repeat: Infinity, ease: "linear" },
+                    opacity: { duration: 0.3 },
                   }}
                 />
 
                 {/* 3. Traveling photon particle along path */}
-                <circle r={isActive ? 3.5 : 2.5} fill={w.color} filter="url(#hubGlow)">
-                  <animateMotion
-                    path={w.d}
-                    dur={isActive ? "1.4s" : "2.6s"}
-                    repeatCount="indefinite"
-                    keyPoints="0;1"
-                    keyTimes="0;1"
-                  />
-                </circle>
+                <g filter="url(#hubGlow)">
+                  {/* Outer glow ring */}
+                  <circle r={isActive ? 5.5 : 3.5} fill={w.color} opacity={0.45}>
+                    <animateMotion
+                      path={w.d}
+                      dur={isActive ? "1.8s" : "3.6s"}
+                      repeatCount="indefinite"
+                      keyPoints="0;1"
+                      keyTimes="0;1"
+                    />
+                  </circle>
+                  {/* Bright white core particle */}
+                  <circle r={isActive ? 3 : 2} fill="#ffffff">
+                    <animateMotion
+                      path={w.d}
+                      dur={isActive ? "1.8s" : "3.6s"}
+                      repeatCount="indefinite"
+                      keyPoints="0;1"
+                      keyTimes="0;1"
+                    />
+                  </circle>
+                </g>
 
-                {/* 4. Anchor dot at connection junction */}
+                {/* 4. Terminal Anchor Port at Card Connection */}
                 <circle
-                  cx={w.dotPos.cx}
-                  cy={w.dotPos.cy}
-                  r={5}
+                  cx={w.cardDot.cx}
+                  cy={w.cardDot.cy}
+                  r={4.5}
+                  fill="#ffffff"
+                  stroke={w.color}
+                  strokeWidth={2}
+                />
+                <circle
+                  cx={w.cardDot.cx}
+                  cy={w.cardDot.cy}
+                  r={2}
                   fill={w.color}
                 />
 
-                {/* 5. Pulsing ring wave on active stage */}
+                {/* 5. Terminal Anchor Port at Core Connection */}
+                <circle
+                  cx={w.coreDot.cx}
+                  cy={w.coreDot.cy}
+                  r={4.5}
+                  fill="#ffffff"
+                  stroke={w.color}
+                  strokeWidth={2}
+                />
+                <circle
+                  cx={w.coreDot.cx}
+                  cy={w.coreDot.cy}
+                  r={2}
+                  fill={w.color}
+                />
+
+                {/* 6. Pulsing ring wave on active stage at both ends */}
                 {isActive && (
-                  <motion.circle
-                    cx={w.dotPos.cx}
-                    cy={w.dotPos.cy}
-                    r={5}
-                    fill="none"
-                    stroke={w.color}
-                    strokeWidth={1.5}
-                    animate={{ r: [5, 14], opacity: [0.9, 0] }}
-                    transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
-                  />
+                  <>
+                    <motion.circle
+                      cx={w.cardDot.cx}
+                      cy={w.cardDot.cy}
+                      r={5}
+                      fill="none"
+                      stroke={w.color}
+                      strokeWidth={1.5}
+                      animate={{ r: [5, 14], opacity: [0.9, 0] }}
+                      transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+                    />
+                    <motion.circle
+                      cx={w.coreDot.cx}
+                      cy={w.coreDot.cy}
+                      r={5}
+                      fill="none"
+                      stroke={w.color}
+                      strokeWidth={1.5}
+                      animate={{ r: [5, 14], opacity: [0.9, 0] }}
+                      transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut", delay: 0.2 }}
+                    />
+                  </>
                 )}
               </g>
             );
@@ -361,324 +409,364 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
         </svg>
 
         {/* ============================================================ */}
-        {/* CENTER NODE: PROTO CORE                                       */}
+        {/* CENTER NODE: PROTYPE AI MASCOT ORB (Matching CTA Section)     */}
         {/* ============================================================ */}
         <div
-          className="absolute left-[51%] top-[50%] z-20 -translate-x-1/2 -translate-y-1/2"
-          style={{ transformStyle: "preserve-3d" }}
+          className="absolute z-20 flex flex-col items-center justify-center pointer-events-auto"
+          style={{
+            left: "calc(50% - 65px)",
+            top: "calc(47.8% - 65px)",
+            width: "130px",
+            height: "130px",
+            transformStyle: "preserve-3d",
+          }}
         >
-          <motion.div
-            animate={{
-              boxShadow: [
-                "0 0 45px rgba(16,185,129,0.22), 0 20px 40px -10px rgba(15,23,42,0.1)",
-                "0 0 65px rgba(6,182,212,0.32), 0 20px 40px -10px rgba(15,23,42,0.12)",
-                "0 0 45px rgba(16,185,129,0.22), 0 20px 40px -10px rgba(15,23,42,0.1)",
-              ],
-            }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-            className="relative flex h-[150px] w-[154px] flex-col items-center justify-center rounded-[28px] border border-white/90 px-4 text-center backdrop-blur-xl"
-            style={{
-              background:
-                "linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(220,252,231,0.85) 50%, rgba(224,242,254,0.78) 100%)",
-            }}
-          >
-            {/* Dark green badge with speech mark / quotation icon */}
-            <div className="relative mb-2 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#08231c] shadow-inner">
-              <svg
-                viewBox="0 0 24 24"
-                className="h-6 w-6 fill-emerald-400"
-                aria-hidden="true"
-              >
-                <path d="M7 15h3l2-4V6H6v6h3l-2 3zm8 0h3l2-4V6h-6v6h3l-2 3z" />
-              </svg>
-              {/* Soft inner glow dot */}
-              <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-            </div>
-
-            {/* Title */}
-            <div className="text-[11.5px] font-bold tracking-[0.22em] text-slate-900 uppercase">
-              PROTO CORE
-            </div>
-
-            {/* Subtitle */}
-            <div className="mt-1 text-[9px] font-semibold tracking-wider text-teal-700/90 leading-tight">
-              AI + WORKFLOWS
-              <br />
-              + YOUR SYSTEMS
-            </div>
-
-            {/* Subtle animated border sheen */}
-            <motion.div
-              className="pointer-events-none absolute inset-0 rounded-[28px] border border-emerald-400/30"
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          <div className="relative flex items-center justify-center">
+            {/* Multi-layer Luminous Halo Glows (matching CTA Section) */}
+            <div
+              className="pointer-events-none absolute -inset-6 rounded-full bg-emerald-400/40 blur-2xl animate-pulse"
+              aria-hidden="true"
             />
-          </motion.div>
+            <div
+              className="pointer-events-none absolute -inset-10 rounded-full bg-cyan-400/25 blur-3xl"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -inset-3 rounded-full border border-emerald-400/30 bg-white/10 backdrop-blur-xs"
+              aria-hidden="true"
+            />
+
+            {/* Glowing Connector Radar Nodes along Mascot Boundary */}
+            {/* Top Node */}
+            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-20 flex h-3 w-3 items-center justify-center">
+              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            </div>
+            {/* Left Node */}
+            <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
+              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            </div>
+            {/* Right Node */}
+            <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
+              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            </div>
+            {/* Bottom-Left Node */}
+            <div className="absolute bottom-0 left-2.5 z-20 flex h-3 w-3 items-center justify-center">
+              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            </div>
+            {/* Bottom-Right Node */}
+            <div className="absolute bottom-0 right-2.5 z-20 flex h-3 w-3 items-center justify-center">
+              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            </div>
+
+            {/* 3D Floating Mascot with breathing scale */}
+            <motion.div
+              animate={{ y: [0, -7, 0] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 flex h-24 w-24 sm:h-28 sm:w-28 items-center justify-center drop-shadow-[0_18px_35px_rgba(16,185,129,0.4)] cursor-pointer select-none"
+              whileHover={{ scale: 1.08 }}
+              onClick={() =>
+                onShowToast("Protype AI Core: Connected and orchestrating all workflows")
+              }
+            >
+              <Image
+                src="/fevicon.png"
+                alt="Protype AI Core"
+                width={116}
+                height={116}
+                className="h-full w-full object-contain select-none"
+                priority
+              />
+            </motion.div>
+          </div>
+
+          {/* Core Pill Badge under Mascot */}
+          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full border border-emerald-500/25 bg-white/95 px-3 py-0.5 text-[9.5px] font-bold tracking-[0.16em] text-emerald-900 uppercase shadow-xs backdrop-blur-md whitespace-nowrap">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
+            <span>PROTO CORE</span>
+          </div>
         </div>
 
         {/* ============================================================ */}
-        {/* CARD 1: CUSTOMER (Top)                                       */}
+        {/* CARD 1: CUSTOMER (Top) - Exactly centered via calc(50% - 130px) */}
         {/* ============================================================ */}
-        <HubCard
-          stage={0}
-          currentActive={currentActive}
-          onHover={() => setHoveredCard(0)}
-          onLeave={() => setHoveredCard(null)}
-          className="absolute z-10 w-[245px]"
-          style={{ left: "45.8%", top: "3.1%" }}
-          accent="#0ea5e9"
-          floatingDelay={0}
+        <div
+          className="absolute z-10"
+          style={{ left: "calc(50% - 130px)", top: "1.8%", width: "260px" }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
-                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          <HubCard
+            stage={0}
+            currentActive={currentActive}
+            onHover={() => setHoveredCard(0)}
+            onLeave={() => setHoveredCard(null)}
+            accent="#0ea5e9"
+            floatingDelay={0}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
+                </div>
+                <span className="text-[13px] font-medium text-slate-700">Customer</span>
+              </div>
+              <span className="text-[11px] font-normal text-slate-400">10:24 AM</span>
+            </div>
+
+            {/* Question Text */}
+            <p className="mt-2 text-[14px] font-semibold text-slate-900">
+              Where is my order?
+            </p>
+
+            {/* Communication Channels */}
+            <div className="mt-2.5 flex items-center gap-1.5">
+              {/* WhatsApp */}
+              <div
+                title="WhatsApp Channel"
+                className="flex h-5 w-5 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xs"
+              >
+                <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.84-3.05-.2-.31a8.106 8.106 0 01-1.25-4.31c0-4.47 3.64-8.11 8.11-8.11 2.17 0 4.2 0.85 5.73 2.38 1.54 1.54 2.38 3.57 2.38 5.73 0 4.47-3.64 8.17-8.11 8.17z" />
                 </svg>
               </div>
-              <span className="text-[13px] font-medium text-slate-700">Customer</span>
-            </div>
-            <span className="text-[11px] font-normal text-slate-400">10:24 AM</span>
-          </div>
 
-          {/* Question Text */}
-          <p className="mt-2 text-[14px] font-semibold text-slate-900">
-            Where is my order?
-          </p>
+              {/* Website pill */}
+              <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+                <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-blue-500" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                </svg>
+                <span>Website</span>
+              </div>
 
-          {/* Communication Channels */}
-          <div className="mt-2.5 flex items-center gap-1.5">
-            {/* WhatsApp */}
-            <div
-              title="WhatsApp Channel"
-              className="flex h-5 w-5 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xs"
-            >
-              <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current">
-                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.84-3.05-.2-.31a8.106 8.106 0 01-1.25-4.31c0-4.47 3.64-8.11 8.11-8.11 2.17 0 4.2 0.85 5.73 2.38 1.54 1.54 2.38 3.57 2.38 5.73 0 4.47-3.64 8.17-8.11 8.17z" />
-              </svg>
-            </div>
+              {/* Instagram */}
+              <div
+                title="Instagram DM"
+                className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-2xs"
+              >
+                <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </div>
 
-            {/* Website pill */}
-            <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
-              <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-blue-500" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-              </svg>
-              <span>Website</span>
+              {/* +2 */}
+              <div className="flex h-5 items-center justify-center rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-slate-500">
+                +2
+              </div>
             </div>
-
-            {/* Instagram */}
-            <div
-              title="Instagram DM"
-              className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-2xs"
-            >
-              <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-              </svg>
-            </div>
-
-            {/* +2 */}
-            <div className="flex h-5 items-center justify-center rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-slate-500">
-              +2
-            </div>
-          </div>
-        </HubCard>
+          </HubCard>
+        </div>
 
         {/* ============================================================ */}
         {/* CARD 2: CUSTOMER SUPPORT (Middle-Left)                       */}
         {/* ============================================================ */}
-        <HubCard
-          stage={1}
-          currentActive={currentActive}
-          onHover={() => setHoveredCard(1)}
-          onLeave={() => setHoveredCard(null)}
-          className="absolute z-10 w-[260px]"
-          style={{ left: "4.0%", top: "34.4%" }}
-          accent="#10b981"
-          floatingDelay={0.6}
+        <div
+          className="absolute z-10"
+          style={{ left: "1.5%", top: "27%", width: "260px" }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <MessageSquare className="h-4 w-4" />
+          <HubCard
+            stage={1}
+            currentActive={currentActive}
+            onHover={() => setHoveredCard(1)}
+            onLeave={() => setHoveredCard(null)}
+            accent="#10b981"
+            floatingDelay={0.6}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <MessageSquare className="h-4 w-4" />
+                </div>
+                <span className="text-[13.5px] font-semibold text-slate-900">
+                  Customer Support
+                </span>
               </div>
-              <span className="text-[13.5px] font-semibold text-slate-900">
-                Customer Support
+              <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
+                Resolved
               </span>
             </div>
-            <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
-              Resolved
-            </span>
-          </div>
 
-          {/* Body Message */}
-          <div className="mt-2 text-[12.5px] leading-snug text-slate-600">
-            <p>Hi! Your order is on track.</p>
-            <p className="text-slate-500">Here&apos;s the latest update...</p>
-          </div>
-
-          {/* Footer with avatar photo and timestamp */}
-          <div className="mt-3 flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <img
-                src="/support-agent.jpg"
-                alt="Support Agent"
-                className="h-6 w-6 rounded-full object-cover border border-emerald-200 shadow-2xs"
-              />
-              <span className="text-[11px] text-slate-400">Agent live</span>
+            {/* Body Message */}
+            <div className="mt-2 text-[12.5px] leading-snug text-slate-600">
+              <p>Hi! Your order is on track.</p>
+              <p className="text-slate-500">Here&apos;s the latest update...</p>
             </div>
-            <span className="text-[11px] text-slate-400">10:32 AM</span>
-          </div>
-        </HubCard>
+
+            {/* Footer with avatar photo and timestamp */}
+            <div className="mt-3 flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <img
+                  src="/support-agent.jpg"
+                  alt="Support Agent"
+                  className="h-6 w-6 rounded-full object-cover border border-emerald-200 shadow-2xs"
+                />
+                <span className="text-[11px] text-slate-400">Agent live</span>
+              </div>
+              <span className="text-[11px] text-slate-400">10:32 AM</span>
+            </div>
+          </HubCard>
+        </div>
 
         {/* ============================================================ */}
         {/* CARD 3: ORDER OPERATIONS (Middle-Right)                      */}
         {/* ============================================================ */}
-        <HubCard
-          stage={2}
-          currentActive={currentActive}
-          onHover={() => setHoveredCard(2)}
-          onLeave={() => setHoveredCard(null)}
-          className="absolute z-10 w-[260px]"
-          style={{ left: "71.0%", top: "35.0%" }}
-          accent="#3b82f6"
-          floatingDelay={1.2}
+        <div
+          className="absolute z-10"
+          style={{ right: "1.5%", top: "27%", width: "260px" }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <Package className="h-4 w-4" />
+          <HubCard
+            stage={2}
+            currentActive={currentActive}
+            onHover={() => setHoveredCard(2)}
+            onLeave={() => setHoveredCard(null)}
+            accent="#3b82f6"
+            floatingDelay={1.2}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <Package className="h-4 w-4" />
+                </div>
+                <span className="text-[13.5px] font-semibold text-slate-900">
+                  Order Operations
+                </span>
               </div>
-              <span className="text-[13.5px] font-semibold text-slate-900">
-                Order Operations
+              <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
+                Processing
               </span>
             </div>
-            <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
-              Processing
-            </span>
-          </div>
 
-          {/* Body Document & Routing */}
-          <div className="mt-3 flex items-start gap-2.5">
-            <div className="mt-0.5 flex h-7 w-6 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
-              <FileText className="h-3.5 w-3.5" />
+            {/* Body Document & Routing */}
+            <div className="mt-3 flex items-start gap-2.5">
+              <div className="mt-0.5 flex h-7 w-6 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
+                <FileText className="h-3.5 w-3.5" />
+              </div>
+              <div>
+                <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
+                <p className="text-[11.5px] text-slate-500">
+                  Assigned <span className="text-slate-400">→</span> Warehouse 02
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
-              <p className="text-[11.5px] text-slate-500">
-                Assigned <span className="text-slate-400">→</span> Warehouse 02
-              </p>
-            </div>
-          </div>
 
-          {/* Footer */}
-          <div className="mt-2.5 flex justify-end">
-            <span className="text-[11px] text-slate-400">10:28 AM</span>
-          </div>
-        </HubCard>
+            {/* Footer */}
+            <div className="mt-2.5 flex justify-end">
+              <span className="text-[11px] text-slate-400">10:28 AM</span>
+            </div>
+          </HubCard>
+        </div>
 
         {/* ============================================================ */}
         {/* CARD 4: FULFILMENT (Bottom-Left)                             */}
         {/* ============================================================ */}
-        <HubCard
-          stage={3}
-          currentActive={currentActive}
-          onHover={() => setHoveredCard(3)}
-          onLeave={() => setHoveredCard(null)}
-          className="absolute z-10 w-[250px]"
-          style={{ left: "17.0%", top: "70.3%" }}
-          accent="#10b981"
-          floatingDelay={1.8}
+        <div
+          className="absolute z-10"
+          style={{ left: "9%", top: "73%", width: "250px" }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <Truck className="h-4 w-4" />
+          <HubCard
+            stage={3}
+            currentActive={currentActive}
+            onHover={() => setHoveredCard(3)}
+            onLeave={() => setHoveredCard(null)}
+            accent="#10b981"
+            floatingDelay={1.8}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Truck className="h-4 w-4" />
+                </div>
+                <span className="text-[13.5px] font-semibold text-slate-900">
+                  Fulfilment
+                </span>
               </div>
-              <span className="text-[13.5px] font-semibold text-slate-900">
-                Fulfilment
+              <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
+                Packed
               </span>
             </div>
-            <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
-              Packed
-            </span>
-          </div>
 
-          {/* Body with 3D cardboard box image */}
-          <div className="mt-3 flex items-center gap-3">
-            <img
-              src="/shipping-box.jpg"
-              alt="Parcel package"
-              className="h-9 w-9 rounded-md object-contain shrink-0"
-            />
-            <div>
-              <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
-              <p className="text-[11.5px] text-slate-500">Ready for shipping</p>
+            {/* Body with 3D cardboard box image */}
+            <div className="mt-3 flex items-center gap-3">
+              <img
+                src="/shipping-box.jpg"
+                alt="Parcel package"
+                className="h-9 w-9 rounded-md object-contain shrink-0"
+              />
+              <div>
+                <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
+                <p className="text-[11.5px] text-slate-500">Ready for shipping</p>
+              </div>
             </div>
-          </div>
 
-          {/* Footer */}
-          <div className="mt-2 flex justify-end">
-            <span className="text-[11px] text-slate-400">11:12 AM</span>
-          </div>
-        </HubCard>
+            {/* Footer */}
+            <div className="mt-2 flex justify-end">
+              <span className="text-[11px] text-slate-400">11:12 AM</span>
+            </div>
+          </HubCard>
+        </div>
 
         {/* ============================================================ */}
         {/* CARD 5: CUSTOMER UPDATE (Bottom-Right)                       */}
         {/* ============================================================ */}
-        <HubCard
-          stage={4}
-          currentActive={currentActive}
-          onHover={() => setHoveredCard(4)}
-          onLeave={() => setHoveredCard(null)}
-          className="absolute z-10 w-[250px]"
-          style={{ left: "58.0%", top: "71.8%" }}
-          accent="#06b6d4"
-          floatingDelay={2.4}
+        <div
+          className="absolute z-10"
+          style={{ right: "9%", top: "73%", width: "250px" }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <Bell className="h-4 w-4" />
+          <HubCard
+            stage={4}
+            currentActive={currentActive}
+            onHover={() => setHoveredCard(4)}
+            onLeave={() => setHoveredCard(null)}
+            accent="#06b6d4"
+            floatingDelay={2.4}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <Bell className="h-4 w-4" />
+                </div>
+                <span className="text-[13.5px] font-semibold text-slate-900">
+                  Customer Update
+                </span>
               </div>
-              <span className="text-[13.5px] font-semibold text-slate-900">
-                Customer Update
+              <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
+                Sent
               </span>
             </div>
-            <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
-              Sent
-            </span>
-          </div>
 
-          {/* Body with tracking action */}
-          <div className="mt-2.5">
-            <p className="text-[13px] font-medium text-slate-800">
-              Your order is on the way!
-            </p>
-            <button
-              type="button"
-              onClick={() =>
-                onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
-              }
-              className="group mt-1 flex items-center gap-1 text-[12px] font-semibold text-blue-600 hover:text-blue-700 transition-colors"
-            >
-              <span>Track your order</span>
-              <span className="transition-transform group-hover:translate-x-0.5">→</span>
-            </button>
-          </div>
+            {/* Body with tracking action */}
+            <div className="mt-2.5">
+              <p className="text-[13px] font-medium text-slate-800">
+                Your order is on the way!
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
+                }
+                className="group mt-1 flex items-center gap-1 text-[12px] font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
+              >
+                <span>Track your order</span>
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              </button>
+            </div>
 
-          {/* Footer */}
-          <div className="mt-1 flex justify-end">
-            <span className="text-[11px] text-slate-400">11:15 AM</span>
-          </div>
-        </HubCard>
+            {/* Footer */}
+            <div className="mt-1 flex justify-end">
+              <span className="text-[11px] text-slate-400">11:15 AM</span>
+            </div>
+          </HubCard>
+        </div>
       </motion.div>
     </div>
   );
@@ -690,7 +778,7 @@ function HubCard({
   currentActive,
   onHover,
   onLeave,
-  className,
+  className = "",
   style,
   accent,
   floatingDelay,
@@ -735,3 +823,4 @@ function HubCard({
     </motion.div>
   );
 }
+

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ShoppingCart, Package, Truck, Smile, ArrowRight } from "lucide-react";
-import Magnet from "../react-bits/Magnet";
+import ShineButton from "../ui/ShineButton";
 
 interface StepItem {
   id: string;
@@ -185,15 +185,10 @@ export default function ServicesSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-14 flex justify-center"
         >
-          <Magnet padding={15} magnetStrength={3}>
-            <a
-              href="#process"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-[#0a2018] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(10,32,24,0.24)] transition-all duration-300 hover:bg-[#12362a] hover:shadow-[0_18px_38px_rgba(10,32,24,0.32)] hover:-translate-y-0.5"
-            >
-              See how Protype works
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-          </Magnet>
+          <ShineButton href="#process" variant="primary" size="lg">
+            <span>See how Protype works</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </ShineButton>
         </motion.div>
 
       </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Sparkles, ArrowRight, ShieldCheck, Zap, Clock } from "lucide-react";
-import Magnet from "../react-bits/Magnet";
+import ShineButton from "../ui/ShineButton";
 
 interface PricingPlan {
   id: string;
@@ -290,19 +290,15 @@ export default function PricingSection() {
 
                 {/* CTA Action */}
                 <div className="mt-8 pt-4 border-t border-slate-100">
-                  <Magnet padding={12} magnetStrength={3}>
-                    <a
-                      href="#cta"
-                      className={`group flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all duration-300 ${
-                        plan.popular
-                          ? "bg-[#0a2018] text-white hover:bg-[#12362a] shadow-[0_12px_26px_rgba(10,32,24,0.22)]"
-                          : "border border-slate-200/90 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-50 shadow-2xs"
-                      }`}
-                    >
-                      <span>{plan.ctaText}</span>
-                      <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </a>
-                  </Magnet>
+                  <ShineButton
+                    href="#cta"
+                    variant={plan.popular ? "primary" : "secondary"}
+                    size="md"
+                    className="w-full"
+                  >
+                    <span>{plan.ctaText}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </ShineButton>
                 </div>
               </motion.div>
             );

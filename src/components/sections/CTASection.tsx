@@ -13,7 +13,7 @@ import {
   User,
   ArrowRight,
 } from "lucide-react";
-import Magnet from "../react-bits/Magnet";
+import ShineButton from "../ui/ShineButton";
 
 // Custom WhatsApp brand icon SVG
 function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -439,29 +439,27 @@ export default function CTASection() {
               transition={{ duration: 0.6, delay: 0.22 }}
               className="mt-8 flex flex-wrap items-center justify-center gap-3.5"
             >
-              <Magnet padding={12} magnetStrength={3}>
-                <a
-                  href="https://wa.me/8637584923"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full bg-[#0a2018] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-[0_12px_28px_rgba(10,32,24,0.25)] transition-all duration-300 hover:bg-[#12362a] hover:scale-[1.02]"
-                >
-                  <span>Let’s Build Your Flow</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </a>
-              </Magnet>
+              <ShineButton
+                href="https://wa.me/8637584923"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                size="md"
+              >
+                <span>Let’s Build Your Flow</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </ShineButton>
 
-              <Magnet padding={12} magnetStrength={3}>
-                <a
-                  href="https://wa.me/8637584923"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-6 py-3.5 text-xs sm:text-sm font-bold text-slate-800 shadow-xs transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm"
-                >
-                  <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-                  <span>WhatsApp Us</span>
-                </a>
-              </Magnet>
+              <ShineButton
+                href="https://wa.me/8637584923"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="secondary"
+                size="md"
+              >
+                <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+                <span>WhatsApp Us</span>
+              </ShineButton>
             </motion.div>
 
             {/* ================= CENTRAL MASCOT ORB ================= */}

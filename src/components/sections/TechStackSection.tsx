@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Terminal, Cpu } from "lucide-react";
-import Magnet from "../react-bits/Magnet";
 
 const categories = [
     {
@@ -104,24 +103,23 @@ export default function TechStackSection() {
 
                                 <div className="flex w-full flex-1 flex-wrap justify-center gap-3 md:justify-start md:gap-4">
                                     {cat.items.map((item, ii) => (
-                                        <Magnet key={ii} padding={15} disabled={false} magnetStrength={2}>
+                                        <div
+                                            key={ii}
+                                            className="group relative flex h-[64px] w-[150px] cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-4 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.07] sm:w-[168px] sm:px-5"
+                                        >
                                             <div
-                                                className="group relative flex h-[64px] w-[150px] cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-4 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.07] sm:w-[168px] sm:px-5"
-                                            >
-                                                <div
-                                                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-[0.12]"
-                                                    style={{ background: `radial-gradient(circle at left, ${item.color}, transparent)` }}
-                                                />
+                                                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-[0.12]"
+                                                style={{ background: `radial-gradient(circle at left, ${item.color}, transparent)` }}
+                                            />
 
-                                                <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center transition-transform duration-500 group-hover:scale-110 sm:h-9 sm:w-9">
-                                                    <img src={item.logo} alt={item.name} className="h-full w-full object-contain brightness-0 invert" />
-                                                </div>
-
-                                                <span className="z-10 truncate text-[14px] font-semibold tracking-tight text-slate-300 transition-colors group-hover:text-white">
-                                                    {item.name}
-                                                </span>
+                                            <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center transition-transform duration-500 group-hover:scale-110 sm:h-9 sm:w-9">
+                                                <img src={item.logo} alt={item.name} className="h-full w-full object-contain brightness-0 invert" />
                                             </div>
-                                        </Magnet>
+
+                                            <span className="z-10 truncate text-[14px] font-semibold tracking-tight text-slate-300 transition-colors group-hover:text-white">
+                                                {item.name}
+                                            </span>
+                                        </div>
                                     ))}
                                 </div>
                             </motion.div>

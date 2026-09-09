@@ -13,7 +13,7 @@ import {
   Zap,
   ArrowRight,
 } from "lucide-react";
-import Magnet from "../react-bits/Magnet";
+import ShineButton from "../ui/ShineButton";
 
 interface FAQItem {
   id: string;
@@ -316,18 +316,17 @@ export default function FAQSection() {
             </div>
 
             <div className="shrink-0">
-              <Magnet padding={12} magnetStrength={3}>
-                <a
-                  href="https://wa.me/8637584923"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full bg-[#0a2018] px-6 py-3.5 text-xs font-bold text-white shadow-[0_10px_24px_rgba(10,32,24,0.25)] transition-all duration-300 hover:bg-[#12362a] hover:scale-[1.02]"
-                >
-                  <MessageCircle className="h-4 w-4 text-emerald-400" />
-                  <span>Chat on WhatsApp</span>
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </a>
-              </Magnet>
+              <ShineButton
+                href="https://wa.me/8637584923"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                size="md"
+              >
+                <MessageCircle className="h-4 w-4 text-emerald-400" />
+                <span>Chat on WhatsApp</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+              </ShineButton>
             </div>
           </div>
         </motion.div>
