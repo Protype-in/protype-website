@@ -78,7 +78,7 @@ export default function Footer() {
             <a href="#home" className="group mb-6 inline-flex items-center gap-3">
               <Image
                 src="/logo3.png"
-                alt="protype logo"
+                alt="Protype Logo - AI Agents and E-commerce Operations Automation"
                 width={180}
                 height={70}
                 className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"

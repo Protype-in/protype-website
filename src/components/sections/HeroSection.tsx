@@ -476,7 +476,7 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
             >
               <Image
                 src="/fevicon.png"
-                alt="Protype AI Core"
+                alt="Protype AI Core - Intelligent AI agent orchestrating WhatsApp support and CRM automation"
                 width={116}
                 height={116}
                 className="h-full w-full object-contain select-none"
@@ -601,7 +601,7 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
               <div className="flex items-center gap-1.5">
                 <img
                   src="/support-agent.jpg"
-                  alt="Support Agent"
+                  alt="Protype Customer Support AI Agent avatar"
                   className="h-6 w-6 rounded-full object-cover border border-emerald-200 shadow-2xs"
                 />
                 <span className="text-[11px] text-slate-400">Agent live</span>
@@ -695,7 +695,7 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
             <div className="mt-3 flex items-center gap-3">
               <img
                 src="/shipping-box.jpg"
-                alt="Parcel package"
+                alt="E-commerce parcel package indicating Protype automated order fulfilment tracking"
                 className="h-9 w-9 rounded-md object-contain shrink-0"
               />
               <div>

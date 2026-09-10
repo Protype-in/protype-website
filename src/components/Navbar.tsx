@@ -91,7 +91,7 @@ export default function Navbar() {
             >
               <Image
                 src="/logo3.png"
-                alt="Protype"
+                alt="Protype AI - Business Automation and Customer Support Agents"
                 fill
                 className="object-contain object-left select-none"
                 priority

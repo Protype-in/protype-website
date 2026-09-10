@@ -9,6 +9,9 @@ import {
   getDeviceBreakdown,
   getTopReferrers,
   getBrowserBreakdown,
+  getCityBreakdown,
+  getOSBreakdown,
+  getUTMSources,
 } from "@/lib/posthog";
 import StatCard from "@/components/admin/StatCard";
 import AreaChart from "@/components/admin/AreaChart";
@@ -33,16 +36,29 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
   const resolvedParams = await searchParams;
   const currentTab = (resolvedParams?.tab || "overview").toLowerCase();
 
-  const [dailyViews, stats, topPages, countries, devices, referrers, browsers] =
-    await Promise.all([
-      getDailyPageViews(),
-      getOverviewStats(),
-      getTopPages(),
-      getCountryBreakdown(),
-      getDeviceBreakdown(),
-      getTopReferrers(),
-      getBrowserBreakdown(),
-    ]);
+  const [
+    dailyViews,
+    stats,
+    topPages,
+    countries,
+    devices,
+    referrers,
+    browsers,
+    cities,
+    osBreakdown,
+    utmSources,
+  ] = await Promise.all([
+    getDailyPageViews(),
+    getOverviewStats(),
+    getTopPages(),
+    getCountryBreakdown(),
+    getDeviceBreakdown(),
+    getTopReferrers(),
+    getBrowserBreakdown(),
+    getCityBreakdown(),
+    getOSBreakdown(),
+    getUTMSources(),
+  ]);
 
   const now = new Date().toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
@@ -188,25 +204,25 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {currentTab === "overview" && (
           <>
-            {/* Stat Cards */}
+            {/* ── Row 1: Key stats ── */}
             <div className="admin-stat-grid">
               <StatCard
-                title="Page Views (7d)"
-                value={stats.pageViews7d.toLocaleString()}
-                change={stats.pageViewChange}
-                subtitle="vs prior 7 days"
+                title="Views Today"
+                value={stats.pageViewsToday.toLocaleString()}
+                subtitle="Since midnight IST"
                 color="emerald"
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" strokeWidth="2" />
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
                     <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 }
               />
               <StatCard
-                title="Page Views (30d)"
-                value={stats.pageViews30d.toLocaleString()}
-                subtitle="Rolling 30 days"
+                title="Page Views (7d)"
+                value={stats.pageViews7d.toLocaleString()}
+                change={stats.pageViewChange}
+                subtitle="vs prior 7 days"
                 color="cyan"
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -216,10 +232,23 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                 }
               />
               <StatCard
+                title="Page Views (30d)"
+                value={stats.pageViews30d.toLocaleString()}
+                subtitle="Rolling 30 days"
+                color="indigo"
+                icon={
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="2" />
+                    <path d="M8 12l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                }
+              />
+              <StatCard
                 title="Unique Visitors (7d)"
                 value={stats.uniqueVisitors7d.toLocaleString()}
-                subtitle="Distinct active visitors"
-                color="indigo"
+                change={stats.uniqueChange}
+                subtitle="vs prior 7 days"
+                color="violet"
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                     <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -229,38 +258,25 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                 }
               />
               <StatCard
-                title="Active Regions"
+                title="Sessions (7d)"
+                value={stats.sessions7d.toLocaleString()}
+                subtitle={`${stats.avgPagesPerSession}x pages/session`}
+                color="amber"
+                icon={
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                }
+              />
+              <StatCard
+                title="Active Countries"
                 value={countries.length}
-                subtitle="Countries recorded"
+                subtitle={`Top: ${countries[0]?.country || "—"}`}
                 color="emerald"
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
                     <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                }
-              />
-              <StatCard
-                title="Top Pages"
-                value={topPages.length}
-                subtitle="Active routes accessed"
-                color="amber"
-                icon={
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
-                }
-              />
-              <StatCard
-                title="Referral Sources"
-                value={referrers.length}
-                subtitle="Incoming traffic domains"
-                color="violet"
-                icon={
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 }
               />
@@ -271,11 +287,11 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
               <div className="admin-card-header-line">
                 <h2 className="admin-card-title">
                   <Icon3D type="chart" size={22} />
-                  Daily Page Views Activity
+                  Daily Page Views — Last 30 Days
                 </h2>
-                <span className="admin-card-badge">Rolling 30-Day View</span>
+                <span className="admin-card-badge">Rolling 30-Day</span>
               </div>
-              <AreaChart data={dailyViews} label="Visitor Trajectory" />
+              <AreaChart data={dailyViews} label="Page Views" />
             </div>
 
             {/* Two col: Top Pages + Referrers */}
@@ -284,11 +300,9 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                 <div className="admin-card-header-line">
                   <h2 className="admin-card-title">
                     <Icon3D type="file" size={22} />
-                    Top Pages Visited
+                    Top Pages
                   </h2>
-                  <Link href="/admin?tab=pages" className="admin-card-link">
-                    View full breakdown →
-                  </Link>
+                  <Link href="/admin?tab=pages" className="admin-card-link">Full breakdown →</Link>
                 </div>
                 <TopPages data={topPages} />
               </div>
@@ -296,11 +310,9 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                 <div className="admin-card-header-line">
                   <h2 className="admin-card-title">
                     <Icon3D type="link" size={22} />
-                    Traffic & Referral Sources
+                    Traffic Sources
                   </h2>
-                  <Link href="/admin?tab=sources" className="admin-card-link">
-                    View channels →
-                  </Link>
+                  <Link href="/admin?tab=sources" className="admin-card-link">View channels →</Link>
                 </div>
                 <ReferrerTable data={referrers} />
               </div>
@@ -310,34 +322,21 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
             <div className="admin-three-col">
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="globe" size={22} />
-                    Visitor Geography
-                  </h2>
-                  <Link href="/admin?tab=geography" className="admin-card-link">
-                    Explore map →
-                  </Link>
+                  <h2 className="admin-card-title"><Icon3D type="globe" size={22} />Geography</h2>
+                  <Link href="/admin?tab=geography" className="admin-card-link">All countries →</Link>
                 </div>
                 <CountryTable data={countries} />
               </div>
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="monitor" size={22} />
-                    Device Breakdown
-                  </h2>
-                  <Link href="/admin?tab=visitors" className="admin-card-link">
-                    Audience →
-                  </Link>
+                  <h2 className="admin-card-title"><Icon3D type="monitor" size={22} />Devices</h2>
+                  <Link href="/admin?tab=visitors" className="admin-card-link">Audience →</Link>
                 </div>
                 <DeviceBreakdown data={devices} />
               </div>
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="chrome" size={22} />
-                    Web Browsers
-                  </h2>
+                  <h2 className="admin-card-title"><Icon3D type="chrome" size={22} />Browsers</h2>
                 </div>
                 <BrowserBreakdown data={browsers} />
               </div>
@@ -352,67 +351,96 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
           <div className="admin-tab-view">
             <div className="admin-stat-grid">
               <StatCard
-                title="7-Day Active Visitors"
+                title="Unique Visitors (7d)"
                 value={stats.uniqueVisitors7d.toLocaleString()}
-                subtitle="Unique individuals"
+                change={stats.uniqueChange}
+                subtitle="vs prior 7 days"
                 color="indigo"
                 icon={<Icon3D type="users" size={18} />}
               />
               <StatCard
-                title="Total Visits (30d)"
-                value={stats.pageViews30d.toLocaleString()}
-                subtitle="Aggregated page hits"
+                title="Unique Visitors (30d)"
+                value={stats.uniqueVisitors30d.toLocaleString()}
+                subtitle="Rolling 30-day uniques"
                 color="cyan"
+                icon={<Icon3D type="users" size={18} />}
+              />
+              <StatCard
+                title="Sessions (7d)"
+                value={stats.sessions7d.toLocaleString()}
+                subtitle={`${stats.avgPagesPerSession} pages/session avg`}
+                color="emerald"
                 icon={<Icon3D type="chart" size={18} />}
               />
               <StatCard
-                title="Client Platforms"
+                title="Sessions (30d)"
+                value={stats.sessions30d.toLocaleString()}
+                subtitle="Total session count"
+                color="violet"
+                icon={<Icon3D type="chart" size={18} />}
+              />
+              <StatCard
+                title="Device Types"
                 value={devices.length}
-                subtitle="Distinct device classes"
-                color="emerald"
+                subtitle="Distinct platforms tracked"
+                color="amber"
                 icon={<Icon3D type="monitor" size={18} />}
+              />
+              <StatCard
+                title="Browsers Tracked"
+                value={browsers.length}
+                subtitle="Distinct browser types"
+                color="emerald"
+                icon={<Icon3D type="chrome" size={18} />}
               />
             </div>
 
             <div className="admin-two-col">
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="monitor" size={22} />
-                    Device Distribution
-                  </h2>
+                  <h2 className="admin-card-title"><Icon3D type="monitor" size={22} />Device Breakdown</h2>
                   <span className="admin-card-badge">Hardware Platform</span>
                 </div>
-                <p className="admin-tab-description">
-                  Proportion of visitors accessing your site via Desktop computers, Mobile smartphones, or Tablets.
-                </p>
+                <p className="admin-tab-description">Share of visitors on Desktop, Mobile, or Tablet.</p>
                 <DeviceBreakdown data={devices} />
               </div>
-
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="chrome" size={22} />
-                    Web Browsers & Rendering Engines
-                  </h2>
+                  <h2 className="admin-card-title"><Icon3D type="chrome" size={22} />Web Browsers</h2>
                   <span className="admin-card-badge">Client Software</span>
                 </div>
-                <p className="admin-tab-description">
-                  Top software platforms used by your visitors to browse Protype.
-                </p>
+                <p className="admin-tab-description">Browser share across all sessions in the last 30 days.</p>
                 <BrowserBreakdown data={browsers} />
+              </div>
+            </div>
+
+            {/* OS breakdown */}
+            <div className="admin-card">
+              <div className="admin-card-header-line">
+                <h2 className="admin-card-title"><Icon3D type="monitor" size={22} />Operating Systems</h2>
+                <span className="admin-card-badge">30-Day</span>
+              </div>
+              <p className="admin-tab-description">OS platform share — macOS, Windows, Android, iOS, Linux, etc.</p>
+              <div className="admin-os-grid">
+                {osBreakdown.length === 0 ? (
+                  <p style={{color:"#94a3b8",fontSize:"13px"}}>No OS data yet — awaiting traffic.</p>
+                ) : (
+                  osBreakdown.map((o: {os:string;count:number}) => (
+                    <div key={o.os} className="admin-os-row">
+                      <span className="admin-os-name">{o.os}</span>
+                      <span className="admin-os-count">{o.count.toLocaleString()}</span>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
 
             <div className="admin-card">
               <div className="admin-card-header-line">
-                <h2 className="admin-card-title">
-                  <Icon3D type="chart" size={22} />
-                  Traffic Volume Trend
-                </h2>
-                <span className="admin-card-badge">30-Day Activity</span>
+                <h2 className="admin-card-title"><Icon3D type="chart" size={22} />Visitor Trend — 30 Days</h2>
+                <span className="admin-card-badge">Daily Active Users</span>
               </div>
-              <AreaChart data={dailyViews} label="Daily Visitor Trajectory" />
+              <AreaChart data={dailyViews} label="Daily Visitors" />
             </div>
           </div>
         )}
@@ -424,51 +452,65 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
           <div className="admin-tab-view">
             <div className="admin-stat-grid">
               <StatCard
-                title="Distinct Routes"
-                value={topPages.length}
-                subtitle="Monitored endpoints"
-                color="amber"
-                icon={<Icon3D type="file" size={18} />}
-              />
-              <StatCard
-                title="30-Day Total Views"
-                value={stats.pageViews30d.toLocaleString()}
-                subtitle="All routes combined"
+                title="Views Today"
+                value={stats.pageViewsToday.toLocaleString()}
+                subtitle="Since midnight"
                 color="emerald"
                 icon={<Icon3D type="chart" size={18} />}
               />
               <StatCard
-                title="Top Performer"
-                value={topPages[0]?.page || "/"}
-                subtitle={`${topPages[0]?.views.toLocaleString() || 0} visits`}
+                title="Views This Week"
+                value={stats.pageViews7d.toLocaleString()}
+                change={stats.pageViewChange}
+                subtitle="vs prior 7 days"
                 color="cyan"
+                icon={<Icon3D type="chart" size={18} />}
+              />
+              <StatCard
+                title="Views This Month"
+                value={stats.pageViews30d.toLocaleString()}
+                subtitle="Rolling 30 days"
+                color="indigo"
+                icon={<Icon3D type="chart" size={18} />}
+              />
+              <StatCard
+                title="Distinct Pages"
+                value={topPages.length}
+                subtitle="Unique URLs tracked"
+                color="amber"
                 icon={<Icon3D type="file" size={18} />}
+              />
+              <StatCard
+                title="Top Page"
+                value={topPages[0]?.page || "/"}
+                subtitle={`${(topPages[0]?.views || 0).toLocaleString()} views`}
+                color="violet"
+                icon={<Icon3D type="file" size={18} />}
+              />
+              <StatCard
+                title="Avg Pages / Session"
+                value={stats.avgPagesPerSession}
+                subtitle="Last 7 days"
+                color="emerald"
+                icon={<Icon3D type="chart" size={18} />}
               />
             </div>
 
             <div className="admin-card">
               <div className="admin-card-header-line">
-                <h2 className="admin-card-title">
-                  <Icon3D type="file" size={22} />
-                  Complete Route Breakdown & Traffic Heatmap
-                </h2>
-                <span className="admin-card-badge">Ranked By Views</span>
+                <h2 className="admin-card-title"><Icon3D type="file" size={22} />All Pages — Ranked by Views</h2>
+                <span className="admin-card-badge">30-Day Window</span>
               </div>
-              <p className="admin-tab-description">
-                Tracks specific path visits across your landing page, capabilities, solutions, and sub-pages.
-              </p>
+              <p className="admin-tab-description">Every tracked URL ranked by total page views in the last 30 days.</p>
               <TopPages data={topPages} />
             </div>
 
             <div className="admin-card">
               <div className="admin-card-header-line">
-                <h2 className="admin-card-title">
-                  <Icon3D type="chart" size={22} />
-                  Traffic Wave over Time
-                </h2>
-                <span className="admin-card-badge">Page Load Volume</span>
+                <h2 className="admin-card-title"><Icon3D type="chart" size={22} />Page Views Over Time</h2>
+                <span className="admin-card-badge">30-Day Trend</span>
               </div>
-              <AreaChart data={dailyViews} label="Route Consumption Activity" />
+              <AreaChart data={dailyViews} label="Page Views" />
             </div>
           </div>
         )}
@@ -480,23 +522,23 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
           <div className="admin-tab-view">
             <div className="admin-stat-grid">
               <StatCard
-                title="Represented Countries"
+                title="Countries"
                 value={countries.length}
-                subtitle="Territories reached"
+                subtitle="Territories with traffic"
                 color="emerald"
                 icon={<Icon3D type="globe" size={18} />}
               />
               <StatCard
-                title="Top Country"
-                value={countries[0]?.country || countries[0]?.code || "Worldwide"}
-                subtitle={`${countries[0]?.visitors.toLocaleString() || 0} visitors`}
+                title="#1 Country"
+                value={countries[0]?.country || "—"}
+                subtitle={`${(countries[0]?.visitors || 0).toLocaleString()} visitors`}
                 color="cyan"
                 icon={<Icon3D type="globe" size={18} />}
               />
               <StatCard
-                title="Audience Reach"
-                value="Global"
-                subtitle="Geo-IP Resolution Enabled"
+                title="#1 City"
+                value={cities[0]?.city || "—"}
+                subtitle={`${(cities[0]?.visitors || 0).toLocaleString()} visitors`}
                 color="indigo"
                 icon={<Icon3D type="mapPin" size={18} />}
               />
@@ -505,30 +547,30 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
             <div className="admin-two-col">
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="globe" size={22} />
-                    Country Distribution Table
-                  </h2>
-                  <span className="admin-card-badge">Geo-IP Tracking</span>
+                  <h2 className="admin-card-title"><Icon3D type="globe" size={22} />Country Distribution</h2>
+                  <span className="admin-card-badge">Geo-IP · 30 Days</span>
                 </div>
-                <p className="admin-tab-description">
-                  Audience traffic mapped by country origin derived automatically from incoming client requests.
-                </p>
+                <p className="admin-tab-description">Visitors ranked by country. GeoIP resolution from PostHog.</p>
                 <CountryTable data={countries} />
               </div>
-
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="link" size={22} />
-                    Cross-Channel Referrers
-                  </h2>
-                  <span className="admin-card-badge">Acquisition</span>
+                  <h2 className="admin-card-title"><Icon3D type="mapPin" size={22} />Top Cities</h2>
+                  <span className="admin-card-badge">30-Day Window</span>
                 </div>
-                <p className="admin-tab-description">
-                  Where in the world your visitors discover the link to your Protype service.
-                </p>
-                <ReferrerTable data={referrers} />
+                <p className="admin-tab-description">Most active cities by page view count in the last 30 days.</p>
+                <div className="admin-os-grid">
+                  {cities.length === 0 ? (
+                    <p style={{color:"#94a3b8",fontSize:"13px"}}>No city data yet — awaiting traffic from GeoIP-resolvable visitors.</p>
+                  ) : (
+                    cities.map((c: {city:string;visitors:number}) => (
+                      <div key={c.city} className="admin-os-row">
+                        <span className="admin-os-name">{c.city}</span>
+                        <span className="admin-os-count">{c.visitors.toLocaleString()}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -543,21 +585,21 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
               <StatCard
                 title="Referral Domains"
                 value={referrers.length}
-                subtitle="Acquisition channels"
+                subtitle="Distinct incoming sources"
                 color="violet"
                 icon={<Icon3D type="link" size={18} />}
               />
               <StatCard
-                title="Top Discovery Channel"
-                value={referrers[0]?.referrer || "Direct Traffic"}
-                subtitle={`${referrers[0]?.visitors.toLocaleString() || 0} visits`}
+                title="Top Referrer"
+                value={referrers[0]?.referrer || "Direct"}
+                subtitle={`${(referrers[0]?.visitors || 0).toLocaleString()} visits · ${referrers[0]?.pct ?? 0}%`}
                 color="indigo"
                 icon={<Icon3D type="link" size={18} />}
               />
               <StatCard
-                title="Tracked Events"
-                value={stats.pageViews30d.toLocaleString()}
-                subtitle="Referrer attribution"
+                title="UTM Campaigns"
+                value={utmSources.length}
+                subtitle="Tagged sources tracked"
                 color="emerald"
                 icon={<Icon3D type="chart" size={18} />}
               />
@@ -565,14 +607,11 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 
             <div className="admin-card">
               <div className="admin-card-header-line">
-                <h2 className="admin-card-title">
-                  <Icon3D type="link" size={22} />
-                  Complete Traffic Sources & Acquisition Channels
-                </h2>
-                <span className="admin-card-badge">Attribution</span>
+                <h2 className="admin-card-title"><Icon3D type="link" size={22} />Referrers & Acquisition Channels</h2>
+                <span className="admin-card-badge">30-Day Attribution</span>
               </div>
               <p className="admin-tab-description">
-                Identifies whether visitors typed your URL directly, arrived from Google searches, LinkedIn campaigns, 𝕏/Twitter, or other external websites.
+                Direct traffic, organic search, LinkedIn, Google, and other external sites driving visitors to Protype.
               </p>
               <ReferrerTable data={referrers} />
             </div>
@@ -580,23 +619,29 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
             <div className="admin-two-col">
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="file" size={22} />
-                    Landing Destinations
-                  </h2>
-                  <span className="admin-card-badge">First Touches</span>
+                  <h2 className="admin-card-title"><Icon3D type="chart" size={22} />UTM Campaign Sources</h2>
+                  <span className="admin-card-badge">Campaign Tracking</span>
                 </div>
-                <TopPages data={topPages} />
+                <p className="admin-tab-description">Visitors arriving via UTM-tagged links (email, ads, social campaigns).</p>
+                <div className="admin-os-grid">
+                  {utmSources.length === 0 ? (
+                    <p style={{color:"#94a3b8",fontSize:"13px"}}>No UTM-tagged traffic yet. Add <code>?utm_source=</code> to your campaign links.</p>
+                  ) : (
+                    utmSources.map((u: {source:string;visitors:number}) => (
+                      <div key={u.source} className="admin-os-row">
+                        <span className="admin-os-name">{u.source}</span>
+                        <span className="admin-os-count">{u.visitors.toLocaleString()}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
               </div>
               <div className="admin-card">
                 <div className="admin-card-header-line">
-                  <h2 className="admin-card-title">
-                    <Icon3D type="monitor" size={22} />
-                    Hardware Acquisition
-                  </h2>
-                  <span className="admin-card-badge">Device Type</span>
+                  <h2 className="admin-card-title"><Icon3D type="file" size={22} />Landing Pages</h2>
+                  <span className="admin-card-badge">Entry Points</span>
                 </div>
-                <DeviceBreakdown data={devices} />
+                <TopPages data={topPages} />
               </div>
             </div>
           </div>
