@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 export const metadata: Metadata = {
   title: "Protype - AI Agents for Support, Operations & Customer Experience",
@@ -45,7 +46,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-white text-slate-900" suppressHydrationWarning>
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );

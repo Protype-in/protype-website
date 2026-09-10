@@ -19,6 +19,8 @@
     "motion": "^12.36.0",
     "next": "16.1.6",
     "ogl": "^1.0.11",
+    "posthog-js": "^1.429.2",
+    "posthog-node": "^5.21.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-spring": "^10.0.3",
