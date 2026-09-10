@@ -14,6 +14,17 @@ import {
   ShoppingBag,
   ExternalLink,
 } from "lucide-react";
+import {
+  WhatsAppLogo,
+  ShopifyLogo,
+  GmailLogo,
+  SlackLogo,
+  ExcelLogo,
+  GoogleSheetsLogo,
+  ShiprocketLogo,
+  HubSpotLogo,
+  InstagramLogo,
+} from "@/components/icons/BrandLogos";
 
 // Queries list for "Constant customer queries" card
 const customerQueries = [
@@ -31,14 +42,14 @@ const customerQueries = [
   },
   {
     name: "Customer 3",
-    avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=80&h=80&q=80",
-    query: "Can I get an exchange?",
-    time: "11:43 AM",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=80&h=80&q=80",
+    query: "Can you change my shipping address?",
+    time: "11:45 AM",
   },
   {
     name: "Customer 4",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=80&h=80&q=80",
-    query: "When will this be delivered?",
+    avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=80&h=80&q=80",
+    query: "Is this item back in stock?",
     time: "12:30 PM",
   },
   {
@@ -49,51 +60,47 @@ const customerQueries = [
   },
 ];
 
-// Tools list for "Tools & Platforms" card
+// Tools list for "Tools & Platforms" card with authentic software brand logos
 const toolsList = [
   {
     name: "WhatsApp",
     color: "text-[#25D366] bg-emerald-50",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4 fill-[#25D366]">
-        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.16l-.3-.18-3.13.82.84-3.05-.2-.31a8.106 8.106 0 01-1.25-4.31c0-4.47 3.64-8.11 8.11-8.11 2.17 0 4.2 0.85 5.73 2.38 1.54 1.54 2.38 3.57 2.38 5.73 0 4.47-3.64 8.17-8.11 8.17z" />
-      </svg>
-    ),
+    icon: <WhatsAppLogo className="h-4 w-4" />,
   },
   {
     name: "Shopify",
     color: "text-[#95BF47] bg-lime-50",
-    icon: <ShoppingBag className="h-4 w-4 text-[#95BF47]" />,
+    icon: <ShopifyLogo className="h-4 w-4" />,
   },
   {
     name: "Gmail",
     color: "text-[#EA4335] bg-red-50",
-    icon: <Mail className="h-4 w-4 text-[#EA4335]" />,
+    icon: <GmailLogo className="h-4 w-4" />,
   },
   {
     name: "Slack",
     color: "text-[#4A154B] bg-purple-50",
-    icon: <span className="text-xs font-black text-[#4A154B]">#</span>,
+    icon: <SlackLogo className="h-4 w-4" />,
   },
   {
     name: "Excel",
     color: "text-[#107C41] bg-emerald-50",
-    icon: <FileSpreadsheet className="h-4 w-4 text-[#107C41]" />,
+    icon: <ExcelLogo className="h-4 w-4" />,
   },
   {
     name: "Google Sheets",
     color: "text-[#0F9D58] bg-green-50",
-    icon: <Layers className="h-4 w-4 text-[#0F9D58]" />,
+    icon: <GoogleSheetsLogo className="h-4 w-4" />,
   },
   {
     name: "Shiprocket",
     color: "text-[#008ECC] bg-sky-50",
-    icon: <Send className="h-4 w-4 text-[#008ECC]" />,
+    icon: <ShiprocketLogo className="h-4 w-4" />,
   },
   {
-    name: "CRM",
-    color: "text-[#00A1E0] bg-blue-50",
-    icon: <ExternalLink className="h-4 w-4 text-[#00A1E0]" />,
+    name: "HubSpot CRM",
+    color: "text-[#FF7A59] bg-orange-50",
+    icon: <HubSpotLogo className="h-4 w-4" />,
   },
   {
     name: "and more...",
@@ -129,7 +136,7 @@ export default function ProblemSection() {
     const c = containerRef.current.getBoundingClientRect();
     if (c.width === 0 || c.height === 0) return;
 
-    // Only render dynamic SVG wires on large screens where layout is 2-column
+    // Only render dynamic SVG wires on large screens where layout is multi-column
     if (window.innerWidth < 1024) {
       setWires([]);
       return;
@@ -205,7 +212,7 @@ export default function ProblemSection() {
       const x1 = m.right - c.left;
       const y1 = m.top + m.height * 0.5 - c.top;
       const x2 = it.left - c.left;
-      const y2 = it.top + it.height * 0.35 - c.top;
+      const y2 = it.top + it.height * 0.38 - c.top;
       const dx = Math.max(25, (x2 - x1) * 0.5);
       list.push({
         id: "wire-messages-internal",
@@ -218,13 +225,15 @@ export default function ProblemSection() {
       });
     }
 
-    // 5. Order Operations (Bottom edge) -> Internal Tools (Top edge)
+    // 5. Order Operations (Bottom Center) -> Internal Tools (Top Center)
     if (o && it) {
-      const x1 = o.left + o.width * 0.44 - c.left;
+      const x1 = o.left + o.width * 0.5 - c.left;
       const y1 = o.bottom - c.top;
-      const x2 = it.left + it.width * 0.56 - c.left;
+      const x2 = it.left + it.width * 0.5 - c.left;
       const y2 = it.top - c.top;
-      const dy = Math.max(12, (y2 - y1) * 0.5);
+      const gap = Math.max(16, y2 - y1);
+      const dy = gap * 0.5;
+      const wave = 26; // graceful horizontal wave swing
       list.push({
         id: "wire-ops-internal",
         color: "#3b82f6",
@@ -232,17 +241,19 @@ export default function ProblemSection() {
         toCard: "internalTools",
         start: { x: x1, y: y1 },
         end: { x: x2, y: y2 },
-        d: `M ${x1},${y1} C ${x1 - 22},${y1 + dy} ${x2 + 22},${y2 - dy} ${x2},${y2}`,
+        d: `M ${x1},${y1} C ${x1 - wave},${y1 + dy} ${x2 + wave},${y2 - dy} ${x2},${y2}`,
       });
     }
 
-    // 6. Internal Tools (Bottom edge) -> Customer Journey (Top edge)
+    // 6. Internal Tools (Bottom Center) -> Customer Journey (Top Center)
     if (it && j) {
-      const x1 = it.left + it.width * 0.56 - c.left;
+      const x1 = it.left + it.width * 0.5 - c.left;
       const y1 = it.bottom - c.top;
-      const x2 = j.left + j.width * 0.44 - c.left;
+      const x2 = j.left + j.width * 0.5 - c.left;
       const y2 = j.top - c.top;
-      const dy = Math.max(12, (y2 - y1) * 0.5);
+      const gap = Math.max(16, y2 - y1);
+      const dy = gap * 0.5;
+      const wave = 26; // alternating graceful horizontal wave swing
       list.push({
         id: "wire-internal-journey",
         color: "#06b6d4",
@@ -250,7 +261,7 @@ export default function ProblemSection() {
         toCard: "customerJourney",
         start: { x: x1, y: y1 },
         end: { x: x2, y: y2 },
-        d: `M ${x1},${y1} C ${x1 + 22},${y1 + dy} ${x2 - 22},${y2 - dy} ${x2},${y2}`,
+        d: `M ${x1},${y1} C ${x1 + wave},${y1 + dy} ${x2 - wave},${y2 - dy} ${x2},${y2}`,
       });
     }
 
@@ -259,22 +270,37 @@ export default function ProblemSection() {
 
   useEffect(() => {
     updateWires();
-    const timer1 = setTimeout(updateWires, 120);
-    const timer2 = setTimeout(updateWires, 450);
+    const t0 = setTimeout(updateWires, 50);
+    const t1 = setTimeout(updateWires, 150);
+    const t2 = setTimeout(updateWires, 400);
+    const t3 = setTimeout(updateWires, 1000);
 
     const handleResize = () => updateWires();
+    const handleScroll = () => updateWires();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     let observer: ResizeObserver | null = null;
-    if (containerRef.current && typeof ResizeObserver !== "undefined") {
-      observer = new ResizeObserver(updateWires);
-      observer.observe(containerRef.current);
+    if (typeof ResizeObserver !== "undefined") {
+      observer = new ResizeObserver(() => {
+        updateWires();
+      });
+      if (containerRef.current) observer.observe(containerRef.current);
+      if (queriesRef.current) observer.observe(queriesRef.current);
+      if (toolsRef.current) observer.observe(toolsRef.current);
+      if (messagesRef.current) observer.observe(messagesRef.current);
+      if (orderOpsRef.current) observer.observe(orderOpsRef.current);
+      if (internalToolsRef.current) observer.observe(internalToolsRef.current);
+      if (customerJourneyRef.current) observer.observe(customerJourneyRef.current);
     }
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      clearTimeout(t0);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
       if (observer) observer.disconnect();
     };
   }, [updateWires]);
@@ -317,9 +343,10 @@ export default function ProblemSection() {
         >
           {/* ============================================================ */}
           {/* SVG Connection Wires with Glowing Light Beams & Particles     */}
+          {/* Placed at z-20 with pointer-events-none to render above cards */}
           {/* ============================================================ */}
           <svg
-            className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible lg:block"
+            className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible lg:block z-20"
             aria-hidden="true"
           >
             <defs>
@@ -343,10 +370,10 @@ export default function ProblemSection() {
                     d={w.d}
                     fill="none"
                     stroke="#cbd5e1"
-                    strokeWidth={1.8}
+                    strokeWidth={2}
                     strokeDasharray="5 5"
                     strokeLinecap="round"
-                    opacity={0.5}
+                    opacity={0.6}
                   />
 
                   {/* 2. Flowing active glowing dashed wire */}
@@ -354,35 +381,35 @@ export default function ProblemSection() {
                     d={w.d}
                     fill="none"
                     stroke={w.color}
-                    strokeWidth={isHighlighted ? 2.8 : 2}
+                    strokeWidth={isHighlighted ? 3.2 : 2.4}
                     strokeLinecap="round"
                     strokeDasharray="6 6"
-                    filter={isHighlighted ? "url(#problemGlow)" : undefined}
+                    filter="url(#problemGlow)"
                     animate={{
                       strokeDashoffset: [0, -24],
-                      opacity: isHighlighted ? 1 : 0.45,
+                      opacity: isHighlighted ? 1 : 0.75,
                     }}
                     transition={{
-                      strokeDashoffset: { duration: 1.4, repeat: Infinity, ease: "linear" },
+                      strokeDashoffset: { duration: 1.3, repeat: Infinity, ease: "linear" },
                       opacity: { duration: 0.3 },
                     }}
                   />
 
                   {/* 3. Traveling photon particle */}
                   <g filter="url(#problemGlow)">
-                    <circle r={isHighlighted ? 5 : 3.5} fill={w.color} opacity={0.6}>
+                    <circle r={isHighlighted ? 6 : 4.5} fill={w.color} opacity={0.8}>
                       <animateMotion
                         path={w.d}
-                        dur={isHighlighted ? "1.6s" : "2.6s"}
+                        dur={isHighlighted ? "1.5s" : "2.2s"}
                         repeatCount="indefinite"
                         keyPoints="0;1"
                         keyTimes="0;1"
                       />
                     </circle>
-                    <circle r={isHighlighted ? 2.8 : 2} fill="#ffffff">
+                    <circle r={isHighlighted ? 3.2 : 2.4} fill="#ffffff">
                       <animateMotion
                         path={w.d}
-                        dur={isHighlighted ? "1.6s" : "2.6s"}
+                        dur={isHighlighted ? "1.5s" : "2.2s"}
                         repeatCount="indefinite"
                         keyPoints="0;1"
                         keyTimes="0;1"
@@ -394,23 +421,23 @@ export default function ProblemSection() {
                   <circle
                     cx={w.start.x}
                     cy={w.start.y}
-                    r={4}
+                    r={4.5}
                     fill="#ffffff"
                     stroke={w.color}
-                    strokeWidth={2}
+                    strokeWidth={2.2}
                   />
-                  <circle cx={w.start.x} cy={w.start.y} r={2} fill={w.color} />
+                  <circle cx={w.start.x} cy={w.start.y} r={2.2} fill={w.color} />
 
                   {/* 5. End Anchor Dock Node */}
                   <circle
                     cx={w.end.x}
                     cy={w.end.y}
-                    r={4}
+                    r={4.5}
                     fill="#ffffff"
                     stroke={w.color}
-                    strokeWidth={2}
+                    strokeWidth={2.2}
                   />
-                  <circle cx={w.end.x} cy={w.end.y} r={2} fill={w.color} />
+                  <circle cx={w.end.x} cy={w.end.y} r={2.2} fill={w.color} />
 
                   {/* 6. Pulsing ring wave if highlighted */}
                   {isHighlighted && (
@@ -418,21 +445,21 @@ export default function ProblemSection() {
                       <motion.circle
                         cx={w.start.x}
                         cy={w.start.y}
-                        r={4}
+                        r={4.5}
                         fill="none"
                         stroke={w.color}
                         strokeWidth={1.5}
-                        animate={{ r: [4, 12], opacity: [0.9, 0] }}
+                        animate={{ r: [4.5, 13], opacity: [0.9, 0] }}
                         transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
                       />
                       <motion.circle
                         cx={w.end.x}
                         cy={w.end.y}
-                        r={4}
+                        r={4.5}
                         fill="none"
                         stroke={w.color}
                         strokeWidth={1.5}
-                        animate={{ r: [4, 12], opacity: [0.9, 0] }}
+                        animate={{ r: [4.5, 13], opacity: [0.9, 0] }}
                         transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut", delay: 0.2 }}
                       />
                     </>
@@ -445,7 +472,7 @@ export default function ProblemSection() {
           {/* ============================================================ */}
           {/* LEFT COLUMN: Heading & Constant Customer Queries Card Below  */}
           {/* ============================================================ */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 relative z-10">
             {/* Header Text */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -493,7 +520,7 @@ export default function ProblemSection() {
               whileHover={{ y: -3 }}
               onMouseEnter={() => setHoveredCard("queries")}
               onMouseLeave={() => setHoveredCard(null)}
-              className={`rounded-[22px] border bg-white/95 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all ${
+              className={`rounded-[22px] border bg-white/95 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all relative z-10 ${
                 hoveredCard === "queries"
                   ? "border-emerald-300 ring-2 ring-emerald-400/20"
                   : "border-slate-200/80"
@@ -543,10 +570,10 @@ export default function ProblemSection() {
           {/* ============================================================ */}
           {/* RIGHT COLUMN: 2 Well-Spaced Columns of Fragmented Chaos Cards*/}
           {/* ============================================================ */}
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 relative z-10">
             
             {/* Column 1: Tools & Platforms + Fragmented Messages Widget */}
-            <div className="flex flex-col gap-7">
+            <div className="flex flex-col gap-8">
               
               {/* CARD 2: Tools & Platforms */}
               <motion.div
@@ -558,7 +585,7 @@ export default function ProblemSection() {
                 whileHover={{ y: -3 }}
                 onMouseEnter={() => setHoveredCard("tools")}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all ${
+                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all relative z-10 ${
                   hoveredCard === "tools"
                     ? "border-emerald-300 ring-2 ring-emerald-400/20"
                     : "border-slate-200/80"
@@ -606,7 +633,7 @@ export default function ProblemSection() {
                 whileHover={{ y: -3 }}
                 onMouseEnter={() => setHoveredCard("messages")}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md space-y-2.5 transition-all ${
+                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md space-y-2.5 transition-all relative z-10 ${
                   hoveredCard === "messages"
                     ? "border-sky-300 ring-2 ring-sky-400/20"
                     : "border-slate-200/80"
@@ -615,11 +642,11 @@ export default function ProblemSection() {
                 {/* Message 1: WhatsApp */}
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#25D366] text-white">
-                      <span className="text-[9px]">💬</span>
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full overflow-hidden shadow-2xs">
+                      <WhatsAppLogo className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="block text-[10.5px] text-slate-400">Customer</span>
+                      <span className="block text-[10.5px] text-slate-400">WhatsApp • Customer</span>
                       <span className="font-semibold text-slate-800 text-[11.5px]">
                         Hi, I want to track my order.
                       </span>
@@ -631,11 +658,11 @@ export default function ProblemSection() {
                 {/* Message 2: Instagram */}
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white">
-                      <span className="text-[9px]">📷</span>
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full overflow-hidden shadow-2xs">
+                      <InstagramLogo className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="block text-[10.5px] text-slate-400">Customer</span>
+                      <span className="block text-[10.5px] text-slate-400">Instagram DM • Customer</span>
                       <span className="font-semibold text-slate-800 text-[11.5px]">
                         Can I get a refund?
                       </span>
@@ -647,11 +674,11 @@ export default function ProblemSection() {
                 {/* Message 3: Email */}
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-white">
-                      <span className="text-[9px]">✉️</span>
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 p-0.5 shadow-2xs">
+                      <GmailLogo className="h-3.5 w-3.5" />
                     </div>
                     <div>
-                      <span className="block text-[10.5px] text-slate-400">Customer</span>
+                      <span className="block text-[10.5px] text-slate-400">Gmail • Customer</span>
                       <span className="font-semibold text-slate-800 text-[11.5px]">
                         When will my order arrive?
                       </span>
@@ -662,8 +689,8 @@ export default function ProblemSection() {
               </motion.div>
             </div>
 
-            {/* Column 2: Order Ops + Internal Tools + Customer Journey */}
-            <div className="flex flex-col gap-10">
+            {/* Column 2: Order Ops + Internal Tools + Customer Journey (Generous 48px spacing) */}
+            <div className="flex flex-col gap-12">
               
               {/* CARD 4: Order operations */}
               <motion.div
@@ -675,7 +702,7 @@ export default function ProblemSection() {
                 whileHover={{ y: -3 }}
                 onMouseEnter={() => setHoveredCard("orderOps")}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all ${
+                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all relative z-10 ${
                   hoveredCard === "orderOps"
                     ? "border-blue-300 ring-2 ring-blue-400/20"
                     : "border-slate-200/80"
@@ -725,7 +752,7 @@ export default function ProblemSection() {
                 whileHover={{ y: -3 }}
                 onMouseEnter={() => setHoveredCard("internalTools")}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all ${
+                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all relative z-10 ${
                   hoveredCard === "internalTools"
                     ? "border-purple-300 ring-2 ring-purple-400/20"
                     : "border-slate-200/80"
@@ -774,7 +801,7 @@ export default function ProblemSection() {
                 whileHover={{ y: -3 }}
                 onMouseEnter={() => setHoveredCard("customerJourney")}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all ${
+                className={`rounded-[22px] border bg-white/95 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all relative z-10 ${
                   hoveredCard === "customerJourney"
                     ? "border-cyan-300 ring-2 ring-cyan-400/20"
                     : "border-slate-200/80"

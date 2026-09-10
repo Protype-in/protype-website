@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { WhatsAppLogo } from "@/components/icons/BrandLogos";
 import ShineButton from "./ui/ShineButton";
 
 const navLinks = [
@@ -223,7 +224,7 @@ export default function Navbar() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
                 >
-                  <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                  <WhatsAppLogo className="h-4 w-4" />
                   <span>WhatsApp Chat</span>
                 </a>
               </div>

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   HelpCircle,
   Plus,
-  MessageCircle,
   Sparkles,
   Bot,
   Layers,
@@ -13,6 +12,7 @@ import {
   Zap,
   ArrowRight,
 } from "lucide-react";
+import { WhatsAppLogo } from "@/components/icons/BrandLogos";
 import ShineButton from "../ui/ShineButton";
 
 interface FAQItem {
@@ -323,7 +323,7 @@ export default function FAQSection() {
                 variant="primary"
                 size="md"
               >
-                <MessageCircle className="h-4 w-4 text-emerald-400" />
+                <WhatsAppLogo className="h-4 w-4" />
                 <span>Chat on WhatsApp</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </ShineButton>

@@ -332,43 +332,64 @@ export default function SolutionSection() {
           </div>
 
           {/* Center Hub Node (Desktop Overlay) */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block z-20">
             <motion.div
+              whileHover={{ scale: 1.08 }}
               animate={{
                 boxShadow: [
-                  "0 0 50px rgba(16,185,129,0.25), 0 20px 40px -10px rgba(15,23,42,0.1)",
-                  "0 0 70px rgba(6,182,212,0.32), 0 20px 40px -10px rgba(15,23,42,0.12)",
-                  "0 0 50px rgba(16,185,129,0.25), 0 20px 40px -10px rgba(15,23,42,0.1)",
+                  "0 0 50px rgba(16,185,129,0.28), 0 20px 40px -10px rgba(15,23,42,0.12)",
+                  "0 0 70px rgba(6,182,212,0.35), 0 20px 40px -10px rgba(15,23,42,0.15)",
+                  "0 0 50px rgba(16,185,129,0.28), 0 20px 40px -10px rgba(15,23,42,0.12)",
                 ],
               }}
               transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-              className="pointer-events-auto flex h-[146px] w-[156px] flex-col items-center justify-center rounded-[28px] border border-white/90 p-3 text-center backdrop-blur-xl"
+              className="pointer-events-auto group relative flex h-[142px] w-[142px] flex-col items-center justify-center rounded-[32px] border border-white/95 p-3 text-center backdrop-blur-2xl cursor-pointer transition-transform duration-300"
               style={{
                 background:
-                  "linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(220,252,231,0.85) 50%, rgba(224,242,254,0.78) 100%)",
+                  "radial-gradient(circle at 50% 30%, rgba(255,255,255,0.98) 0%, rgba(236,253,245,0.92) 55%, rgba(207,250,254,0.88) 100%)",
               }}
             >
-              {/* Protype Brand Logo */}
-              <img
-                src="/logo3.png"
-                alt="Protype"
-                className="h-10 w-auto object-contain"
-              />
+              {/* Outer Rotating Optical Energy Ring */}
+              <div className="pointer-events-none absolute -inset-3 rounded-[38px] border border-dashed border-emerald-400/40 animate-[spin_16s_linear_infinite]" />
 
-              {/* Subtext */}
-              <div className="mt-1.5 text-[10.5px] font-semibold text-slate-800 leading-tight">
-                AI + Automation
-              </div>
-              <div className="text-[9.5px] font-medium text-slate-500">
-                for E-commerce
-              </div>
-
-              {/* Animated Sheen */}
+              {/* Ambient Pulsing Atmospheric Glow */}
               <motion.div
-                className="pointer-events-none absolute inset-0 rounded-[28px] border border-emerald-400/30"
-                animate={{ opacity: [0.3, 0.7, 0.3] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                animate={{
+                  opacity: [0.35, 0.7, 0.35],
+                  scale: [0.95, 1.05, 0.95],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="pointer-events-none absolute -inset-2 rounded-[34px] bg-gradient-to-tr from-emerald-500/25 via-teal-400/20 to-cyan-500/25 blur-xl"
               />
+
+              {/* Core 3D Mascot with Smooth Floating Motion */}
+              <motion.div
+                animate={{
+                  y: [-3, 3, -3],
+                }}
+                transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 flex items-center justify-center"
+              >
+                <img
+                  src="/fevicon.png"
+                  alt="Protype Core"
+                  className="h-16 w-16 drop-shadow-[0_10px_22px_rgba(16,185,129,0.45)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                />
+              </motion.div>
+
+              {/* Live Core Status Pill */}
+              <div className="relative z-10 mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-white/90 px-2.5 py-0.5 shadow-2xs">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                </span>
+                <span className="text-[9.5px] font-bold tracking-wider text-slate-800 uppercase">
+                  Protype AI
+                </span>
+              </div>
+
+              {/* Glass Rim Highlight */}
+              <div className="pointer-events-none absolute inset-0 rounded-[32px] border border-white/60 shadow-inner" />
             </motion.div>
           </div>
 

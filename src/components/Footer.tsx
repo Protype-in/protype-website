@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Twitter, Linkedin, Github, MessageCircle, Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
+import { WhatsAppLogo, LinkedInLogo, GitHubLogo, XTwitterLogo } from "@/components/icons/BrandLogos";
 
 const links = [
   {
@@ -97,7 +98,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-50/80 px-3.5 py-1.5 text-xs font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
               >
-                <MessageCircle className="h-3.5 w-3.5 text-emerald-600" />
+                <WhatsAppLogo className="h-3.5 w-3.5" />
                 <span>+91 86375 84923</span>
               </a>
 
@@ -117,9 +118,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="group flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/90 text-slate-500 shadow-2xs backdrop-blur-sm transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-700 hover:scale-105 active:scale-95"
+                className="group flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/90 shadow-2xs backdrop-blur-sm transition-all duration-300 hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5 hover:scale-105 active:scale-95"
               >
-                <Linkedin className="h-4 w-4 transition-transform group-hover:scale-110" />
+                <LinkedInLogo className="h-4 w-4 transition-transform group-hover:scale-110" />
               </a>
 
               <a
@@ -127,17 +128,19 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="group flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/90 text-slate-500 shadow-2xs backdrop-blur-sm transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-700 hover:scale-105 active:scale-95"
+                className="group flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/90 shadow-2xs backdrop-blur-sm transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 hover:scale-105 active:scale-95"
               >
-                <Github className="h-4 w-4 transition-transform group-hover:scale-110" />
+                <GitHubLogo className="h-4 w-4 transition-transform group-hover:scale-110" />
               </a>
 
               <a
-                href="#"
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Twitter / X"
-                className="group flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/90 text-slate-500 shadow-2xs backdrop-blur-sm transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-700 hover:scale-105 active:scale-95"
+                className="group flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/90 shadow-2xs backdrop-blur-sm transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 hover:scale-105 active:scale-95"
               >
-                <Twitter className="h-4 w-4 transition-transform group-hover:scale-110" />
+                <XTwitterLogo className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
               </a>
             </div>
           </div>
