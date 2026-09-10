@@ -485,10 +485,10 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
           </div>
 
           {/* Core Pill Badge under Mascot */}
-          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full border border-emerald-500/25 bg-white/95 px-3 py-0.5 text-[9.5px] font-bold tracking-[0.16em] text-emerald-900 uppercase shadow-xs backdrop-blur-md whitespace-nowrap">
+          {/* <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full border border-emerald-500/25 bg-white/95 px-3 py-0.5 text-[9.5px] font-bold tracking-[0.16em] text-emerald-900 uppercase shadow-xs backdrop-blur-md whitespace-nowrap">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
             <span>PROTO CORE</span>
-          </div>
+          </div> */}
         </div>
 
         {/* ============================================================ */}
