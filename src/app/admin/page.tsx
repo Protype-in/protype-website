@@ -12,7 +12,7 @@ import {
   getCityBreakdown,
   getOSBreakdown,
   getUTMSources,
-} from "@/lib/posthog";
+} from "@/lib/ga";
 import StatCard from "@/components/admin/StatCard";
 import AreaChart from "@/components/admin/AreaChart";
 import TopPages from "@/components/admin/TopPages";
@@ -166,7 +166,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
               {currentTab === "sources" && "Traffic Sources & Acquisition Channels"}
             </h1>
             <p className="admin-page-subtitle">
-              Internal console telemetry · Data synced via PostHog · Refreshed {now} IST
+              Internal console telemetry · Data synced via Google Analytics · Refreshed {now} IST
             </p>
           </div>
           <div className="admin-header-right">
