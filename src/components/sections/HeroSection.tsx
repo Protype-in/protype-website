@@ -98,7 +98,13 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.24 }}
             className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center"
           >
-            <ShineButton href="#cta" variant="primary" size="lg">
+            <ShineButton
+              href="https://calendly.com/protype-info/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              size="lg"
+            >
               <span>Talk to us</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </ShineButton>

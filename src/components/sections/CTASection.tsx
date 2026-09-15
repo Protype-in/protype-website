@@ -424,7 +424,7 @@ export default function CTASection() {
               className="mt-8 flex flex-wrap items-center justify-center gap-3.5"
             >
               <ShineButton
-                href="https://wa.me/8637584923"
+                href="https://calendly.com/protype-info/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="primary"

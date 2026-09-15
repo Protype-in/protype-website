@@ -144,7 +144,9 @@ export default function Navbar() {
           {/* CTA Action Button */}
           <div className="hidden md:flex items-center gap-3">
             <ShineButton
-              href="#cta"
+              href="https://calendly.com/protype-info/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               variant="primary"
               size={scrolled ? "sm" : "md"}
             >
@@ -211,7 +213,9 @@ export default function Navbar() {
 
               <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-2.5">
                 <a
-                  href="#cta"
+                  href="https://calendly.com/protype-info/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center justify-center gap-2 rounded-full bg-[#0a2018] py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#12362a]"
                 >
