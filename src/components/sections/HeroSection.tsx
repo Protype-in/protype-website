@@ -176,10 +176,8 @@ export default function HeroSection() {
       </AnimatePresence>
     </section>
   );
-}
-
-// 1000 x 680 Coordinate Wires with precise dual anchor nodes (Card + Core)
-// Bilateral symmetry around center axis X = 500, Y = 325
+}// 960 x 550 Coordinate Wires with precise dual anchor nodes (Card + Core)
+// Bilateral symmetry around center axis X = 480, Y = 272
 interface WireConfig {
   id: string;
   stage: number;
@@ -190,50 +188,50 @@ interface WireConfig {
 }
 
 const WIRES: WireConfig[] = [
-  // Wire 0: Customer (Top) -> Mascot Orb (Top) - Inward wavy flow
+  // Wire 0: Customer (Top) -> Mascot Orb (Top) - Inward query flow
   {
     id: "wire-customer",
     stage: 0,
-    d: "M 500,128 C 528,168 472,224 500,265",
+    d: "M 480,154 C 488,185 472,225 480,255",
     color: "#0ea5e9",
-    cardDot: { cx: 500, cy: 128 },
-    coreDot: { cx: 500, cy: 265 },
+    cardDot: { cx: 480, cy: 154 },
+    coreDot: { cx: 480, cy: 255 },
   },
   // Wire 1: Mascot Orb (Left) -> Customer Support (Middle-Left) - Outward wavy flow
   {
     id: "wire-support",
     stage: 1,
-    d: "M 438,325 C 385,360 330,240 275,275",
+    d: "M 415,320 C 365,320 330,263 284,263",
     color: "#10b981",
-    cardDot: { cx: 275, cy: 275 },
-    coreDot: { cx: 438, cy: 325 },
+    cardDot: { cx: 284, cy: 263 },
+    coreDot: { cx: 415, cy: 320 },
   },
   // Wire 2: Mascot Orb (Right) -> Order Operations (Middle-Right) - Symmetrical wavy flow
   {
     id: "wire-ops",
     stage: 2,
-    d: "M 562,325 C 615,360 670,240 725,275",
+    d: "M 545,320 C 595,320 630,263 676,263",
     color: "#3b82f6",
-    cardDot: { cx: 725, cy: 275 },
-    coreDot: { cx: 562, cy: 325 },
+    cardDot: { cx: 676, cy: 263 },
+    coreDot: { cx: 545, cy: 320 },
   },
   // Wire 3: Mascot Orb (Bottom-Left) -> Fulfilment (Bottom-Left) - Outward wavy flow
   {
     id: "wire-fulfilment",
     stage: 3,
-    d: "M 455,375 C 430,445 340,425 310,496",
+    d: "M 434,366 C 390,410 330,440 280,480",
     color: "#10b981",
-    cardDot: { cx: 310, cy: 496 },
-    coreDot: { cx: 455, cy: 375 },
+    cardDot: { cx: 280, cy: 480 },
+    coreDot: { cx: 434, cy: 366 },
   },
   // Wire 4: Mascot Orb (Bottom-Right) -> Customer Update (Bottom-Right) - Symmetrical wavy flow
   {
     id: "wire-update",
     stage: 4,
-    d: "M 545,375 C 570,445 660,425 690,496",
+    d: "M 526,366 C 570,410 630,440 680,480",
     color: "#06b6d4",
-    cardDot: { cx: 690, cy: 496 },
-    coreDot: { cx: 545, cy: 375 },
+    cardDot: { cx: 680, cy: 480 },
+    coreDot: { cx: 526, cy: 366 },
   },
 ];
 
@@ -298,13 +296,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
     const updateScale = () => {
       const width = el.clientWidth;
       if (width > 0) {
-        // Native artboard is 800px wide (was 1000, previously floored at 0.82
-        // which forced it to render wider than the container and get clipped
-        // by overflow-hidden — that's why cards were disappearing). A smaller
-        // native canvas means less downscaling for the same container width,
-        // so everything renders bigger, and capping at 1 guarantees it always
-        // fits with no clipping.
-        setScale(Math.min(1, width / 800));
+        setScale(Math.min(1, width / 960));
       }
     };
 
@@ -318,11 +310,11 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [3, -3]), {
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [2.5, -2.5]), {
     stiffness: 150,
     damping: 20,
   });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-3, 3]), {
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-2.5, 2.5]), {
     stiffness: 150,
     damping: 20,
   });
@@ -364,13 +356,13 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
       className="relative w-full select-none flex justify-center overflow-hidden"
       style={{
         perspective: 1200,
-        height: 544 * scale,
+        height: 640 * scale,
       }}
     >
       <div
         style={{
-          width: 800,
-          height: 544,
+          width: 960,
+          height: 640,
           transform: `scale(${scale})`,
           transformOrigin: "top center",
           flexShrink: 0,
@@ -382,10 +374,10 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
         >
           {/* Soft aura glow behind central node */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[47.8%] h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{
               background:
-                "radial-gradient(circle, rgba(16,185,129,0.24) 0%, rgba(6,182,212,0.16) 45%, transparent 72%)",
+                "radial-gradient(circle, rgba(16,185,129,0.22) 0%, rgba(6,182,212,0.14) 45%, transparent 72%)",
               filter: "blur(42px)",
             }}
             aria-hidden="true"
@@ -393,7 +385,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
 
           {/* SVG Connection Wires & Animated Dashed Light Beams */}
           <svg
-            viewBox="0 0 1000 680"
+            viewBox="0 0 960 640"
             className="absolute inset-0 h-full w-full overflow-visible pointer-events-none"
             aria-hidden="true"
           >
@@ -533,10 +525,10 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
           <div
             className="absolute z-20 flex flex-col items-center justify-center pointer-events-auto"
             style={{
-              left: "calc(50% - 80px)",
-              top: "calc(47.8% - 80px)",
-              width: "160px",
-              height: "160px",
+              left: "calc(50% - 70px)",
+              top: "calc(50% - 70px)",
+              width: "140px",
+              height: "140px",
               transformStyle: "preserve-3d",
             }}
           >
@@ -555,33 +547,11 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
                 aria-hidden="true"
               />
 
-              {/* Glowing Connector Radar Nodes along Mascot Boundary */}
-              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-20 flex h-3 w-3 items-center justify-center">
-                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              </div>
-              <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
-                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              </div>
-              <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
-                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              </div>
-              <div className="absolute bottom-0 left-2.5 z-20 flex h-3 w-3 items-center justify-center">
-                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              </div>
-              <div className="absolute bottom-0 right-2.5 z-20 flex h-3 w-3 items-center justify-center">
-                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              </div>
-
               {/* 3D Floating Mascot with breathing scale */}
               <motion.div
-                animate={{ y: [0, -7, 0] }}
+                animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10 flex h-32 w-32 sm:h-36 sm:w-36 items-center justify-center drop-shadow-[0_20px_40px_rgba(16,185,129,0.45)] cursor-pointer select-none"
+                className="relative z-10 flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center drop-shadow-[0_20px_40px_rgba(16,185,129,0.45)] cursor-pointer select-none"
                 whileHover={{ scale: 1.08 }}
                 onClick={() =>
                   onShowToast("Protype AI Core: Connected and orchestrating all workflows")
@@ -590,8 +560,8 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
                 <Image
                   src="/fevicon.png"
                   alt="Protype AI Core - Intelligent AI agent orchestrating WhatsApp support and CRM automation"
-                  width={144}
-                  height={144}
+                  width={128}
+                  height={128}
                   className="h-full w-full object-contain select-none"
                   priority
                 />
@@ -600,11 +570,11 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
           </div>
 
           {/* ============================================================ */}
-          {/* CARD 1: CUSTOMER (Top)                                       */}
+          {/* CARD 1: CUSTOMER (Top Center)                                */}
           {/* ============================================================ */}
           <div
             className="absolute z-10"
-            style={{ left: "calc(50% - 140px)", top: "1.8%", width: "280px" }}
+            style={{ left: "calc(50% - 130px)", top: "18px", width: "260px" }}
           >
             <HubCard
               stage={0}
@@ -616,28 +586,28 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
-                    <User className="h-4.5 w-4.5" />
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
+                    <User className="h-4 w-4" />
                   </div>
-                  <span className="text-sm font-medium text-slate-700">Customer</span>
+                  <span className="text-xs font-semibold text-slate-700">Customer</span>
                 </div>
-                <span className="text-xs font-normal text-slate-400">10:24 AM</span>
+                <span className="text-[11px] font-normal text-slate-400">10:24 AM</span>
               </div>
 
-              <p className="mt-2 text-base font-semibold text-slate-900">
+              <p className="mt-2 text-sm sm:text-[15px] font-bold text-slate-900 leading-snug">
                 Where is my order?
               </p>
 
               <div className="mt-2.5 flex items-center gap-1.5">
                 <div
                   title="WhatsApp Channel"
-                  className="flex h-6 w-6 items-center justify-center rounded-full overflow-hidden shadow-2xs"
+                  className="flex h-5.5 w-5.5 items-center justify-center rounded-full overflow-hidden shadow-2xs"
                 >
-                  <WhatsAppLogo className="h-6 w-6" />
+                  <WhatsAppLogo className="h-5.5 w-5.5" />
                 </div>
 
-                <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-600">
-                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-none stroke-blue-500" strokeWidth="2">
+                <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+                  <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-blue-500" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
                   </svg>
@@ -646,12 +616,12 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
 
                 <div
                   title="Instagram DM"
-                  className="flex h-6 w-6 items-center justify-center rounded-full overflow-hidden shadow-2xs"
+                  className="flex h-5.5 w-5.5 items-center justify-center rounded-full overflow-hidden shadow-2xs"
                 >
-                  <InstagramLogo className="h-6 w-6" />
+                  <InstagramLogo className="h-5.5 w-5.5" />
                 </div>
 
-                <div className="flex h-6 items-center justify-center rounded-full bg-slate-100 px-1.5 text-xs font-semibold text-slate-500">
+                <div className="flex h-5.5 items-center justify-center rounded-full bg-slate-100 px-1.5 text-[11px] font-semibold text-slate-500">
                   +2
                 </div>
               </div>
@@ -663,7 +633,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
           {/* ============================================================ */}
           <div
             className="absolute z-10"
-            style={{ left: "1.5%", top: "27%", width: "280px" }}
+            style={{ left: "24px", top: "195px", width: "260px" }}
           >
             <HubCard
               stage={1}
@@ -675,33 +645,33 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                    <MessageSquare className="h-5 w-5" />
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                    <MessageSquare className="h-4 w-4" />
                   </div>
-                  <span className="text-[15px] font-semibold text-slate-900">
+                  <span className="text-xs sm:text-[13px] font-semibold text-slate-900">
                     Customer Support
                   </span>
                 </div>
-                <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-600">
+                <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-semibold text-emerald-600">
                   Resolved
                 </span>
               </div>
 
-              <div className="mt-2 text-sm leading-snug text-slate-600">
+              <div className="mt-2 text-xs leading-snug text-slate-600">
                 <p>Hi! Your order is on track.</p>
                 <p className="text-slate-500">Here&apos;s the latest update...</p>
               </div>
 
-              <div className="mt-3 flex items-center justify-between">
+              <div className="mt-2.5 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <img
                     src="/support-agent.jpg"
                     alt="Protype Customer Support AI Agent avatar"
-                    className="h-7 w-7 rounded-full object-cover border border-emerald-200 shadow-2xs"
+                    className="h-6 w-6 rounded-full object-cover border border-emerald-200 shadow-2xs"
                   />
-                  <span className="text-xs text-slate-400">Agent live</span>
+                  <span className="text-[11px] text-slate-400">Agent live</span>
                 </div>
-                <span className="text-xs text-slate-400">10:32 AM</span>
+                <span className="text-[11px] text-slate-400">10:32 AM</span>
               </div>
             </HubCard>
           </div>
@@ -711,7 +681,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
           {/* ============================================================ */}
           <div
             className="absolute z-10"
-            style={{ right: "1.5%", top: "27%", width: "280px" }}
+            style={{ right: "24px", top: "195px", width: "260px" }}
           >
             <HubCard
               stage={2}
@@ -723,32 +693,32 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                    <Package className="h-5 w-5" />
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                    <Package className="h-4 w-4" />
                   </div>
-                  <span className="text-[15px] font-semibold text-slate-900">
+                  <span className="text-xs sm:text-[13px] font-semibold text-slate-900">
                     Order Operations
                   </span>
                 </div>
-                <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
+                <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[10.5px] font-semibold text-blue-600">
                   Processing
                 </span>
               </div>
 
-              <div className="mt-3 flex items-start gap-2.5">
-                <div className="mt-0.5 flex h-8 w-7 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
-                  <FileText className="h-4 w-4" />
+              <div className="mt-2.5 flex items-start gap-2">
+                <div className="mt-0.5 flex h-7 w-6 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
+                  <FileText className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Order #4821</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs sm:text-[13px] font-semibold text-slate-900">Order #4821</p>
+                  <p className="text-[11px] text-slate-500">
                     Assigned <span className="text-slate-400">→</span> Warehouse 02
                   </p>
                 </div>
               </div>
 
-              <div className="mt-2.5 flex justify-end">
-                <span className="text-xs text-slate-400">10:28 AM</span>
+              <div className="mt-2 flex justify-end">
+                <span className="text-[11px] text-slate-400">10:28 AM</span>
               </div>
             </HubCard>
           </div>
@@ -758,7 +728,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
           {/* ============================================================ */}
           <div
             className="absolute z-10"
-            style={{ left: "9%", top: "73%", width: "265px" }}
+            style={{ left: "80px", top: "480px", width: "260px" }}
           >
             <HubCard
               stage={3}
@@ -770,32 +740,32 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                    <Truck className="h-5 w-5" />
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                    <Truck className="h-4 w-4" />
                   </div>
-                  <span className="text-[15px] font-semibold text-slate-900">
+                  <span className="text-xs sm:text-[13px] font-semibold text-slate-900">
                     Fulfilment
                   </span>
                 </div>
-                <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-600">
+                <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-semibold text-emerald-600">
                   Packed
                 </span>
               </div>
 
-              <div className="mt-3 flex items-center gap-3">
+              <div className="mt-2.5 flex items-center gap-2.5">
                 <img
                   src="/shipping-box.jpg"
                   alt="E-commerce parcel package indicating Protype automated order fulfilment tracking"
-                  className="h-10 w-10 rounded-md object-contain shrink-0"
+                  className="h-9 w-9 rounded-md object-contain shrink-0"
                 />
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">Order #4821</p>
-                  <p className="text-xs text-slate-500">Ready for shipping</p>
+                  <p className="text-xs sm:text-[13px] font-semibold text-slate-900">Order #4821</p>
+                  <p className="text-[11px] text-slate-500">Ready for shipping</p>
                 </div>
               </div>
 
               <div className="mt-2 flex justify-end">
-                <span className="text-xs text-slate-400">11:12 AM</span>
+                <span className="text-[11px] text-slate-400">11:12 AM</span>
               </div>
             </HubCard>
           </div>
@@ -805,7 +775,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
           {/* ============================================================ */}
           <div
             className="absolute z-10"
-            style={{ right: "9%", top: "73%", width: "265px" }}
+            style={{ right: "80px", top: "480px", width: "260px" }}
           >
             <HubCard
               stage={4}
@@ -817,20 +787,20 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                    <Bell className="h-5 w-5" />
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-50 text-cyan-600">
+                    <Bell className="h-4 w-4" />
                   </div>
-                  <span className="text-[15px] font-semibold text-slate-900">
+                  <span className="text-xs sm:text-[13px] font-semibold text-slate-900">
                     Customer Update
                   </span>
                 </div>
-                <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
+                <span className="rounded-full border border-cyan-200/80 bg-cyan-50 px-2 py-0.5 text-[10.5px] font-semibold text-cyan-600">
                   Sent
                 </span>
               </div>
 
-              <div className="mt-2.5">
-                <p className="text-sm font-medium text-slate-800">
+              <div className="mt-2">
+                <p className="text-xs text-slate-700 font-medium">
                   Your order is on the way!
                 </p>
                 <button
@@ -838,7 +808,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
                   onClick={() =>
                     onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
                   }
-                  className="group mt-1 flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
+                  className="group mt-1 flex items-center gap-1 text-xs font-semibold text-cyan-600 hover:text-cyan-700 transition-colors cursor-pointer"
                 >
                   <span>Track your order</span>
                   <span className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -846,7 +816,7 @@ function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => voi
               </div>
 
               <div className="mt-1 flex justify-end">
-                <span className="text-xs text-slate-400">11:15 AM</span>
+                <span className="text-[11px] text-slate-400">11:15 AM</span>
               </div>
             </HubCard>
           </div>
