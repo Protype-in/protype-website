@@ -3,7 +3,19 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, MessageSquare, Package, Truck, Bell, FileText, CheckCircle2, X } from "lucide-react";
+import {
+  ArrowRight,
+  MessageSquare,
+  Package,
+  Truck,
+  Bell,
+  FileText,
+  CheckCircle2,
+  X,
+  User,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { WhatsAppLogo, InstagramLogo } from "@/components/icons/BrandLogos";
 import ShineButton from "../ui/ShineButton";
 
@@ -14,7 +26,7 @@ export default function HeroSection() {
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="relative isolate min-h-[880px] overflow-hidden bg-[#fafcfc] pt-24 text-slate-900 md:min-h-[820px] md:pt-28"
+      className="relative isolate min-h-0 overflow-hidden bg-[#fafcfc] pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 text-slate-900 lg:min-h-[820px]"
     >
       {/* Ambient background glows */}
       <div
@@ -30,7 +42,7 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* Clean, smoothly visible background grid matching screenshot */}
+      {/* Clean, smoothly visible background grid */}
       <div
         className="pointer-events-none absolute inset-0 opacity-80"
         style={{
@@ -46,7 +58,7 @@ export default function HeroSection() {
       />
 
       {/* Main Hero Container */}
-      <div className="relative z-10 mx-auto grid max-w-[1400px] items-center gap-8 px-6 pt-4 pb-16 lg:grid-cols-[440px_1fr] lg:gap-12 lg:px-10 lg:pt-8 xl:grid-cols-[480px_1fr]">
+      <div className="relative z-10 mx-auto grid max-w-[1520px] items-center gap-8 px-4 sm:px-6 pt-4 pb-12 lg:grid-cols-[440px_1fr] lg:gap-8 lg:px-10 lg:pt-8 xl:grid-cols-[480px_1fr]">
         
         {/* Left Column: Typography & CTAs */}
         <div className="relative z-10 max-w-lg">
@@ -55,7 +67,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 text-[11.5px] font-semibold tracking-[0.14em] text-emerald-900 uppercase backdrop-blur-md"
+            className="mb-6 sm:mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 text-[11px] sm:text-[11.5px] font-semibold tracking-[0.14em] text-emerald-900 uppercase backdrop-blur-md"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -70,7 +82,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08 }}
-            className="font-[Outfit] text-[52px] font-bold leading-[1.02] tracking-[-0.04em] text-slate-900 sm:text-6xl lg:text-[76px]"
+            className="font-[Outfit] text-[42px] sm:text-6xl lg:text-[76px] font-bold leading-[1.04] tracking-[-0.04em] text-slate-900"
           >
             Support.
             <br />
@@ -86,7 +98,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.16 }}
-            className="mt-7 max-w-md text-base leading-relaxed text-slate-500 sm:text-lg lg:text-[19px]"
+            className="mt-5 sm:mt-7 max-w-md text-base leading-relaxed text-slate-500 sm:text-lg lg:text-[19px]"
           >
             Protype builds custom systems that connect customer support, operations, and every step in between.
           </motion.p>
@@ -96,7 +108,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.24 }}
-            className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center"
+            className="mt-5 sm:mt-6 flex flex-row flex-wrap items-center gap-2 sm:gap-2.5"
           >
             <ShineButton
               href="https://calendly.com/protype-info/30min"
@@ -109,7 +121,11 @@ export default function HeroSection() {
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </ShineButton>
 
-            <ShineButton href="#process" variant="secondary" size="lg">
+            <ShineButton
+              href="#process"
+              variant="secondary"
+              size="lg"
+            >
               <span>See how it works</span>
               <span className="text-emerald-700 font-semibold">↗</span>
             </ShineButton>
@@ -121,9 +137,17 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.85, delay: 0.15, ease: "easeOut" }}
-          className="relative w-full"
+          className="relative w-full overflow-hidden"
         >
-          <WorkflowHub onShowToast={(msg) => setToastMessage(msg)} />
+          {/* Desktop & Tablet Bilateral Diagram Hub (>= 768px) with Auto-Scaling */}
+          <div className="hidden md:block w-full">
+            <DesktopWorkflowHub onShowToast={(msg) => setToastMessage(msg)} />
+          </div>
+
+          {/* Dedicated Mobile Interactive Workflow Hub (< 768px) */}
+          <div className="block md:hidden w-full">
+            <MobileWorkflowHub onShowToast={(msg) => setToastMessage(msg)} />
+          </div>
         </motion.div>
       </div>
 
@@ -134,13 +158,15 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/95 px-5 py-3.5 text-sm font-medium text-slate-800 shadow-[0_20px_40px_rgba(0,0,0,0.12)] backdrop-blur-md"
+            className="fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-50 flex items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white/95 px-4 sm:px-5 py-3.5 text-sm font-medium text-slate-800 shadow-[0_20px_40px_rgba(0,0,0,0.12)] backdrop-blur-md"
           >
-            <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-            <span>{toastMessage}</span>
+            <div className="flex items-center gap-2.5 min-w-0">
+              <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+              <span className="text-[13px] sm:text-sm">{toastMessage}</span>
+            </div>
             <button
               onClick={() => setToastMessage(null)}
-              className="ml-2 text-slate-400 hover:text-slate-600"
+              className="ml-2 text-slate-400 hover:text-slate-600 cursor-pointer shrink-0"
               aria-label="Dismiss notification"
             >
               <X className="h-3.5 w-3.5" />
@@ -150,8 +176,10 @@ export default function HeroSection() {
       </AnimatePresence>
     </section>
   );
-}// 1000 x 640 Coordinate Wires with precise dual anchor nodes (Card + Core)
-// Bilateral symmetry around center axis X = 500, Y = 310
+}
+
+// 1000 x 680 Coordinate Wires with precise dual anchor nodes (Card + Core)
+// Bilateral symmetry around center axis X = 500, Y = 325
 interface WireConfig {
   id: string;
   stage: number;
@@ -209,10 +237,82 @@ const WIRES: WireConfig[] = [
   },
 ];
 
-function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
+// Stage configuration used for tabs and active stage styling
+const STAGES_DATA = [
+  {
+    id: 0,
+    title: "Customer",
+    shortTitle: "Customer",
+    icon: User,
+    accent: "#0ea5e9",
+    tag: "10:24 AM",
+  },
+  {
+    id: 1,
+    title: "Customer Support",
+    shortTitle: "Support",
+    icon: MessageSquare,
+    accent: "#10b981",
+    tag: "Resolved",
+  },
+  {
+    id: 2,
+    title: "Order Operations",
+    shortTitle: "Operations",
+    icon: Package,
+    accent: "#3b82f6",
+    tag: "Processing",
+  },
+  {
+    id: 3,
+    title: "Fulfilment",
+    shortTitle: "Fulfilment",
+    icon: Truck,
+    accent: "#10b981",
+    tag: "Packed",
+  },
+  {
+    id: 4,
+    title: "Customer Update",
+    shortTitle: "Update",
+    icon: Bell,
+    accent: "#06b6d4",
+    tag: "Sent",
+  },
+];
+
+/* ========================================================================= */
+/* DESKTOP & TABLET WORKFLOW HUB (Proportional Vector Scaler >= 768px)       */
+/* ========================================================================= */
+function DesktopWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
   const [activeStage, setActiveStage] = useState<number>(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState<number>(1);
+
+  // Measure container and scale the artboard proportionally
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const updateScale = () => {
+      const width = el.clientWidth;
+      if (width > 0) {
+        // Native artboard is 800px wide (was 1000, previously floored at 0.82
+        // which forced it to render wider than the container and get clipped
+        // by overflow-hidden — that's why cards were disappearing). A smaller
+        // native canvas means less downscaling for the same container width,
+        // so everything renders bigger, and capping at 1 guarantees it always
+        // fits with no clipping.
+        setScale(Math.min(1, width / 800));
+      }
+    };
+
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // 3D Parallax Mouse Physics
   const mouseX = useMotionValue(0);
@@ -261,33 +361,590 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full select-none"
-      style={{ perspective: 1200 }}
+      className="relative w-full select-none flex justify-center overflow-hidden"
+      style={{
+        perspective: 1200,
+        height: 544 * scale,
+      }}
     >
-      <motion.div
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative mx-auto w-full max-w-[1040px] aspect-[1000/680]"
+      <div
+        style={{
+          width: 800,
+          height: 544,
+          transform: `scale(${scale})`,
+          transformOrigin: "top center",
+          flexShrink: 0,
+        }}
       >
-        {/* Soft aura glow behind central node */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-[47.8%] h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(16,185,129,0.24) 0%, rgba(6,182,212,0.16) 45%, transparent 72%)",
-            filter: "blur(42px)",
-          }}
-          aria-hidden="true"
-        />
-
-        {/* SVG Connection Wires & Animated Dashed Light Beams */}
-        <svg
-          viewBox="0 0 1000 680"
-          className="absolute inset-0 h-full w-full overflow-visible pointer-events-none"
-          aria-hidden="true"
+        <motion.div
+          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+          className="relative w-full h-full"
         >
+          {/* Soft aura glow behind central node */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-[47.8%] h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(16,185,129,0.24) 0%, rgba(6,182,212,0.16) 45%, transparent 72%)",
+              filter: "blur(42px)",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* SVG Connection Wires & Animated Dashed Light Beams */}
+          <svg
+            viewBox="0 0 1000 680"
+            className="absolute inset-0 h-full w-full overflow-visible pointer-events-none"
+            aria-hidden="true"
+          >
+            <defs>
+              <filter id="hubGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {WIRES.map((w) => {
+              const isActive = currentActive === w.stage;
+              return (
+                <g key={w.id}>
+                  {/* 1. Base clean muted dashed line */}
+                  <path
+                    d={w.d}
+                    fill="none"
+                    stroke="#cbd5e1"
+                    strokeWidth={1.8}
+                    strokeDasharray="5 5"
+                    strokeLinecap="round"
+                    opacity={0.45}
+                  />
+
+                  {/* 2. Active glowing wire with flowing animated dashes */}
+                  <motion.path
+                    d={w.d}
+                    fill="none"
+                    stroke={w.color}
+                    strokeWidth={isActive ? 2.6 : 1.8}
+                    strokeLinecap="round"
+                    strokeDasharray="6 6"
+                    filter={isActive ? "url(#hubGlow)" : undefined}
+                    animate={{
+                      strokeDashoffset: [0, -24],
+                      opacity: isActive ? 1 : 0.25,
+                    }}
+                    transition={{
+                      strokeDashoffset: { duration: 1.1, repeat: Infinity, ease: "linear" },
+                      opacity: { duration: 0.3 },
+                    }}
+                  />
+
+                  {/* 3. Traveling photon particle along path */}
+                  <g filter="url(#hubGlow)">
+                    {/* Outer glow ring */}
+                    <circle r={isActive ? 5.5 : 3.5} fill={w.color} opacity={0.45}>
+                      <animateMotion
+                        path={w.d}
+                        dur={isActive ? "1.8s" : "3.6s"}
+                        repeatCount="indefinite"
+                        keyPoints="0;1"
+                        keyTimes="0;1"
+                      />
+                    </circle>
+                    {/* Bright white core particle */}
+                    <circle r={isActive ? 3 : 2} fill="#ffffff">
+                      <animateMotion
+                        path={w.d}
+                        dur={isActive ? "1.8s" : "3.6s"}
+                        repeatCount="indefinite"
+                        keyPoints="0;1"
+                        keyTimes="0;1"
+                      />
+                    </circle>
+                  </g>
+
+                  {/* 4. Terminal Anchor Port at Card Connection */}
+                  <circle
+                    cx={w.cardDot.cx}
+                    cy={w.cardDot.cy}
+                    r={4.5}
+                    fill="#ffffff"
+                    stroke={w.color}
+                    strokeWidth={2}
+                  />
+                  <circle
+                    cx={w.cardDot.cx}
+                    cy={w.cardDot.cy}
+                    r={2}
+                    fill={w.color}
+                  />
+
+                  {/* 5. Terminal Anchor Port at Core Connection */}
+                  <circle
+                    cx={w.coreDot.cx}
+                    cy={w.coreDot.cy}
+                    r={4.5}
+                    fill="#ffffff"
+                    stroke={w.color}
+                    strokeWidth={2}
+                  />
+                  <circle
+                    cx={w.coreDot.cx}
+                    cy={w.coreDot.cy}
+                    r={2}
+                    fill={w.color}
+                  />
+
+                  {/* 6. Pulsing ring wave on active stage at both ends */}
+                  {isActive && (
+                    <>
+                      <motion.circle
+                        cx={w.cardDot.cx}
+                        cy={w.cardDot.cy}
+                        r={5}
+                        fill="none"
+                        stroke={w.color}
+                        strokeWidth={1.5}
+                        animate={{ r: [5, 14], opacity: [0.9, 0] }}
+                        transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+                      />
+                      <motion.circle
+                        cx={w.coreDot.cx}
+                        cy={w.coreDot.cy}
+                        r={5}
+                        fill="none"
+                        stroke={w.color}
+                        strokeWidth={1.5}
+                        animate={{ r: [5, 14], opacity: [0.9, 0] }}
+                        transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut", delay: 0.2 }}
+                      />
+                    </>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* ============================================================ */}
+          {/* CENTER NODE: PROTYPE AI MASCOT ORB (Matching CTA Section)     */}
+          {/* ============================================================ */}
+          <div
+            className="absolute z-20 flex flex-col items-center justify-center pointer-events-auto"
+            style={{
+              left: "calc(50% - 80px)",
+              top: "calc(47.8% - 80px)",
+              width: "160px",
+              height: "160px",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            <div className="relative flex items-center justify-center">
+              {/* Multi-layer Luminous Halo Glows */}
+              <div
+                className="pointer-events-none absolute -inset-8 rounded-full bg-emerald-400/40 blur-2xl animate-pulse"
+                aria-hidden="true"
+              />
+              <div
+                className="pointer-events-none absolute -inset-12 rounded-full bg-cyan-400/25 blur-3xl"
+                aria-hidden="true"
+              />
+              <div
+                className="pointer-events-none absolute -inset-3 rounded-full border border-emerald-400/30 bg-white/10 backdrop-blur-xs"
+                aria-hidden="true"
+              />
+
+              {/* Glowing Connector Radar Nodes along Mascot Boundary */}
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-20 flex h-3 w-3 items-center justify-center">
+                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+              </div>
+              <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
+                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+              </div>
+              <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
+                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+              </div>
+              <div className="absolute bottom-0 left-2.5 z-20 flex h-3 w-3 items-center justify-center">
+                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+              </div>
+              <div className="absolute bottom-0 right-2.5 z-20 flex h-3 w-3 items-center justify-center">
+                <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+              </div>
+
+              {/* 3D Floating Mascot with breathing scale */}
+              <motion.div
+                animate={{ y: [0, -7, 0] }}
+                transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 flex h-32 w-32 sm:h-36 sm:w-36 items-center justify-center drop-shadow-[0_20px_40px_rgba(16,185,129,0.45)] cursor-pointer select-none"
+                whileHover={{ scale: 1.08 }}
+                onClick={() =>
+                  onShowToast("Protype AI Core: Connected and orchestrating all workflows")
+                }
+              >
+                <Image
+                  src="/fevicon.png"
+                  alt="Protype AI Core - Intelligent AI agent orchestrating WhatsApp support and CRM automation"
+                  width={144}
+                  height={144}
+                  className="h-full w-full object-contain select-none"
+                  priority
+                />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* CARD 1: CUSTOMER (Top)                                       */}
+          {/* ============================================================ */}
+          <div
+            className="absolute z-10"
+            style={{ left: "calc(50% - 140px)", top: "1.8%", width: "280px" }}
+          >
+            <HubCard
+              stage={0}
+              currentActive={currentActive}
+              onHover={() => setHoveredCard(0)}
+              onLeave={() => setHoveredCard(null)}
+              accent="#0ea5e9"
+              floatingDelay={0}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
+                    <User className="h-4.5 w-4.5" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-700">Customer</span>
+                </div>
+                <span className="text-xs font-normal text-slate-400">10:24 AM</span>
+              </div>
+
+              <p className="mt-2 text-base font-semibold text-slate-900">
+                Where is my order?
+              </p>
+
+              <div className="mt-2.5 flex items-center gap-1.5">
+                <div
+                  title="WhatsApp Channel"
+                  className="flex h-6 w-6 items-center justify-center rounded-full overflow-hidden shadow-2xs"
+                >
+                  <WhatsAppLogo className="h-6 w-6" />
+                </div>
+
+                <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-600">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-none stroke-blue-500" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                  </svg>
+                  <span>Website</span>
+                </div>
+
+                <div
+                  title="Instagram DM"
+                  className="flex h-6 w-6 items-center justify-center rounded-full overflow-hidden shadow-2xs"
+                >
+                  <InstagramLogo className="h-6 w-6" />
+                </div>
+
+                <div className="flex h-6 items-center justify-center rounded-full bg-slate-100 px-1.5 text-xs font-semibold text-slate-500">
+                  +2
+                </div>
+              </div>
+            </HubCard>
+          </div>
+
+          {/* ============================================================ */}
+          {/* CARD 2: CUSTOMER SUPPORT (Middle-Left)                       */}
+          {/* ============================================================ */}
+          <div
+            className="absolute z-10"
+            style={{ left: "1.5%", top: "27%", width: "280px" }}
+          >
+            <HubCard
+              stage={1}
+              currentActive={currentActive}
+              onHover={() => setHoveredCard(1)}
+              onLeave={() => setHoveredCard(null)}
+              accent="#10b981"
+              floatingDelay={0.6}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                    <MessageSquare className="h-5 w-5" />
+                  </div>
+                  <span className="text-[15px] font-semibold text-slate-900">
+                    Customer Support
+                  </span>
+                </div>
+                <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-600">
+                  Resolved
+                </span>
+              </div>
+
+              <div className="mt-2 text-sm leading-snug text-slate-600">
+                <p>Hi! Your order is on track.</p>
+                <p className="text-slate-500">Here&apos;s the latest update...</p>
+              </div>
+
+              <div className="mt-3 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <img
+                    src="/support-agent.jpg"
+                    alt="Protype Customer Support AI Agent avatar"
+                    className="h-7 w-7 rounded-full object-cover border border-emerald-200 shadow-2xs"
+                  />
+                  <span className="text-xs text-slate-400">Agent live</span>
+                </div>
+                <span className="text-xs text-slate-400">10:32 AM</span>
+              </div>
+            </HubCard>
+          </div>
+
+          {/* ============================================================ */}
+          {/* CARD 3: ORDER OPERATIONS (Middle-Right)                      */}
+          {/* ============================================================ */}
+          <div
+            className="absolute z-10"
+            style={{ right: "1.5%", top: "27%", width: "280px" }}
+          >
+            <HubCard
+              stage={2}
+              currentActive={currentActive}
+              onHover={() => setHoveredCard(2)}
+              onLeave={() => setHoveredCard(null)}
+              accent="#3b82f6"
+              floatingDelay={1.2}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                    <Package className="h-5 w-5" />
+                  </div>
+                  <span className="text-[15px] font-semibold text-slate-900">
+                    Order Operations
+                  </span>
+                </div>
+                <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
+                  Processing
+                </span>
+              </div>
+
+              <div className="mt-3 flex items-start gap-2.5">
+                <div className="mt-0.5 flex h-8 w-7 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
+                  <FileText className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Order #4821</p>
+                  <p className="text-xs text-slate-500">
+                    Assigned <span className="text-slate-400">→</span> Warehouse 02
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-2.5 flex justify-end">
+                <span className="text-xs text-slate-400">10:28 AM</span>
+              </div>
+            </HubCard>
+          </div>
+
+          {/* ============================================================ */}
+          {/* CARD 4: FULFILMENT (Bottom-Left)                             */}
+          {/* ============================================================ */}
+          <div
+            className="absolute z-10"
+            style={{ left: "9%", top: "73%", width: "265px" }}
+          >
+            <HubCard
+              stage={3}
+              currentActive={currentActive}
+              onHover={() => setHoveredCard(3)}
+              onLeave={() => setHoveredCard(null)}
+              accent="#10b981"
+              floatingDelay={1.8}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                    <Truck className="h-5 w-5" />
+                  </div>
+                  <span className="text-[15px] font-semibold text-slate-900">
+                    Fulfilment
+                  </span>
+                </div>
+                <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-600">
+                  Packed
+                </span>
+              </div>
+
+              <div className="mt-3 flex items-center gap-3">
+                <img
+                  src="/shipping-box.jpg"
+                  alt="E-commerce parcel package indicating Protype automated order fulfilment tracking"
+                  className="h-10 w-10 rounded-md object-contain shrink-0"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">Order #4821</p>
+                  <p className="text-xs text-slate-500">Ready for shipping</p>
+                </div>
+              </div>
+
+              <div className="mt-2 flex justify-end">
+                <span className="text-xs text-slate-400">11:12 AM</span>
+              </div>
+            </HubCard>
+          </div>
+
+          {/* ============================================================ */}
+          {/* CARD 5: CUSTOMER UPDATE (Bottom-Right)                       */}
+          {/* ============================================================ */}
+          <div
+            className="absolute z-10"
+            style={{ right: "9%", top: "73%", width: "265px" }}
+          >
+            <HubCard
+              stage={4}
+              currentActive={currentActive}
+              onHover={() => setHoveredCard(4)}
+              onLeave={() => setHoveredCard(null)}
+              accent="#06b6d4"
+              floatingDelay={2.4}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                    <Bell className="h-5 w-5" />
+                  </div>
+                  <span className="text-[15px] font-semibold text-slate-900">
+                    Customer Update
+                  </span>
+                </div>
+                <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
+                  Sent
+                </span>
+              </div>
+
+              <div className="mt-2.5">
+                <p className="text-sm font-medium text-slate-800">
+                  Your order is on the way!
+                </p>
+                <button
+                  type="button"
+                  onClick={() =>
+                    onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
+                  }
+                  className="group mt-1 flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
+                >
+                  <span>Track your order</span>
+                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                </button>
+              </div>
+
+              <div className="mt-1 flex justify-end">
+                <span className="text-xs text-slate-400">11:15 AM</span>
+              </div>
+            </HubCard>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+/* ========================================================================= */
+/* DEDICATED MOBILE WORKFLOW HUB (< 768px Viewports)                         */
+/* ========================================================================= */
+function MobileWorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
+  const [activeStage, setActiveStage] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+
+  // Auto-advance loop every 3.2 seconds
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveStage((prev) => (prev + 1) % 5);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleSelectStage = (idx: number) => {
+    setActiveStage(idx);
+    setIsPaused(true);
+    // Resume auto-advancing after 8 seconds of inactivity
+    const timer = setTimeout(() => setIsPaused(false), 8000);
+    return () => clearTimeout(timer);
+  };
+
+  const currentConfig = STAGES_DATA[activeStage];
+
+  return (
+    <div className="relative w-full pt-2 pb-2">
+      {/* Background radial glow */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-20 h-56 w-56 -translate-x-1/2 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(6,182,212,0.16) 45%, transparent 70%)",
+          filter: "blur(36px)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* 1. Mascot Orb Section */}
+      <div className="relative flex flex-col items-center justify-center">
+        <div className="relative flex items-center justify-center">
+          {/* Luminous Halos */}
+          <div className="pointer-events-none absolute -inset-6 rounded-full bg-emerald-400/40 blur-2xl animate-pulse" />
+          <div className="pointer-events-none absolute -inset-10 rounded-full bg-cyan-400/25 blur-3xl" />
+          <div className="pointer-events-none absolute -inset-3 rounded-full border border-emerald-400/30 bg-white/10 backdrop-blur-xs" />
+
+          {/* Glowing Radar Connector Nodes */}
+          <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-20 flex h-3 w-3 items-center justify-center">
+            <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+          </div>
+          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 z-20 flex h-3 w-3 items-center justify-center">
+            <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+          </div>
+
+          {/* 3D Mascot Image */}
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            className="relative z-10 flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center drop-shadow-[0_18px_36px_rgba(16,185,129,0.42)] cursor-pointer select-none"
+            whileTap={{ scale: 0.94 }}
+            onClick={() => onShowToast("Protype AI Core: Connected and orchestrating all workflows")}
+          >
+            <Image
+              src="/fevicon.png"
+              alt="Protype AI Core"
+              width={120}
+              height={120}
+              className="h-full w-full object-contain"
+              priority
+            />
+          </motion.div>
+        </div>
+
+        {/* Mascot Core Badge */}
+        <div className="mt-3.5 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/25 bg-white/95 px-3.5 py-1 text-[11px] font-bold tracking-[0.14em] text-emerald-900 uppercase shadow-xs backdrop-blur-md">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
+          <span>PROTO CORE • LIVE ORCHESTRATION</span>
+        </div>
+      </div>
+
+      {/* 2. Dynamic Connecting Conduit (SVG Wire from Mascot to Stage Card) */}
+      <div className="relative h-8 w-full flex items-center justify-center overflow-visible pointer-events-none">
+        <svg className="h-8 w-48 overflow-visible" viewBox="0 0 192 32">
           <defs>
-            <filter id="hubGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
+            <filter id="mobileWireGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -295,482 +952,313 @@ function WorkflowHub({ onShowToast }: { onShowToast: (msg: string) => void }) {
             </filter>
           </defs>
 
-          {WIRES.map((w) => {
-            const isActive = currentActive === w.stage;
-            return (
-              <g key={w.id}>
-                {/* 1. Base clean muted dashed line */}
-                <path
-                  d={w.d}
-                  fill="none"
-                  stroke="#cbd5e1"
-                  strokeWidth={1.8}
-                  strokeDasharray="5 5"
-                  strokeLinecap="round"
-                  opacity={0.45}
-                />
+          {/* Base Wire */}
+          <line
+            x1="96"
+            y1="0"
+            x2="96"
+            y2="32"
+            stroke="#cbd5e1"
+            strokeWidth="1.8"
+            strokeDasharray="4 4"
+            opacity="0.5"
+          />
 
-                {/* 2. Active glowing wire with flowing animated dashes */}
-                <motion.path
-                  d={w.d}
-                  fill="none"
-                  stroke={w.color}
-                  strokeWidth={isActive ? 2.6 : 1.8}
-                  strokeLinecap="round"
-                  strokeDasharray="6 6"
-                  filter={isActive ? "url(#hubGlow)" : undefined}
-                  animate={{
-                    strokeDashoffset: [0, -24],
-                    opacity: isActive ? 1 : 0.25,
-                  }}
-                  transition={{
-                    strokeDashoffset: { duration: 1.1, repeat: Infinity, ease: "linear" },
-                    opacity: { duration: 0.3 },
-                  }}
-                />
+          {/* Active Flowing Laser */}
+          <motion.line
+            x1="96"
+            y1="0"
+            x2="96"
+            y2="32"
+            stroke={currentConfig.accent}
+            strokeWidth="2.6"
+            strokeDasharray="5 5"
+            filter="url(#mobileWireGlow)"
+            animate={{ strokeDashoffset: [0, -20] }}
+            transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
+          />
 
-                {/* 3. Traveling photon particle along path */}
-                <g filter="url(#hubGlow)">
-                  {/* Outer glow ring */}
-                  <circle r={isActive ? 5.5 : 3.5} fill={w.color} opacity={0.45}>
-                    <animateMotion
-                      path={w.d}
-                      dur={isActive ? "1.8s" : "3.6s"}
-                      repeatCount="indefinite"
-                      keyPoints="0;1"
-                      keyTimes="0;1"
-                    />
-                  </circle>
-                  {/* Bright white core particle */}
-                  <circle r={isActive ? 3 : 2} fill="#ffffff">
-                    <animateMotion
-                      path={w.d}
-                      dur={isActive ? "1.8s" : "3.6s"}
-                      repeatCount="indefinite"
-                      keyPoints="0;1"
-                      keyTimes="0;1"
-                    />
-                  </circle>
-                </g>
+          {/* Traveling Photon Core */}
+          <circle r="3" fill="#ffffff" filter="url(#mobileWireGlow)">
+            <animateMotion
+              path="M 96,0 L 96,32"
+              dur="1.2s"
+              repeatCount="indefinite"
+            />
+          </circle>
 
-                {/* 4. Terminal Anchor Port at Card Connection */}
-                <circle
-                  cx={w.cardDot.cx}
-                  cy={w.cardDot.cy}
-                  r={4.5}
-                  fill="#ffffff"
-                  stroke={w.color}
-                  strokeWidth={2}
-                />
-                <circle
-                  cx={w.cardDot.cx}
-                  cy={w.cardDot.cy}
-                  r={2}
-                  fill={w.color}
-                />
+          {/* Top Anchor Dot */}
+          <circle cx="96" cy="2" r="3.5" fill="#ffffff" stroke={currentConfig.accent} strokeWidth="1.5" />
+          <circle cx="96" cy="2" r="1.5" fill={currentConfig.accent} />
 
-                {/* 5. Terminal Anchor Port at Core Connection */}
-                <circle
-                  cx={w.coreDot.cx}
-                  cy={w.coreDot.cy}
-                  r={4.5}
-                  fill="#ffffff"
-                  stroke={w.color}
-                  strokeWidth={2}
-                />
-                <circle
-                  cx={w.coreDot.cx}
-                  cy={w.coreDot.cy}
-                  r={2}
-                  fill={w.color}
-                />
-
-                {/* 6. Pulsing ring wave on active stage at both ends */}
-                {isActive && (
-                  <>
-                    <motion.circle
-                      cx={w.cardDot.cx}
-                      cy={w.cardDot.cy}
-                      r={5}
-                      fill="none"
-                      stroke={w.color}
-                      strokeWidth={1.5}
-                      animate={{ r: [5, 14], opacity: [0.9, 0] }}
-                      transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
-                    />
-                    <motion.circle
-                      cx={w.coreDot.cx}
-                      cy={w.coreDot.cy}
-                      r={5}
-                      fill="none"
-                      stroke={w.color}
-                      strokeWidth={1.5}
-                      animate={{ r: [5, 14], opacity: [0.9, 0] }}
-                      transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut", delay: 0.2 }}
-                    />
-                  </>
-                )}
-              </g>
-            );
-          })}
+          {/* Bottom Anchor Dot */}
+          <circle cx="96" cy="30" r="3.5" fill="#ffffff" stroke={currentConfig.accent} strokeWidth="1.5" />
+          <circle cx="96" cy="30" r="1.5" fill={currentConfig.accent} />
         </svg>
+      </div>
 
-        {/* ============================================================ */}
-        {/* CENTER NODE: PROTYPE AI MASCOT ORB (Matching CTA Section)     */}
-        {/* ============================================================ */}
-        <div
-          className="absolute z-20 flex flex-col items-center justify-center pointer-events-auto"
-          style={{
-            left: "calc(50% - 65px)",
-            top: "calc(47.8% - 65px)",
-            width: "130px",
-            height: "130px",
-            transformStyle: "preserve-3d",
-          }}
-        >
-          <div className="relative flex items-center justify-center">
-            {/* Multi-layer Luminous Halo Glows (matching CTA Section) */}
-            <div
-              className="pointer-events-none absolute -inset-6 rounded-full bg-emerald-400/40 blur-2xl animate-pulse"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -inset-10 rounded-full bg-cyan-400/25 blur-3xl"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -inset-3 rounded-full border border-emerald-400/30 bg-white/10 backdrop-blur-xs"
-              aria-hidden="true"
-            />
-
-            {/* Glowing Connector Radar Nodes along Mascot Boundary */}
-            {/* Top Node */}
-            <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-20 flex h-3 w-3 items-center justify-center">
-              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-            </div>
-            {/* Left Node */}
-            <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
-              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-            </div>
-            {/* Right Node */}
-            <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 z-20 flex h-3 w-3 items-center justify-center">
-              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-            </div>
-            {/* Bottom-Left Node */}
-            <div className="absolute bottom-0 left-2.5 z-20 flex h-3 w-3 items-center justify-center">
-              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-            </div>
-            {/* Bottom-Right Node */}
-            <div className="absolute bottom-0 right-2.5 z-20 flex h-3 w-3 items-center justify-center">
-              <span className="absolute h-3.5 w-3.5 animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-            </div>
-
-            {/* 3D Floating Mascot with breathing scale */}
-            <motion.div
-              animate={{ y: [0, -7, 0] }}
-              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 flex h-24 w-24 sm:h-28 sm:w-28 items-center justify-center drop-shadow-[0_18px_35px_rgba(16,185,129,0.4)] cursor-pointer select-none"
-              whileHover={{ scale: 1.08 }}
-              onClick={() =>
-                onShowToast("Protype AI Core: Connected and orchestrating all workflows")
-              }
+      {/* 3. Stage Selector Navigation Tabs */}
+      <div className="relative mb-3.5 flex items-center justify-between gap-1.5 overflow-x-auto px-0.5 py-1 no-scrollbar">
+        {STAGES_DATA.map((stage, idx) => {
+          const Icon = stage.icon;
+          const isActive = activeStage === idx;
+          return (
+            <button
+              key={stage.id}
+              type="button"
+              onClick={() => handleSelectStage(idx)}
+              className={`group relative flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-[11px] sm:text-[12px] font-bold transition-all duration-200 cursor-pointer ${
+                isActive
+                  ? "bg-white text-slate-900 shadow-sm border border-slate-200/90"
+                  : "bg-slate-100/70 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+              }`}
+              style={{
+                borderColor: isActive ? stage.accent : undefined,
+              }}
             >
-              <Image
-                src="/fevicon.png"
-                alt="Protype AI Core - Intelligent AI agent orchestrating WhatsApp support and CRM automation"
-                width={116}
-                height={116}
-                className="h-full w-full object-contain select-none"
-                priority
+              <Icon
+                className="h-3.5 w-3.5 shrink-0"
+                style={{ color: isActive ? stage.accent : "currentColor" }}
               />
-            </motion.div>
-          </div>
+              <span className="truncate">{stage.shortTitle}</span>
 
-          {/* Core Pill Badge under Mascot */}
-          {/* <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full border border-emerald-500/25 bg-white/95 px-3 py-0.5 text-[9.5px] font-bold tracking-[0.16em] text-emerald-900 uppercase shadow-xs backdrop-blur-md whitespace-nowrap">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
-            <span>PROTO CORE</span>
-          </div> */}
-        </div>
-
-        {/* ============================================================ */}
-        {/* CARD 1: CUSTOMER (Top) - Exactly centered via calc(50% - 130px) */}
-        {/* ============================================================ */}
-        <div
-          className="absolute z-10"
-          style={{ left: "calc(50% - 130px)", top: "1.8%", width: "260px" }}
-        >
-          <HubCard
-            stage={0}
-            currentActive={currentActive}
-            onHover={() => setHoveredCard(0)}
-            onLeave={() => setHoveredCard(null)}
-            accent="#0ea5e9"
-            floatingDelay={0}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                  </svg>
-                </div>
-                <span className="text-[13px] font-medium text-slate-700">Customer</span>
-              </div>
-              <span className="text-[11px] font-normal text-slate-400">10:24 AM</span>
-            </div>
-
-            {/* Question Text */}
-            <p className="mt-2 text-[14px] font-semibold text-slate-900">
-              Where is my order?
-            </p>
-
-            {/* Communication Channels */}
-            <div className="mt-2.5 flex items-center gap-1.5">
-              {/* WhatsApp */}
-              <div
-                title="WhatsApp Channel"
-                className="flex h-5 w-5 items-center justify-center rounded-full overflow-hidden shadow-2xs"
-              >
-                <WhatsAppLogo className="h-5 w-5" />
-              </div>
-
-              {/* Website pill */}
-              <div className="flex items-center gap-1 rounded-full border border-slate-200/70 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600">
-                <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-blue-500" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                </svg>
-                <span>Website</span>
-              </div>
-
-              {/* Instagram */}
-              <div
-                title="Instagram DM"
-                className="flex h-5 w-5 items-center justify-center rounded-full overflow-hidden shadow-2xs"
-              >
-                <InstagramLogo className="h-5 w-5" />
-              </div>
-
-              {/* +2 */}
-              <div className="flex h-5 items-center justify-center rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-slate-500">
-                +2
-              </div>
-            </div>
-          </HubCard>
-        </div>
-
-        {/* ============================================================ */}
-        {/* CARD 2: CUSTOMER SUPPORT (Middle-Left)                       */}
-        {/* ============================================================ */}
-        <div
-          className="absolute z-10"
-          style={{ left: "1.5%", top: "27%", width: "260px" }}
-        >
-          <HubCard
-            stage={1}
-            currentActive={currentActive}
-            onHover={() => setHoveredCard(1)}
-            onLeave={() => setHoveredCard(null)}
-            accent="#10b981"
-            floatingDelay={0.6}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                  <MessageSquare className="h-4 w-4" />
-                </div>
-                <span className="text-[13.5px] font-semibold text-slate-900">
-                  Customer Support
-                </span>
-              </div>
-              <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
-                Resolved
-              </span>
-            </div>
-
-            {/* Body Message */}
-            <div className="mt-2 text-[12.5px] leading-snug text-slate-600">
-              <p>Hi! Your order is on track.</p>
-              <p className="text-slate-500">Here&apos;s the latest update...</p>
-            </div>
-
-            {/* Footer with avatar photo and timestamp */}
-            <div className="mt-3 flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <img
-                  src="/support-agent.jpg"
-                  alt="Protype Customer Support AI Agent avatar"
-                  className="h-6 w-6 rounded-full object-cover border border-emerald-200 shadow-2xs"
+              {/* Active animated progress bar underneath tab */}
+              {isActive && (
+                <motion.div
+                  layoutId="mobileActiveIndicator"
+                  className="absolute -bottom-1 left-1.5 right-1.5 h-0.5 rounded-full"
+                  style={{ backgroundColor: stage.accent }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
                 />
-                <span className="text-[11px] text-slate-400">Agent live</span>
-              </div>
-              <span className="text-[11px] text-slate-400">10:32 AM</span>
-            </div>
-          </HubCard>
-        </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
 
-        {/* ============================================================ */}
-        {/* CARD 3: ORDER OPERATIONS (Middle-Right)                      */}
-        {/* ============================================================ */}
-        <div
-          className="absolute z-10"
-          style={{ right: "1.5%", top: "27%", width: "260px" }}
-        >
-          <HubCard
-            stage={2}
-            currentActive={currentActive}
-            onHover={() => setHoveredCard(2)}
-            onLeave={() => setHoveredCard(null)}
-            accent="#3b82f6"
-            floatingDelay={1.2}
+      {/* 4. Active Stage Card Showcase */}
+      <div className="relative min-h-[190px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeStage}
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            className="w-full rounded-[24px] border bg-white/95 p-5 sm:p-6 shadow-[0_20px_45px_-10px_rgba(15,23,42,0.12)] backdrop-blur-md"
+            style={{
+              borderColor: currentConfig.accent,
+              boxShadow: `0 20px 45px -10px rgba(15,23,42,0.12), 0 0 0 1px ${currentConfig.accent}40, 0 0 24px ${currentConfig.accent}20`,
+            }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                  <Package className="h-4 w-4" />
-                </div>
-                <span className="text-[13.5px] font-semibold text-slate-900">
-                  Order Operations
-                </span>
-              </div>
-              <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
-                Processing
-              </span>
-            </div>
-
-            {/* Body Document & Routing */}
-            <div className="mt-3 flex items-start gap-2.5">
-              <div className="mt-0.5 flex h-7 w-6 shrink-0 items-center justify-center rounded bg-blue-50/80 border border-blue-200/70 text-blue-600">
-                <FileText className="h-3.5 w-3.5" />
-              </div>
+            {activeStage === 0 && (
               <div>
-                <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
-                <p className="text-[11.5px] text-slate-500">
-                  Assigned <span className="text-slate-400">→</span> Warehouse 02
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-xs">
+                      <User className="h-5 w-5" />
+                    </div>
+                    <span className="text-[15px] font-semibold text-slate-800">Customer</span>
+                  </div>
+                  <span className="text-xs font-medium text-slate-400">10:24 AM</span>
+                </div>
+                <p className="mt-3 text-[18px] sm:text-[19px] font-bold text-slate-900 leading-tight">
+                  Where is my order?
                 </p>
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="mt-2.5 flex justify-end">
-              <span className="text-[11px] text-slate-400">10:28 AM</span>
-            </div>
-          </HubCard>
-        </div>
-
-        {/* ============================================================ */}
-        {/* CARD 4: FULFILMENT (Bottom-Left)                             */}
-        {/* ============================================================ */}
-        <div
-          className="absolute z-10"
-          style={{ left: "9%", top: "73%", width: "250px" }}
-        >
-          <HubCard
-            stage={3}
-            currentActive={currentActive}
-            onHover={() => setHoveredCard(3)}
-            onLeave={() => setHoveredCard(null)}
-            accent="#10b981"
-            floatingDelay={1.8}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                  <Truck className="h-4 w-4" />
+                <div className="mt-4 flex items-center gap-2.5">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full overflow-hidden shadow-2xs">
+                    <WhatsAppLogo className="h-7 w-7" />
+                  </div>
+                  <div className="flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-none stroke-blue-500" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                    </svg>
+                    <span>Website</span>
+                  </div>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full overflow-hidden shadow-2xs">
+                    <InstagramLogo className="h-7 w-7" />
+                  </div>
+                  <div className="flex h-7 items-center justify-center rounded-full bg-slate-100 px-2.5 text-xs font-semibold text-slate-600">
+                    +2
+                  </div>
                 </div>
-                <span className="text-[13.5px] font-semibold text-slate-900">
-                  Fulfilment
-                </span>
               </div>
-              <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-600">
-                Packed
-              </span>
-            </div>
+            )}
 
-            {/* Body with 3D cardboard box image */}
-            <div className="mt-3 flex items-center gap-3">
-              <img
-                src="/shipping-box.jpg"
-                alt="E-commerce parcel package indicating Protype automated order fulfilment tracking"
-                className="h-9 w-9 rounded-md object-contain shrink-0"
-              />
+            {activeStage === 1 && (
               <div>
-                <p className="text-[13px] font-semibold text-slate-900">Order #4821</p>
-                <p className="text-[11.5px] text-slate-500">Ready for shipping</p>
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="mt-2 flex justify-end">
-              <span className="text-[11px] text-slate-400">11:12 AM</span>
-            </div>
-          </HubCard>
-        </div>
-
-        {/* ============================================================ */}
-        {/* CARD 5: CUSTOMER UPDATE (Bottom-Right)                       */}
-        {/* ============================================================ */}
-        <div
-          className="absolute z-10"
-          style={{ right: "9%", top: "73%", width: "250px" }}
-        >
-          <HubCard
-            stage={4}
-            currentActive={currentActive}
-            onHover={() => setHoveredCard(4)}
-            onLeave={() => setHoveredCard(null)}
-            accent="#06b6d4"
-            floatingDelay={2.4}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                  <Bell className="h-4 w-4" />
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                      <MessageSquare className="h-5 w-5" />
+                    </div>
+                    <span className="text-[16px] font-bold text-slate-900">
+                      Customer Support
+                    </span>
+                  </div>
+                  <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+                    Resolved
+                  </span>
                 </div>
-                <span className="text-[13.5px] font-semibold text-slate-900">
-                  Customer Update
-                </span>
+                <div className="mt-3 text-[14.5px] sm:text-[15px] leading-relaxed text-slate-700">
+                  <p>Hi! Your order is on track.</p>
+                  <p className="text-slate-500">Here&apos;s the latest update...</p>
+                </div>
+                <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      src="/support-agent.jpg"
+                      alt="Protype Customer Support Agent"
+                      className="h-8 w-8 rounded-full object-cover border border-emerald-200 shadow-2xs"
+                    />
+                    <span className="text-[13px] font-medium text-slate-600">Agent live</span>
+                  </div>
+                  <span className="text-xs text-slate-400">10:32 AM</span>
+                </div>
               </div>
-              <span className="rounded-full border border-blue-200/80 bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-600">
-                Sent
-              </span>
-            </div>
+            )}
 
-            {/* Body with tracking action */}
-            <div className="mt-2.5">
-              <p className="text-[13px] font-medium text-slate-800">
-                Your order is on the way!
-              </p>
-              <button
-                type="button"
-                onClick={() =>
-                  onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
-                }
-                className="group mt-1 flex items-center gap-1 text-[12px] font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
-              >
-                <span>Track your order</span>
-                <span className="transition-transform group-hover:translate-x-0.5">→</span>
-              </button>
-            </div>
+            {activeStage === 2 && (
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                      <Package className="h-5 w-5" />
+                    </div>
+                    <span className="text-[16px] font-bold text-slate-900">
+                      Order Operations
+                    </span>
+                  </div>
+                  <span className="rounded-full border border-blue-200/80 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                    Processing
+                  </span>
+                </div>
+                <div className="mt-3.5 flex items-start gap-3.5">
+                  <div className="mt-0.5 flex h-9 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50/80 border border-blue-200/70 text-blue-600">
+                    <FileText className="h-4.5 w-4.5" />
+                  </div>
+                  <div>
+                    <p className="text-[16px] font-bold text-slate-900">Order #4821</p>
+                    <p className="text-[13.5px] text-slate-500">
+                      Assigned <span className="text-slate-400">→</span> Warehouse 02
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-3.5 flex justify-end border-t border-slate-100 pt-2.5">
+                  <span className="text-xs text-slate-400">10:28 AM</span>
+                </div>
+              </div>
+            )}
 
-            {/* Footer */}
-            <div className="mt-1 flex justify-end">
-              <span className="text-[11px] text-slate-400">11:15 AM</span>
-            </div>
-          </HubCard>
+            {activeStage === 3 && (
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                      <Truck className="h-5 w-5" />
+                    </div>
+                    <span className="text-[16px] font-bold text-slate-900">
+                      Fulfilment
+                    </span>
+                  </div>
+                  <span className="rounded-full border border-emerald-200/80 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+                    Packed
+                  </span>
+                </div>
+                <div className="mt-3.5 flex items-center gap-3.5">
+                  <img
+                    src="/shipping-box.jpg"
+                    alt="E-commerce package fulfilment"
+                    className="h-12 w-12 rounded-lg object-contain shrink-0"
+                  />
+                  <div>
+                    <p className="text-[16px] font-bold text-slate-900">Order #4821</p>
+                    <p className="text-[13.5px] text-slate-500">Ready for shipping</p>
+                  </div>
+                </div>
+                <div className="mt-3.5 flex justify-end border-t border-slate-100 pt-2.5">
+                  <span className="text-xs text-slate-400">11:12 AM</span>
+                </div>
+              </div>
+            )}
+
+            {activeStage === 4 && (
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
+                      <Bell className="h-5 w-5" />
+                    </div>
+                    <span className="text-[16px] font-bold text-slate-900">
+                      Customer Update
+                    </span>
+                  </div>
+                  <span className="rounded-full border border-cyan-200/80 bg-cyan-50 px-3 py-1 text-xs font-bold text-cyan-700">
+                    Sent
+                  </span>
+                </div>
+                <div className="mt-3.5">
+                  <p className="text-[15px] font-semibold text-slate-900">
+                    Your order is on the way!
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onShowToast("Order #4821: In transit with DHL Express • Out for delivery")
+                    }
+                    className="group mt-2.5 inline-flex items-center gap-2 rounded-xl bg-cyan-50 px-4 py-2 text-[13.5px] font-bold text-cyan-700 hover:bg-cyan-100 transition-colors cursor-pointer"
+                  >
+                    <span>Track your order</span>
+                    <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                  </button>
+                </div>
+                <div className="mt-3 flex justify-end border-t border-slate-100 pt-2.5">
+                  <span className="text-xs text-slate-400">11:15 AM</span>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* 5. Mobile Stage Navigation Footer */}
+      <div className="mt-3 flex items-center justify-between px-1 text-xs text-slate-400">
+        <button
+          type="button"
+          onClick={() => handleSelectStage((activeStage - 1 + 5) % 5)}
+          className="flex items-center gap-1 p-1 hover:text-slate-700 transition-colors cursor-pointer"
+          aria-label="Previous workflow step"
+        >
+          <ChevronLeft className="h-3.5 w-3.5" />
+          <span>Prev</span>
+        </button>
+
+        <div className="flex items-center gap-1.5">
+          {STAGES_DATA.map((_, i) => (
+            <span
+              key={i}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                activeStage === i
+                  ? "w-5 bg-emerald-500"
+                  : "w-1.5 bg-slate-200"
+              }`}
+            />
+          ))}
         </div>
-      </motion.div>
+
+        <button
+          type="button"
+          onClick={() => handleSelectStage((activeStage + 1) % 5)}
+          className="flex items-center gap-1 p-1 hover:text-slate-700 transition-colors cursor-pointer"
+          aria-label="Next workflow step"
+        >
+          <span>Next</span>
+          <ChevronRight className="h-3.5 w-3.5" />
+        </button>
+      </div>
     </div>
   );
 }
@@ -803,7 +1291,7 @@ function HubCard({
     <motion.div
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      className={`rounded-[22px] border bg-white/95 p-4 backdrop-blur-md transition-all duration-300 ${className}`}
+      className={`rounded-[22px] border bg-white/95 p-5 backdrop-blur-md transition-all duration-300 ${className}`}
       style={{
         ...style,
         borderColor: isActive ? accent : "#f1f5f9",
@@ -826,4 +1314,3 @@ function HubCard({
     </motion.div>
   );
 }
-
